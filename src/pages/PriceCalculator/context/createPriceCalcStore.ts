@@ -48,6 +48,7 @@ export type PriceCalcStore = {
   selectedVariant: Accessor<RecipeVariant | undefined>;
   recipe: Accessor<Recipe | undefined>;
   recipeSkill: Accessor<string>;
+  variantId: Accessor<string>;
   recipeIngredients: Accessor<
     (RecipeIngredient & {
       calcQuantity: number;
@@ -127,19 +128,6 @@ export default (): PriceCalcStore => {
     recipe()?.SkillNeeds?.[0]?.Skill ?? ""
   );
 
-  const craftModule = createMemo(() =>
-    get.craftModule(focusedProd())
-  );
-  const craftAmmount = createMemo(() =>
-    get.craftAmmount(focusedProd())
-  );
-  const craftLavish = createMemo(() => 
-    get.craftLavish(focusedProd())
-  );
-  const craftLevel = createMemo(() => 
-    get.craftLevel(recipeSkill())
-  );
-
   const selectedVariant = createMemo(() =>
     getSelectedOrFirstRecipeVariant(
       focusedNode()?.recipeVariants ?? [],
@@ -147,8 +135,23 @@ export default (): PriceCalcStore => {
     )
   );
 
+  const variantId = createMemo(() => selectedVariant()?.Variant.Key ?? "");
+
+  const craftModule = createMemo(() =>
+    get.craftModule(variantId())
+  );
+  const craftAmmount = createMemo(() =>
+    get.craftAmmount(variantId())
+  );
+  const craftLavish = createMemo(() => 
+    get.craftLavish(variantId())
+  );
+  const craftLevel = createMemo(() => 
+    get.craftLevel(recipeSkill())
+  );
+
   const recipeMargin = createMemo(() =>
-    get.recipeMargin(selectedVariant()?.Recipe.Key)
+    get.recipeMargin(variantId())
   );
 
   const costPercentages = createMemo(() => {
@@ -247,6 +250,7 @@ export default (): PriceCalcStore => {
     selectedVariant,
     recipe,
     recipeSkill,
+    variantId,
     selectedProduct,
     selectedRecipes,
     costPercentages,

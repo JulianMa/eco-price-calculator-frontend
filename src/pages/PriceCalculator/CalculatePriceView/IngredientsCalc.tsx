@@ -70,13 +70,11 @@ export default () => {
                 ]}
                 onChange={(selected: string | number) =>
                   update.craftAmmount(
-                    priceCalcStore.focusedNode()?.productName ?? "",
+                    priceCalcStore.variantId(),
                     Number(selected)
                   )
                 }
-                selected={get.craftAmmount(
-                  priceCalcStore.focusedNode()?.productName
-                )}
+                selected={get.craftAmmount(priceCalcStore.variantId())}
               />
             </LabeledField>
             <LabeledField vertical text="Upgrade module in use:">
@@ -87,11 +85,11 @@ export default () => {
                 }))}
                 onChange={(selected: string | number) =>
                   update.craftModule(
-                    priceCalcStore.focusedNode()?.productName ?? "",
+                    priceCalcStore.variantId(),
                     Number(selected)
                   )
                 }
-                selected={get.craftModule(priceCalcStore.focusedNode()?.productName)}
+                selected={get.craftModule(priceCalcStore.variantId())}
               />
             </LabeledField>
             <LabeledField vertical text="Lavish Talent:">
@@ -99,11 +97,11 @@ export default () => {
                 label="Enabled"
                 onChange={(isChecked: boolean) =>
                   update.craftLavish(
-                    priceCalcStore.focusedNode()?.productName ?? "",
+                    priceCalcStore.variantId(),
                     isChecked,
                   )
                 }
-                checked={get.craftLavish(priceCalcStore.focusedNode()?.productName)}
+                checked={get.craftLavish(priceCalcStore.variantId())}
               />
             </LabeledField>
             {(priceCalcStore.recipe()?.SkillNeeds.length ?? 0 > 0) &&

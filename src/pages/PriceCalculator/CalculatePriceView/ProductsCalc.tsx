@@ -42,10 +42,7 @@ export default () => {
             <RadioToggle
               options={recipeMargins}
               onChange={(selected: string | number) =>
-                update.recipeMargin(
-                  priceCalcStore.selectedVariant()?.Recipe.Key ?? "",
-                  Number(selected)
-                )
+                update.recipeMargin(priceCalcStore.variantId(), Number(selected))
               }
               selected={priceCalcStore.recipeMargin()}
             />
@@ -80,7 +77,7 @@ export default () => {
                         value={product.costPercentage}
                         onChange={(newValue) =>
                           update.costPercentage(
-                            priceCalcStore.selectedVariant()?.Variant.Key ?? "",
+                            priceCalcStore.variantId(),
                             fixPercentages(
                               priceCalcStore.costPercentages(),
                               product.Name,

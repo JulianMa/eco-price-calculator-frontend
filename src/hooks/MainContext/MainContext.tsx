@@ -14,6 +14,7 @@ import {
   sortByText,
   sortByTextExcludingWord,
 } from "../../utils/helpers";
+import { getSelectedRecipeVariant } from "../../utils/recipeHelper";
 import { getRecipes, getStores, getTags, listDBs } from "../../utils/restDbSdk";
 
 type MainContextType = {
@@ -229,6 +230,16 @@ export const MainContextProvider = (props: Props) => {
             ),
           } as CraftableProduct)
       )
+      .map((prod) => {
+        for (let i = 0; i < prod.RecipeVariants.length; ++i) {
+          const variant = prod.RecipeVariants[i];
+          if (prod.RecipeVariants.findIndex((v, j) => v.Variant.Key == variant.Variant.Key && i != j) >= 0) {
+            variant.Variant.Key += "" + i;
+          }
+        }
+        
+        return prod;
+      })
       .sort(
         (a, b) =>
           a.Name?.toLowerCase()?.localeCompare(b.Name?.toLowerCase() ?? "") ?? 0
