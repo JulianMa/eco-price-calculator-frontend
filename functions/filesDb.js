@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 async function fetchFileAsync(key) {
-    const url = `https://api.jsonstorage.net/v1/json/${key}`;
+    const url = `https://api.jsonstorage.net/v1/json/00000000-0000-0000-0000-000000000000/${key}`;
     try {
       const response = await fetch(url);
       return response.json();
