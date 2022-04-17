@@ -1,7 +1,7 @@
 import { removeXmlTags } from "./helpers";
+import * as constants from './constants';
 
 const endpoints = {
-  list: () => ".netlify/functions/filesDb",
   readDB: (fileName: string) => `.netlify/functions/filesDb?file=${fileName}`,
 };
 
@@ -15,12 +15,11 @@ async function fetchAsync<T>(url: string): Promise<T | undefined> {
   return undefined;
 }
 
-export const listDBs = () => fetchAsync<Config>(endpoints.list());
 export const readDB = (fileName: string) =>
   fetchAsync(endpoints.readDB(fileName));
 
 export const getStores = (): Promise<StoresResponse | undefined> =>
-  fetchAsync<StoresResponse>(endpoints.readDB("Stores")).then((response) => response ? ({
+  fetchAsync<StoresResponse>(endpoints.readDB(constants.Stores)).then((response) => response ? ({
     ...response,
     Stores: response?.Stores?.map((store) => ({
       ...store,
@@ -28,8 +27,8 @@ export const getStores = (): Promise<StoresResponse | undefined> =>
     })),
   }):undefined);
 
-export const getRecipes = (): Promise<Recipe[] | undefined> =>
-  fetchAsync<Recipe[]>(endpoints.readDB("Recipes"));
+export const getRecipes = (): Promise<RecipesResponse | undefined> =>
+  fetchAsync<RecipesResponse>(endpoints.readDB(constants.Recipes));
 
 export const getTags = () =>
-  fetchAsync<Record<string, string[]>>(endpoints.readDB("Tags"));
+  fetchAsync<TagsResponse>(endpoints.readDB(constants.Tags));

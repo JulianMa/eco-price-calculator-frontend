@@ -22,10 +22,14 @@ declare interface ExportedAt {
   Ticks: number;
 }
 
-declare interface StoresResponse {
+declare interface TypedResponse {
+  PluginVersion: string;
   Version: number;
-  Stores: Stores[];
   ExportedAt: ExportedAt;
+}
+
+declare interface StoresResponse extends TypedResponse {
+  Stores: Stores[];
 }
 
 declare interface Stores {
@@ -51,6 +55,10 @@ declare interface ProductOffer extends Offers {
   StoreName: string;
   StoreOwner: string;
   CurrencyName: string;
+}
+
+declare interface RecipesResponse extends TypedResponse {
+  Recipes: Recipe[];
 }
 
 declare interface Recipe {
@@ -100,4 +108,8 @@ declare interface CraftableProduct {
 
 declare interface SetSignal<T> {
   (t: T | ((prev: T) => T)): void;
+}
+
+declare interface TagsResponse extends TypedResponse {
+  Tags: Record<string, string[]>;
 }

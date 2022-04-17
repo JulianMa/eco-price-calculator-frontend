@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
-async function fetchFileAsync(key) {
-    const url = `https://api.jsonstorage.net/v1/json/00000000-0000-0000-0000-000000000000/${key}`;
+async function fetchFileAsync(fileName) {
+    const url = `https://getpantry.cloud/apiv1/pantry/${process.env.VITE_SECRET}/basket/${fileName}`;
     try {
       const response = await fetch(url);
       return response.json();
@@ -11,21 +11,9 @@ async function fetchFileAsync(key) {
     return {};
   }
 
-async function getResult(listDBs, fileToRead) {
-    if (fileToRead)
-    {
-        const keyToGet = listDBs.Dbs ? listDBs.Dbs.find(t => t.Name === fileToRead) : undefined;
-        return keyToGet && keyToGet.Bin ? await fetchFileAsync(keyToGet.Bin) : undefined;
-    } else {
-        // If no file was requested, return the list of db's instead (with hidden Bins)
-        return listDBs && listDBs.Dbs && listDBs.Dbs.length ? {...listDBs, Dbs: listDBs.Dbs.map(({Bin, ...rest}) => ({...rest}))} : undefined;
-    }
-}
-
 exports.handler = async function(event) {
     const fileToRead = event.queryStringParameters.file;
-    const listDBs = await fetchFileAsync(process.env.VITE_STORAGE_MASTERKEY);
-    const result = await getResult(listDBs, fileToRead);
+    const result = await fetchFileAsync(fileToRead);
     
     return {
         statusCode: 200,

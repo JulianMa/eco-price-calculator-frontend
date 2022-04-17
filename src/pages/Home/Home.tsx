@@ -44,6 +44,11 @@ export default () => {
       <br />
       <div class={styles.changelog}>
         <h2>Latest changes</h2>
+        <h3>2.6.0 (2022-04-16)</h3>
+        <h4>Features</h4>
+        <ul>
+          <li>Switched json storage provider (old one started charging for it's service)</li>
+        </ul>
         <h3>2.5.0 (2022-01-07)</h3>
         <h4>Features</h4>
         <ul>

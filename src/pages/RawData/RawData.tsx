@@ -1,4 +1,4 @@
-import { For } from "solid-js";
+import { createMemo } from "solid-js";
 import createDBsStore from "./createDBsStore";
 import Table, {
   TableHeader,
@@ -6,8 +6,16 @@ import Table, {
   TableHeaderColAction,
   TableBody,
 } from "../../components/Table";
+import * as constants from '../../utils/constants'
+import RawDataRow from "./RawDataRow";
+import { useMainContext } from "../../hooks/MainContext";
 export default () => {
-  const { dbs, downloadFile } = createDBsStore();
+  const { storesResource, tagsResource, recipesResource } = useMainContext();
+  const { downloadFile } = createDBsStore();
+  
+  const storesExportedAt = createMemo(() => storesResource()?.ExportedAt?.StringRepresentation ?? "Not exported");
+  const recipesExportedAt = createMemo(() => recipesResource()?.ExportedAt?.StringRepresentation ?? "Not exported");
+  const tagsExportedAt = createMemo(() => tagsResource()?.ExportedAt?.StringRepresentation ?? "Not exported");
   return (
     <Table>
       <TableHeader>
@@ -16,26 +24,9 @@ export default () => {
         <TableHeaderColAction>Download</TableHeaderColAction>
       </TableHeader>
       <TableBody>
-        <For each={dbs() ?? []}>
-          {(db) => (
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {db?.Name}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {db?.ExportedAt?.StringRepresentation}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button
-                  class="text-indigo-800 hover:text-indigo-900"
-                  onclick={() => downloadFile(db?.Name)}
-                >
-                  Download
-                </button>
-              </td>
-            </tr>
-          )}
-        </For>
+        {storesResource()?.ExportedAt && <RawDataRow name="Stores" exportedAt={storesExportedAt} downloadFile={() => downloadFile(constants.Stores)} />}
+        {recipesResource()?.ExportedAt && <RawDataRow name="Recipes" exportedAt={recipesExportedAt} downloadFile={() => downloadFile(constants.Recipes)} />}
+        {tagsResource()?.ExportedAt && <RawDataRow name="Tags" exportedAt={tagsExportedAt} downloadFile={() => downloadFile(constants.Tags)} />}
       </TableBody>
     </Table>
   );

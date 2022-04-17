@@ -15,13 +15,12 @@ import {
   sortByTextExcludingWord,
 } from "../../utils/helpers";
 import { getSelectedRecipeVariant } from "../../utils/recipeHelper";
-import { getRecipes, getStores, getTags, listDBs } from "../../utils/restDbSdk";
+import { getRecipes, getStores, getTags } from "../../utils/restDbSdk";
 
 type MainContextType = {
-  config: Resource<Config | undefined>;
   storesResource: Resource<StoresResponse | undefined>;
-  recipesResource: Resource<Recipe[] | undefined>;
-  tagsResource: Resource<Record<string, string[]> | undefined>;
+  recipesResource: Resource<RecipesResponse | undefined>;
+  tagsResource: Resource<TagsResponse | undefined>;
   dbs: Accessor<DB[] | undefined>;
   allCurrencies: Accessor<string[] | undefined>;
   allProfessions: Accessor<string[] | undefined>;
@@ -66,13 +65,11 @@ type MainContextType = {
   };
 };
 
-const [config] = createResource(listDBs);
 const [storesResource] = createResource(getStores);
 const [recipesResource] = createResource(getRecipes);
 const [tagsResource] = createResource(getTags);
 
 const MainContext = createContext<MainContextType>({
-  config,
   storesResource,
   recipesResource,
   tagsResource,
@@ -161,8 +158,6 @@ export const MainContextProvider = (props: Props) => {
     "MainStore"
   );
 
-  const dbs = createMemo(() => config()?.Dbs);
-
   const allCurrencies = createMemo(() =>
     storesResource()
       ?.Stores?.map((store) => store.CurrencyName)
@@ -195,7 +190,7 @@ export const MainContextProvider = (props: Props) => {
   );
   const allCraftableProducts = createMemo(() => {
     const CraftableProductsDict =
-      recipesResource()
+      recipesResource()?.Recipes
         ?.map((recipe) =>
           recipe.Variants.map((variant) =>
             variant.Products.map((prod) => ({
@@ -247,7 +242,7 @@ export const MainContextProvider = (props: Props) => {
   });
 
   const allProfessions = createMemo(() =>
-    recipesResource()
+    recipesResource()?.Recipes
       ?.map((recipe) => recipe.SkillNeeds.map((t) => t.Skill))
       .flat()
       .filter(filterUnique)
@@ -255,7 +250,7 @@ export const MainContextProvider = (props: Props) => {
   );
 
   const allCraftStations = createMemo(() =>
-    recipesResource()
+    recipesResource()?.Recipes
       ?.map((recipe) => recipe.CraftStation)
       .flat()
       .filter(filterUnique)
@@ -263,11 +258,9 @@ export const MainContextProvider = (props: Props) => {
   );
 
   const value = {
-    config,
     storesResource,
     recipesResource,
     tagsResource,
-    dbs,
     allCurrencies,
     allProfessions,
     allCraftStations,

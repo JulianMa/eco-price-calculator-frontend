@@ -2,9 +2,7 @@ import {
   createSignal,
   createResource,
   createEffect,
-  createMemo,
 } from "solid-js";
-import { useMainContext } from "../../hooks/MainContext";
 import { openDownloadFileDialog } from "../../utils/downloadFile";
 import { readDB } from "../../utils/restDbSdk";
 
@@ -14,8 +12,7 @@ export interface DbContent<T> {
   result: T;
 }
 
-export default () => {
-  const { dbs } = useMainContext();
+export default  () => {
   const [filenameToDownload, setFilenameToDownload] = createSignal("");
   const [downloadedFile] = createResource(
     filenameToDownload,
@@ -35,7 +32,6 @@ export default () => {
   });
 
   return {
-    dbs,
     downloadFile: setFilenameToDownload,
   };
 };
