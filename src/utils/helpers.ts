@@ -1,6 +1,6 @@
 const removeTagsRegex = /(<([^>]+)>)/gi;
 export const removeXmlTags = (name: string) =>
-  name.replace(removeTagsRegex, "");
+  name.replace(removeTagsRegex, '');
 
 export const filterByText = (valueFilter: string, value: string) =>
   valueFilter.length === 0 ||

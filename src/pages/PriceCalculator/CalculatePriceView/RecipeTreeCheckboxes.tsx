@@ -1,5 +1,5 @@
-import Checkbox from "../../../components/Checkbox";
-import { useCalcContext } from "../context/CalcContext";
+import Checkbox from '../../../components/Checkbox';
+import { useCalcContext } from '../context/CalcContext';
 
 export default () => {
   const { priceCalcStore } = useCalcContext();

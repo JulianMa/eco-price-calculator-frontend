@@ -1,1 +1,1 @@
-export { MainContextProvider, useMainContext } from "./MainContext";
+export { MainContextProvider, useMainContext } from './MainContext';

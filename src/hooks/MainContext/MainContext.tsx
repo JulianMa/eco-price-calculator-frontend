@@ -6,16 +6,16 @@ import {
   useContext,
   createResource,
   Resource,
-} from "solid-js";
-import { Store } from "solid-js/store";
-import { createLocalStore } from "../../utils/createLocalStore";
+} from 'solid-js';
+import { Store } from 'solid-js/store';
+import { createLocalStore } from '../../utils/createLocalStore';
 import {
   filterUnique,
   sortByText,
   sortByTextExcludingWord,
-} from "../../utils/helpers";
-import { getSelectedRecipeVariant } from "../../utils/recipeHelper";
-import { getRecipes, getStores, getTags } from "../../utils/restDbSdk";
+} from '../../utils/helpers';
+import { getSelectedRecipeVariant } from '../../utils/recipeHelper';
+import { getRecipes, getStores, getTags } from '../../utils/restDbSdk';
 
 type MainContextType = {
   storesResource: Resource<StoresResponse | undefined>;
@@ -80,8 +80,8 @@ const MainContext = createContext<MainContextType>({
   allProductsInStores: () => [],
   allCraftableProducts: () => [],
   mainState: {
-    currency: "",
-    userName: "",
+    currency: '',
+    userName: '',
     calorieCost: 0,
   },
   get: {
@@ -135,34 +135,34 @@ type CostPercentagesStore = {
 
 export const MainContextProvider = (props: Props) => {
   const [personalPricesState, setPersonalPricesState] =
-    createLocalStore<PersonalPricesStore>({}, "PersonalPricesStore");
+    createLocalStore<PersonalPricesStore>({}, 'PersonalPricesStore');
   const [craftAmmoutState, setCraftAmmoutState] =
-    createLocalStore<ProdNumberStore>({}, "craftAmmountStore");
+    createLocalStore<ProdNumberStore>({}, 'craftAmmountStore');
   const [craftModuleState, setCraftModuleState] =
-    createLocalStore<ProdNumberStore>({}, "craftModuleStore");
+    createLocalStore<ProdNumberStore>({}, 'craftModuleStore');
   const [craftLavishState, setCraftLavishState] =
-    createLocalStore<ProdBoolStore>({}, "craftLavishStore");
+    createLocalStore<ProdBoolStore>({}, 'craftLavishStore');
   const [craftLevelState, setCraftLevelState] =
-    createLocalStore<ProdNumberStore>({}, "craftLevelStore");
+    createLocalStore<ProdNumberStore>({}, 'craftLevelStore');
   const [recipeMarginState, setRecipeMarginState] =
-    createLocalStore<ProdNumberStore>({}, "recipeMarginStore");
+    createLocalStore<ProdNumberStore>({}, 'recipeMarginStore');
   const [CostPercentagesState, setCostPercentagesState] =
-    createLocalStore<CostPercentagesStore>({}, "CostPercentagesStore");
+    createLocalStore<CostPercentagesStore>({}, 'CostPercentagesStore');
 
   const [mainState, setState] = createLocalStore<MainStore>(
     {
-      currency: "",
-      userName: "",
+      currency: '',
+      userName: '',
       calorieCost: 0,
     },
-    "MainStore"
+    'MainStore'
   );
 
   const allCurrencies = createMemo(() =>
     storesResource()
       ?.Stores?.map((store) => store.CurrencyName)
       .filter(filterUnique)
-      .sort(sortByTextExcludingWord("Credit"))
+      .sort(sortByTextExcludingWord('Credit'))
   );
   const allProductsInStores = createMemo(() =>
     storesResource()
@@ -190,8 +190,8 @@ export const MainContextProvider = (props: Props) => {
   );
   const allCraftableProducts = createMemo(() => {
     const CraftableProductsDict =
-      recipesResource()?.Recipes
-        ?.map((recipe) =>
+      recipesResource()
+        ?.Recipes?.map((recipe) =>
           recipe.Variants.map((variant) =>
             variant.Products.map((prod) => ({
               Name: prod.Name,
@@ -228,30 +228,34 @@ export const MainContextProvider = (props: Props) => {
       .map((prod) => {
         for (let i = 0; i < prod.RecipeVariants.length; ++i) {
           const variant = prod.RecipeVariants[i];
-          if (prod.RecipeVariants.findIndex((v, j) => v.Variant.Key == variant.Variant.Key && i != j) >= 0) {
-            variant.Variant.Key += "" + i;
+          if (
+            prod.RecipeVariants.findIndex(
+              (v, j) => v.Variant.Key == variant.Variant.Key && i != j
+            ) >= 0
+          ) {
+            variant.Variant.Key += '' + i;
           }
         }
-        
+
         return prod;
       })
       .sort(
         (a, b) =>
-          a.Name?.toLowerCase()?.localeCompare(b.Name?.toLowerCase() ?? "") ?? 0
+          a.Name?.toLowerCase()?.localeCompare(b.Name?.toLowerCase() ?? '') ?? 0
       );
   });
 
   const allProfessions = createMemo(() =>
-    recipesResource()?.Recipes
-      ?.map((recipe) => recipe.SkillNeeds.map((t) => t.Skill))
+    recipesResource()
+      ?.Recipes?.map((recipe) => recipe.SkillNeeds.map((t) => t.Skill))
       .flat()
       .filter(filterUnique)
       .sort(sortByText)
   );
 
   const allCraftStations = createMemo(() =>
-    recipesResource()?.Recipes
-      ?.map((recipe) => recipe.CraftStation)
+    recipesResource()
+      ?.Recipes?.map((recipe) => recipe.CraftStation)
       .flat()
       .filter(filterUnique)
       .sort(sortByText)
@@ -269,35 +273,43 @@ export const MainContextProvider = (props: Props) => {
     mainState,
     get: {
       personalPrice: (productName?: string) =>
-        personalPricesState[productName ?? ""]?.[mainState.currency],
+        personalPricesState[productName ?? '']?.[mainState.currency],
       craftAmmount: (productName?: string) =>
-        craftAmmoutState[productName ?? ""] ?? 1,
+        craftAmmoutState[productName ?? ''] ?? 1,
       craftModule: (productName?: string) =>
-        craftModuleState[productName ?? ""] ?? 0,
+        craftModuleState[productName ?? ''] ?? 0,
       craftLavish: (productName?: string) =>
-        craftLavishState[productName ?? ""],
+        craftLavishState[productName ?? ''],
       craftLevel: (productName?: string) =>
-        craftLevelState[productName ?? ""] ?? 0,
+        craftLevelState[productName ?? ''] ?? 0,
       recipeMargin: (recipeKey?: string) =>
-        recipeMarginState[recipeKey ?? ""] ?? 0,
+        recipeMarginState[recipeKey ?? ''] ?? 0,
       costPercentage: (variantKey?: string) =>
-        CostPercentagesState[variantKey ?? ""],
+        CostPercentagesState[variantKey ?? ''],
     },
     update: {
       currency: (newCurrency: string) => setState({ currency: newCurrency }),
       userName: (username: string) => {
         // If no currency is selected, select the user's currency
-        if (mainState.currency.length == 0 || allCurrencies()?.filter(t => t === mainState.currency).length === 0){
-          const userPersonalCurrency = allCurrencies()?.find(t => t.indexOf(username) === 1);
+        if (
+          mainState.currency.length == 0 ||
+          allCurrencies()?.filter((t) => t === mainState.currency).length === 0
+        ) {
+          const userPersonalCurrency = allCurrencies()?.find(
+            (t) => t.indexOf(username) === 1
+          );
           if (userPersonalCurrency) {
-            setState({currency: userPersonalCurrency});
+            setState({ currency: userPersonalCurrency });
           }
         }
         setState({ userName: username });
       },
       personalPrice: (product: string, currency: string, newPrice: number) =>
         setPersonalPricesState((prev) => ({
-          [product]: { ...(prev[product] ?? {}), [currency]: newPrice },
+          [product]: {
+            ...(prev[product] ?? {}),
+            [currency]: newPrice,
+          },
         })),
       craftAmmount: (product: string, ammount: number) =>
         setCraftAmmoutState({ [product]: ammount }),
@@ -320,8 +332,7 @@ export const MainContextProvider = (props: Props) => {
           ...prev,
           [variantKey]: percentages,
         })),
-      calorieCost: (cost: number) => 
-        setState({ calorieCost: cost }),
+      calorieCost: (cost: number) => setState({ calorieCost: cost }),
     },
   } as MainContextType;
 

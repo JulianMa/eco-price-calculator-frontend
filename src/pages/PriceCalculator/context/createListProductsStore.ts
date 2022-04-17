@@ -1,9 +1,9 @@
-import { Accessor, createMemo } from "solid-js";
-import createDebounce from "../../../hooks/createDebounce";
-import { useMainContext } from "../../../hooks/MainContext";
-import { createLocalStore } from "../../../utils/createLocalStore";
-import { filterByIncludesAny, filterByText } from "../../../utils/helpers";
-import { Store } from "solid-js/store";
+import { Accessor, createMemo } from 'solid-js';
+import createDebounce from '../../../hooks/createDebounce';
+import { useMainContext } from '../../../hooks/MainContext';
+import { createLocalStore } from '../../../utils/createLocalStore';
+import { filterByIncludesAny, filterByText } from '../../../utils/helpers';
+import { Store } from 'solid-js/store';
 
 const pageSize = 100;
 export type StoreType = {
@@ -33,20 +33,20 @@ export type ListProductsStore = {
   totalPages: Accessor<number>;
   update: StoreUpdate;
 };
-export const Survivalist = "Survivalist";
+export const Survivalist = 'Survivalist';
 export default (): ListProductsStore => {
   const { allCraftableProducts, allProductsInStores, mainState } =
     useMainContext();
   const [state, setState] = createLocalStore<StoreType>(
     {
-      search: "",
-      filterProfession: "",
-      filterCraftStation: "",
+      search: '',
+      filterProfession: '',
+      filterCraftStation: '',
       currentPage: 1,
       showPricesForProductsModal: undefined,
       filterByOwner: false,
     },
-    "PriceCalculatorListProductsStore"
+    'PriceCalculatorListProductsStore'
   );
 
   const mySellingProducts = createMemo(() => {
@@ -61,7 +61,7 @@ export default (): ListProductsStore => {
   const filteredProducts = createMemo(() =>
     allCraftableProducts()?.filter(
       (product) =>
-        filterByText(state.search, product.Name ?? "") &&
+        filterByText(state.search, product.Name ?? '') &&
         filterByIncludesAny(
           [state.filterProfession],
           product.RecipeVariants.map((variant) =>
@@ -102,19 +102,27 @@ export default (): ListProductsStore => {
       setSearch,
       setFilterProfession: (newSearch: string) =>
         setState({
-          filterProfession: newSearch === Survivalist ? "" : newSearch,
+          filterProfession: newSearch === Survivalist ? '' : newSearch,
           currentPage: 1,
         }),
       setFilterCraftStation: (newSearch: string) =>
         setState({ filterCraftStation: newSearch, currentPage: 1 }),
       setCurrentPage: (newPage: number) => setState({ currentPage: newPage }),
       showPricesForProductsModal: (name: string, isSpecificProduct: boolean) =>
-        setState({ showPricesForProductsModal: { name, isSpecificProduct } }),
+        setState({
+          showPricesForProductsModal: { name, isSpecificProduct },
+        }),
       hidePricesForProductsModal: () =>
         setState({ showPricesForProductsModal: undefined }),
       setFilterByOwner: (filterByOwner: boolean) => setState({ filterByOwner }),
-      clearFilters: () => 
-        setState({search: "", currentPage: 1, filterProfession: "", filterCraftStation: "", filterByOwner: false}),
+      clearFilters: () =>
+        setState({
+          search: '',
+          currentPage: 1,
+          filterProfession: '',
+          filterCraftStation: '',
+          filterByOwner: false,
+        }),
     },
   };
 };

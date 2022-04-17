@@ -1,22 +1,22 @@
 import {
   getIngredientId,
   getRecipeEvenPercentages,
-} from "./../../../utils/helpers";
+} from './../../../utils/helpers';
 import {
   getFlatRecipeIngredients,
   RecipeNodeFlat,
-} from "./../../../utils/recipeHelper";
-import { useMainContext } from "./../../../hooks/MainContext/MainContext";
-import { createLocalStore } from "../../../utils/createLocalStore";
-import { Store } from "solid-js/store";
-import { Accessor, createMemo, createSignal } from "solid-js";
-import { getSelectedOrFirstRecipeVariant } from "../../../utils/recipeHelper";
+} from './../../../utils/recipeHelper';
+import { useMainContext } from './../../../hooks/MainContext/MainContext';
+import { createLocalStore } from '../../../utils/createLocalStore';
+import { Store } from 'solid-js/store';
+import { Accessor, createMemo, createSignal } from 'solid-js';
+import { getSelectedOrFirstRecipeVariant } from '../../../utils/recipeHelper';
 import {
   calcAmmount,
   calcPrice,
   formatNumber,
   convertToMarginMultiplier,
-} from "../../../utils/helpers";
+} from '../../../utils/helpers';
 
 type StoreType = {
   showRecipes: boolean;
@@ -85,7 +85,8 @@ export type PriceCalcStore = {
 
 const moduleReductions = [1, 0.9, 0.75, 0.6, 0.55, 0.5];
 export default (): PriceCalcStore => {
-  const { mainState, get, allCraftableProducts, tagsResource } = useMainContext();
+  const { mainState, get, allCraftableProducts, tagsResource } =
+    useMainContext();
   const [state, setState] = createLocalStore<StoreType>(
     {
       showRecipes: false,
@@ -93,7 +94,7 @@ export default (): PriceCalcStore => {
       showRecipeTree: false,
       focusedProdPath: [],
     },
-    "PriceCalculatorPriceCalcStore"
+    'PriceCalculatorPriceCalcStore'
   );
 
   const [selectedProduct, setSelectedProduct] = createSignal<string>();
@@ -108,51 +109,39 @@ export default (): PriceCalcStore => {
       allCraftableProducts() ?? [],
       selectedRecipes(),
       tagsResource() ?? {},
-      selectedProduct() ?? ""
+      selectedProduct() ?? ''
     )
   );
-  
-  const focusedProd = createMemo(() => state.focusedProdPath.length === 0 ? undefined : state.focusedProdPath[state.focusedProdPath.length - 1]);
+
+  const focusedProd = createMemo(() =>
+    state.focusedProdPath.length === 0
+      ? undefined
+      : state.focusedProdPath[state.focusedProdPath.length - 1]
+  );
 
   const focusedNode = createMemo(() =>
-    flatRecipeIngredientsTree().find(
-      (t) => t.ingredientId == focusedProd()
-    )
+    flatRecipeIngredientsTree().find((t) => t.ingredientId == focusedProd())
   );
 
-  const recipe = createMemo(() =>
-    focusedNode()?.selectedVariant?.Recipe
-  );
+  const recipe = createMemo(() => focusedNode()?.selectedVariant?.Recipe);
 
-  const recipeSkill = createMemo(() => 
-    recipe()?.SkillNeeds?.[0]?.Skill ?? ""
-  );
+  const recipeSkill = createMemo(() => recipe()?.SkillNeeds?.[0]?.Skill ?? '');
 
   const selectedVariant = createMemo(() =>
     getSelectedOrFirstRecipeVariant(
       focusedNode()?.recipeVariants ?? [],
-      selectedRecipes()[focusedProd() ?? ""]
+      selectedRecipes()[focusedProd() ?? '']
     )
   );
 
-  const variantId = createMemo(() => selectedVariant()?.Variant.Key ?? "");
+  const variantId = createMemo(() => selectedVariant()?.Variant.Key ?? '');
 
-  const craftModule = createMemo(() =>
-    get.craftModule(variantId())
-  );
-  const craftAmmount = createMemo(() =>
-    get.craftAmmount(variantId())
-  );
-  const craftLavish = createMemo(() => 
-    get.craftLavish(variantId())
-  );
-  const craftLevel = createMemo(() => 
-    get.craftLevel(recipeSkill())
-  );
+  const craftModule = createMemo(() => get.craftModule(variantId()));
+  const craftAmmount = createMemo(() => get.craftAmmount(variantId()));
+  const craftLavish = createMemo(() => get.craftLavish(variantId()));
+  const craftLevel = createMemo(() => get.craftLevel(recipeSkill()));
 
-  const recipeMargin = createMemo(() =>
-    get.recipeMargin(variantId())
-  );
+  const recipeMargin = createMemo(() => get.recipeMargin(variantId()));
 
   const costPercentages = createMemo(() => {
     const variant = selectedVariant()?.Variant;
@@ -165,10 +154,10 @@ export default (): PriceCalcStore => {
     const variant = selectedVariant();
     if (variant == undefined) return [];
     return variant.Variant.Ingredients.map((ingredient) => {
-      const reduction = moduleReductions[craftModule()] * (craftLavish() ? 0.95 : 1);
+      const reduction =
+        moduleReductions[craftModule()] * (craftLavish() ? 0.95 : 1);
       const quantity = formatNumber(
-        ingredient.Ammount *
-          (ingredient.IsStatic ? 1 : reduction)
+        ingredient.Ammount * (ingredient.IsStatic ? 1 : reduction)
       );
       const quantityBasedOnCraftAmmount = calcAmmount(quantity, craftAmmount());
       return {
@@ -188,20 +177,23 @@ export default (): PriceCalcStore => {
 
   const skillLevelReductions = [0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2];
   const recipeCalories = createMemo(() => {
-    const reduction = (recipe()?.SkillNeeds.length ?? 0 > 0) ? skillLevelReductions[craftLevel()] : 1;
+    const reduction =
+      recipe()?.SkillNeeds.length ?? 0 > 0
+        ? skillLevelReductions[craftLevel()]
+        : 1;
     return (recipe()?.BaseLaborCost ?? 0) * reduction;
   });
-  const recipeCalorieCost = createMemo(() => 
-    (recipeCalories() / 1000 * mainState.calorieCost)
+  const recipeCalorieCost = createMemo(
+    () => (recipeCalories() / 1000) * mainState.calorieCost
   );
-  const recipeCalorieTotalCost = createMemo(() => 
-    (recipeCalorieCost() * craftAmmount())
+  const recipeCalorieTotalCost = createMemo(
+    () => recipeCalorieCost() * craftAmmount()
   );
 
   const totalIngredientCost = createMemo(() =>
     formatNumber(
-      (recipeIngredients()?.reduce((prev, next) => prev + next.calcPrice, 0) ?? 0) +
-      recipeCalorieTotalCost()
+      (recipeIngredients()?.reduce((prev, next) => prev + next.calcPrice, 0) ??
+        0) + recipeCalorieTotalCost()
     )
   );
 
@@ -256,8 +248,7 @@ export default (): PriceCalcStore => {
     costPercentages,
     setSelectedProduct: (prod: string | undefined) => {
       setSelectedProduct(prod);
-      if (prod != undefined)
-        setState({ focusedProdPath: [prod] });
+      if (prod != undefined) setState({ focusedProdPath: [prod] });
     },
     setSelectedRecipes,
     update: {
@@ -266,9 +257,13 @@ export default (): PriceCalcStore => {
       setShowPersonalPrices: (newValue: boolean) =>
         setState({ showPersonalPrices: newValue }),
       toggleShowRecipeTree: () =>
-        setState(prev => ({ showRecipeTree: !prev.showRecipeTree })),
-      replaceFocusedProductPath: (focusedProductPath: string[]) => setState({focusedProdPath: focusedProductPath}),
-      focusChildProduct: (focusedProd: string) => setState(prev => ({focusedProdPath: [...prev.focusedProdPath, focusedProd]})),
+        setState((prev) => ({ showRecipeTree: !prev.showRecipeTree })),
+      replaceFocusedProductPath: (focusedProductPath: string[]) =>
+        setState({ focusedProdPath: focusedProductPath }),
+      focusChildProduct: (focusedProd: string) =>
+        setState((prev) => ({
+          focusedProdPath: [...prev.focusedProdPath, focusedProd],
+        })),
     } as StoreUpdate,
   };
 };

@@ -1,6 +1,6 @@
-import classNames from "classnames";
-import { formatNumber } from "../../utils/helpers";
-import Styles from "./NumericInput.module.css";
+import classNames from 'classnames';
+import { formatNumber } from '../../utils/helpers';
+import Styles from './NumericInput.module.css';
 
 type Props = {
   value?: number;
@@ -12,8 +12,8 @@ export default (props: Props) => {
   return (
     <div
       class={classNames(
-        Styles["custom-number-input"],
-        "flex flex-row h-8 w-32 rounded-md",
+        Styles['custom-number-input'],
+        'flex flex-row h-8 w-32 rounded-md',
         props.class
       )}
     >
@@ -28,7 +28,7 @@ export default (props: Props) => {
         type="number"
         class="text-center w-full border-t border-b border-gray-300 font-semibold text-md text-black outline-none"
         name="custom-input-number"
-        value={props.value ?? ""}
+        value={props.value ?? ''}
         onChange={(ev) =>
           props.onChange(formatNumber(Number(ev.currentTarget.value)))
         }

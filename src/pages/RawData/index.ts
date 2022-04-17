@@ -1,1 +1,1 @@
-export { default } from "./RawData";
+export { default } from './RawData';

@@ -1,8 +1,8 @@
-import { useMainContext } from "../../hooks/MainContext";
-import Tooltip from "../Tooltip";
-import { calcAvgPrice } from "../../utils/helpers";
-import { createMemo } from "solid-js";
-import Button from "../Button";
+import { useMainContext } from '../../hooks/MainContext';
+import Tooltip from '../Tooltip';
+import { calcAvgPrice } from '../../utils/helpers';
+import { createMemo } from 'solid-js';
+import Button from '../Button';
 
 type Props = {
   name: string;
@@ -18,14 +18,14 @@ export default (props: Props) => {
       : tagsResource()?.[props.name] ?? [];
     const prodOffersInStores =
       allProductsInStores()?.filter((t) => products.includes(t.ItemName)) ?? [];
-    if (prodOffersInStores.length <= 0) return { errorMessage: "no offers" };
+    if (prodOffersInStores.length <= 0) return { errorMessage: 'no offers' };
     const offersInCurrency = !mainState.currency
       ? []
       : prodOffersInStores.filter(
           (t) => t.CurrencyName === mainState.currency
         ) ?? [];
     if (mainState.currency && offersInCurrency.length === 0)
-      return { errorMessage: "no offers in currency" };
+      return { errorMessage: 'no offers in currency' };
 
     return {
       calculatedPrice: !mainState.currency
@@ -45,16 +45,19 @@ export default (props: Props) => {
   }
 
   return (
-    <Tooltip noStyle text="Click for ingame prices. Select currency for average.">
+    <Tooltip
+      noStyle
+      text="Click for ingame prices. Select currency for average."
+    >
       <Button
         onClick={() =>
           props.showPricesForProductsModal(props.name, props.isSpecificItem)
         }
       >
-        {!mainState.currency && "select currency"}
+        {!mainState.currency && 'select currency'}
         {mainState.currency &&
           avgPrice() &&
-          `${avgPrice().calculatedPrice ?? "?"} ${mainState.currency}`}
+          `${avgPrice().calculatedPrice ?? '?'} ${mainState.currency}`}
       </Button>
     </Tooltip>
   );

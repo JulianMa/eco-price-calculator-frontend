@@ -1,10 +1,10 @@
-import Button from "../../../components/Button";
-import CalculatorRecipeTree from "./CalculatorRecipeTree";
-import { useCalcContext } from "../context/CalcContext";
-import IngredientsCalc from "./IngredientsCalc";
-import ProductsCalc from "./ProductsCalc";
-import CalculatorRecipeBreadcrumb from "./CalculatorRecipeBreadcrumb";
-import RadioToggle from "../../../components/RadioToggle";
+import Button from '../../../components/Button';
+import CalculatorRecipeTree from './CalculatorRecipeTree';
+import { useCalcContext } from '../context/CalcContext';
+import IngredientsCalc from './IngredientsCalc';
+import ProductsCalc from './ProductsCalc';
+import CalculatorRecipeBreadcrumb from './CalculatorRecipeBreadcrumb';
+import RadioToggle from '../../../components/RadioToggle';
 
 export default () => {
   const { priceCalcStore } = useCalcContext();
@@ -14,20 +14,28 @@ export default () => {
       {priceCalcStore.selectedProduct() !== undefined && (
         <>
           <div class="flex justify-between">
-            <Button onClick={() => priceCalcStore.setSelectedProduct(undefined)}>
+            <Button
+              onClick={() => priceCalcStore.setSelectedProduct(undefined)}
+            >
               Back
             </Button>
             <RadioToggle
               options={[
-                { text: "Breadcrumb", value: "Breadcrumb" },
-                { text: "Recipe tree", value: "RecipeTree" },
+                { text: 'Breadcrumb', value: 'Breadcrumb' },
+                { text: 'Recipe tree', value: 'RecipeTree' },
               ]}
               onChange={priceCalcStore.update.toggleShowRecipeTree}
-              selected={priceCalcStore.state.showRecipeTree ? "RecipeTree" : "Breadcrumb"}
+              selected={
+                priceCalcStore.state.showRecipeTree
+                  ? 'RecipeTree'
+                  : 'Breadcrumb'
+              }
             />
           </div>
           {priceCalcStore.state.showRecipeTree && <CalculatorRecipeTree />}
-          {!priceCalcStore.state.showRecipeTree && <CalculatorRecipeBreadcrumb />}
+          {!priceCalcStore.state.showRecipeTree && (
+            <CalculatorRecipeBreadcrumb />
+          )}
           <IngredientsCalc />
           <ProductsCalc />
         </>

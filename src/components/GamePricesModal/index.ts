@@ -1,1 +1,1 @@
-export { default } from "./GamePricesModal";
+export { default } from './GamePricesModal';

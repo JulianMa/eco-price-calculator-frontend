@@ -2,18 +2,18 @@ import Table, {
   TableHeader,
   TableHeaderCol,
   TableBody,
-} from "../../components/Table";
-import { Accessor, For } from "solid-js";
-import Tooltip from "../../components/Tooltip";
-import Button from "../../components/Button";
-import { SortableColumnsStoresTable } from "./createMarketStore";
+} from '../../components/Table';
+import { Accessor, For } from 'solid-js';
+import Tooltip from '../../components/Tooltip';
+import Button from '../../components/Button';
+import { SortableColumnsStoresTable } from './createMarketStore';
 
 type Props = {
   stores: Accessor<Stores[]>;
   setSearch: (search: string) => void;
   setCurrencyFilter: (currency: string) => void;
   setShowStoreModal: (storeName: string) => void;
-  currentSort: { column: SortableColumnsStoresTable, directionDesc: boolean };
+  currentSort: { column: SortableColumnsStoresTable; directionDesc: boolean };
   toggleSortColumn: (column: SortableColumnsStoresTable) => void;
 };
 export default (props: Props) => (
@@ -21,21 +21,35 @@ export default (props: Props) => (
     <TableHeader>
       <TableHeaderCol
         onSort={() => props.toggleSortColumn(SortableColumnsStoresTable.STORE)}
-        directionDesc={props.currentSort.column === SortableColumnsStoresTable.STORE ? props.currentSort.directionDesc : undefined}
+        directionDesc={
+          props.currentSort.column === SortableColumnsStoresTable.STORE
+            ? props.currentSort.directionDesc
+            : undefined
+        }
       >
         Store Name
       </TableHeaderCol>
       <TableHeaderCol>Store Owner</TableHeaderCol>
       <TableHeaderCol>Currency</TableHeaderCol>
       <TableHeaderCol
-        onSort={() => props.toggleSortColumn(SortableColumnsStoresTable.BALANCE)}
-        directionDesc={props.currentSort.column === SortableColumnsStoresTable.BALANCE ? props.currentSort.directionDesc : undefined}
+        onSort={() =>
+          props.toggleSortColumn(SortableColumnsStoresTable.BALANCE)
+        }
+        directionDesc={
+          props.currentSort.column === SortableColumnsStoresTable.BALANCE
+            ? props.currentSort.directionDesc
+            : undefined
+        }
       >
         Balance
       </TableHeaderCol>
       <TableHeaderCol
         onSort={() => props.toggleSortColumn(SortableColumnsStoresTable.OFFERS)}
-        directionDesc={props.currentSort.column === SortableColumnsStoresTable.OFFERS ? props.currentSort.directionDesc : undefined}
+        directionDesc={
+          props.currentSort.column === SortableColumnsStoresTable.OFFERS
+            ? props.currentSort.directionDesc
+            : undefined
+        }
       >
         Offers
       </TableHeaderCol>
@@ -46,18 +60,14 @@ export default (props: Props) => (
           <tr>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
               <Tooltip noStyle text="Click to show store orders">
-                <Button
-                  onClick={() => props.setShowStoreModal(store.Name)}
-                >
+                <Button onClick={() => props.setShowStoreModal(store.Name)}>
                   {store.Name}
                 </Button>
               </Tooltip>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
               <Tooltip noStyle text="Click to filter by store owner">
-                <Button
-                  onClick={() => props.setSearch(store.Owner)}
-                >
+                <Button onClick={() => props.setSearch(store.Owner)}>
                   {store.Owner}
                 </Button>
               </Tooltip>

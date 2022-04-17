@@ -1,16 +1,15 @@
 .sortableLink {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    text-decoration: underline;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .sortIcon {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .sortableLink.sorted .sortIcon,
-.sortableLink:hover .sortIcon
-{
-    visibility: visible;
+.sortableLink:hover .sortIcon {
+  visibility: visible;
 }

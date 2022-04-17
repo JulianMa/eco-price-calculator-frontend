@@ -1,10 +1,6 @@
-import {
-  createSignal,
-  createResource,
-  createEffect,
-} from "solid-js";
-import { openDownloadFileDialog } from "../../utils/downloadFile";
-import { readDB } from "../../utils/restDbSdk";
+import { createSignal, createResource, createEffect } from 'solid-js';
+import { openDownloadFileDialog } from '../../utils/downloadFile';
+import { readDB } from '../../utils/restDbSdk';
 
 export interface DbContent<T> {
   isLoading: boolean;
@@ -12,8 +8,8 @@ export interface DbContent<T> {
   result: T;
 }
 
-export default  () => {
-  const [filenameToDownload, setFilenameToDownload] = createSignal("");
+export default () => {
+  const [filenameToDownload, setFilenameToDownload] = createSignal('');
   const [downloadedFile] = createResource(
     filenameToDownload,
     (filename: string) => {
@@ -28,7 +24,7 @@ export default  () => {
     if (filename) {
       openDownloadFileDialog(filename, downloadedFile()?.json);
     }
-    setFilenameToDownload("");
+    setFilenameToDownload('');
   });
 
   return {

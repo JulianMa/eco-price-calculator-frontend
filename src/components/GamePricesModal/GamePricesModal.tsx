@@ -1,22 +1,22 @@
-import { createMemo, createSignal, For } from "solid-js";
-import { useMainContext } from "../../hooks/MainContext";
+import { createMemo, createSignal, For } from 'solid-js';
+import { useMainContext } from '../../hooks/MainContext';
 import {
   calcTotalPages,
   filterByIncludesAny,
   paginateArray,
   getTagPersonalPriceId,
-} from "../../utils/helpers";
+} from '../../utils/helpers';
 import Table, {
   TableHeader,
   TableHeaderCol,
   TableBody,
-} from "../../components/Table";
-import Modal from "../Modal";
-import ModalHeader from "../Modal/ModalHeader";
-import Pagination from "../Pagination";
-import Tooltip from "../Tooltip";
-import { useCalcContext } from "../../pages/PriceCalculator/context/CalcContext";
-import Button from "../Button";
+} from '../../components/Table';
+import Modal from '../Modal';
+import ModalHeader from '../Modal/ModalHeader';
+import Pagination from '../Pagination';
+import Tooltip from '../Tooltip';
+import { useCalcContext } from '../../pages/PriceCalculator/context/CalcContext';
+import Button from '../Button';
 const pageSize = 10;
 
 export default () => {
@@ -63,8 +63,9 @@ export default () => {
           <div class="sm:flex sm:items-start">
             <div class="flex-grow mt-3 text-center sm:mt-0 sm:text-left">
               <ModalHeader>
-                Ingame prices for product{productNames().length > 1 ? "s" : ""}:{" "}
-                {productNames().join(", ")}
+                Ingame prices for product
+                {productNames().length > 1 ? 's' : ''}:{' '}
+                {productNames().join(', ')}
               </ModalHeader>
               <div class="mt-2">
                 <Table>
@@ -95,7 +96,10 @@ export default () => {
                               : `Selling ${product.MaxNumWanted} for`}
                           </td>
                           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <Tooltip noStyle text="Click to set your personal price">
+                            <Tooltip
+                              noStyle
+                              text="Click to set your personal price"
+                            >
                               <Button
                                 onClick={() => {
                                   //Updates both personal price for this product as well as tag price if !isSpecificProduct

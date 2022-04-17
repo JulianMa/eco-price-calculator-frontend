@@ -1,5 +1,5 @@
-import classNames from "classnames";
-import type { JSXElement } from "solid-js";
+import classNames from 'classnames';
+import type { JSXElement } from 'solid-js';
 
 type Props = {
   children: JSXElement;
@@ -50,9 +50,9 @@ export default (props: Props) => (
   --> */}
       <div
         class={classNames(
-          "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full md:max-w-2xl lg:max-w-4xl xl:max-w-5xl",
+          'inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full md:max-w-2xl lg:max-w-4xl xl:max-w-5xl',
           {
-            [props.class ?? ""]: (props.class ?? "").length > 0,
+            [props.class ?? '']: (props.class ?? '').length > 0,
           }
         )}
       >

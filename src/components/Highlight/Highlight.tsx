@@ -1,11 +1,16 @@
-import classNames from "classnames";
+import classNames from 'classnames';
 
 type Props = {
-    text?: string;
-    class?: string;
+  text?: string;
+  class?: string;
 };
-export default (props: Props) => (
-    props.text && <span class={classNames("font-semibold", {[props.class??""]: !!props.class})}>
-        {props.text}
+export default (props: Props) =>
+  props.text && (
+    <span
+      class={classNames('font-semibold', {
+        [props.class ?? '']: !!props.class,
+      })}
+    >
+      {props.text}
     </span>
-);
+  );

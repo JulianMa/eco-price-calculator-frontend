@@ -1,5 +1,5 @@
-import { Show } from "solid-js";
-import RadioToggle from "../RadioToggle";
+import { Show } from 'solid-js';
+import RadioToggle from '../RadioToggle';
 type Props = {
   totalPages: number;
   currentPage: number;
@@ -11,9 +11,7 @@ export default (props: Props) => (
       options={Array.from(new Array(Math.min(props.totalPages, 20))).map(
         (_, i) => ({ value: i + 1, text: `${i + 1}` })
       )}
-      onChange={(selected: string | number) =>
-        props.onChange(Number(selected))
-      }
+      onChange={(selected: string | number) => props.onChange(Number(selected))}
       selected={`${props.currentPage}`}
     />
   </div>

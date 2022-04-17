@@ -1,9 +1,9 @@
-import classNames from "classnames";
-import { createSignal, For } from "solid-js";
+import classNames from 'classnames';
+import { createSignal, For } from 'solid-js';
 import PortalMenuPosition, {
   CardinalPoint,
-} from "../PortalMenuPosition/PortalMenuPosition";
-import createOnClickOutside from "../../hooks/createOnClickOutside";
+} from '../PortalMenuPosition/PortalMenuPosition';
+import createOnClickOutside from '../../hooks/createOnClickOutside';
 
 type Props = {
   value: string | number;
@@ -22,11 +22,11 @@ export default (props: Props) => {
       <div
         {...out}
         class={classNames(
-          "w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transform focus:outline-none z-50",
+          'w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transform focus:outline-none z-50',
           {
-            ["transition ease-out duration-100 opacity-100 scale-100"]:
+            ['transition ease-out duration-100 opacity-100 scale-100']:
               isMenuOpen(),
-            ["transition ease-in duration-75 opacity-0 scale-95"]:
+            ['transition ease-in duration-75 opacity-0 scale-95']:
               !isMenuOpen(),
           }
         )}
@@ -39,9 +39,9 @@ export default (props: Props) => {
           <For each={props.values}>
             {(item) => (
               <button
-                class={classNames("block px-4 py-2 text-sm w-full text-left", {
-                  ["bg-gray-100 text-gray-900"]: item.value == props.value,
-                  ["text-gray-700"]: item.value != props.value,
+                class={classNames('block px-4 py-2 text-sm w-full text-left', {
+                  ['bg-gray-100 text-gray-900']: item.value == props.value,
+                  ['text-gray-700']: item.value != props.value,
                 })}
                 role="menuitem"
                 onClick={() => {
@@ -63,7 +63,7 @@ export default (props: Props) => {
       origin={props.origin}
       direction={props.direction}
     >
-      <div class={classNames("inline-block text-left", props.class)}>
+      <div class={classNames('inline-block text-left', props.class)}>
         <button
           type="button"
           class="inline-flex justify-center w-full rounded-md border border-gray-300 h-8 px-2 py-1 bg-white text-sm font-small text-black hover:bg-gray-50 focus:outline-none"

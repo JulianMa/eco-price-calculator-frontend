@@ -1,9 +1,9 @@
-import { createSignal, JSXElement, onCleanup, onMount } from "solid-js";
-import styles from "./Tooltip.module.css";
+import { createSignal, JSXElement, onCleanup, onMount } from 'solid-js';
+import styles from './Tooltip.module.css';
 import PortalMenuPosition, {
   CardinalPoint,
-} from "../PortalMenuPosition/PortalMenuPosition";
-import classNames from "classnames";
+} from '../PortalMenuPosition/PortalMenuPosition';
+import classNames from 'classnames';
 type Props = {
   text: string;
   children: JSXElement;
@@ -17,12 +17,12 @@ export default (props: Props) => {
   const openMenu = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
   onMount(() => {
-    el?.addEventListener("mouseenter", openMenu, false);
-    el?.addEventListener("mouseleave", closeMenu, false);
+    el?.addEventListener('mouseenter', openMenu, false);
+    el?.addEventListener('mouseleave', closeMenu, false);
   });
   onCleanup(() => {
-    el?.removeEventListener("mouseenter", openMenu);
-    el?.removeEventListener("mouseleave", closeMenu);
+    el?.removeEventListener('mouseenter', openMenu);
+    el?.removeEventListener('mouseleave', closeMenu);
   });
   return (
     <PortalMenuPosition
@@ -34,14 +34,17 @@ export default (props: Props) => {
           </div>
         </>
       )}
-      origin={props.origin ?? "N"}
-      direction={props.direction ?? "N"}
+      origin={props.origin ?? 'N'}
+      direction={props.direction ?? 'N'}
       class="z-50"
     >
       <div class="inline-block relative" ref={el}>
-        <div class={classNames({
-            ["text-sm border rounded border-gray-300 inline-block border-dashed hover:border-gray-500"]: !props.noStyle
-          })}>
+        <div
+          class={classNames({
+            ['text-sm border rounded border-gray-300 inline-block border-dashed hover:border-gray-500']:
+              !props.noStyle,
+          })}
+        >
           {props.children}
         </div>
         {isMenuOpen() && <div class={styles.tooltipArrow}></div>}

@@ -1,7 +1,7 @@
-import { createSignal } from "solid-js";
-import { NavLink } from "solid-app-router";
-import classnames from "classnames";
-import ecoIconUrl from "../assets/eco-icon.ico";
+import { createSignal } from 'solid-js';
+import { NavLink } from 'solid-app-router';
+import classnames from 'classnames';
+import ecoIconUrl from '../assets/eco-icon.ico';
 
 type Props = {
   routes: Array<{
@@ -29,14 +29,14 @@ export default (props: Props) => {
                     href={route.href}
                     end
                     class={classnames(
-                      "px-3 py-2 rounded-md text-sm font-medium",
+                      'px-3 py-2 rounded-md text-sm font-medium',
                       {
-                        "bg-gray-900 text-white": route.highlight,
-                        "text-gray-300 hover:bg-gray-700 hover:text-white":
+                        'bg-gray-900 text-white': route.highlight,
+                        'text-gray-300 hover:bg-gray-700 hover:text-white':
                           !route.highlight,
                       }
                     )}
-                    aria-current={route.highlight ? "page" : undefined}
+                    aria-current={route.highlight ? 'page' : undefined}
                   >
                     {route.text}
                   </NavLink>
@@ -61,7 +61,7 @@ export default (props: Props) => {
             Menu open: "hidden", Menu closed: "block"
           --> */}
               <svg
-                class={classnames("h-6 w-6", {
+                class={classnames('h-6 w-6', {
                   block: !mobileMenuOpen(),
                   hidden: mobileMenuOpen(),
                 })}
@@ -84,7 +84,7 @@ export default (props: Props) => {
             Menu open: "block", Menu closed: "hidden"
           --> */}
               <svg
-                class={classnames("h-6 w-6", {
+                class={classnames('h-6 w-6', {
                   block: mobileMenuOpen(),
                   hidden: !mobileMenuOpen(),
                 })}
@@ -108,7 +108,7 @@ export default (props: Props) => {
 
       {/* <!-- Mobile menu, show/hide based on menu state. --> */}
       <div
-        class={classnames("md:hidden", {
+        class={classnames('md:hidden', {
           block: mobileMenuOpen(),
           hidden: !mobileMenuOpen(),
         })}
@@ -121,14 +121,14 @@ export default (props: Props) => {
               href={route.href}
               end
               class={classnames(
-                "block px-3 py-2 rounded-md text-base font-medium",
+                'block px-3 py-2 rounded-md text-base font-medium',
                 {
-                  "bg-gray-900 text-white": route.highlight,
-                  "text-gray-300 hover:bg-gray-700 hover:text-white":
+                  'bg-gray-900 text-white': route.highlight,
+                  'text-gray-300 hover:bg-gray-700 hover:text-white':
                     !route.highlight,
                 }
               )}
-              aria-current={route.highlight ? "page" : undefined}
+              aria-current={route.highlight ? 'page' : undefined}
             >
               {route.text}
             </NavLink>

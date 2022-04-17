@@ -1,9 +1,12 @@
-export const Recipes = "Recipes";
-export const CraftingTables ="CraftingTables";
-export const Tags = "Tags";
-export const Stores = "Stores";
+export const Recipes = 'Recipes';
+export const CraftingTables = 'CraftingTables';
+export const Tags = 'Tags';
+export const Stores = 'Stores';
 export const fileNames = [Stores, Recipes, CraftingTables, Tags];
+export const lastPluginVersion = '2.1.0';
 
 export enum OrderTypes {
-    BUY, SELL, BOTH
-  }
+  BUY,
+  SELL,
+  BOTH,
+}

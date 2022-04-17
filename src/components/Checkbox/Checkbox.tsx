@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import classNames from 'classnames';
 
 type Props = {
   fieldId?: string;
@@ -10,14 +10,14 @@ type Props = {
 };
 
 export default (props: Props) => {
-  const fieldId = props.fieldId ?? props.label.replaceAll(" ", "_");
+  const fieldId = props.fieldId ?? props.label.replaceAll(' ', '_');
   return (
     <div
       class={classNames(
-        "flex items-start",
+        'flex items-start',
         {
-          "flex-row": !props.left,
-          "flex-row-reverse": props.left,
+          'flex-row': !props.left,
+          'flex-row-reverse': props.left,
         },
         props.class
       )}

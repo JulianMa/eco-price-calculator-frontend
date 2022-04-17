@@ -2,12 +2,12 @@ export const openDownloadFileDialog = (filename: string, json: unknown) => {
   // Create blob link to download
   const fileContent = new Blob(
     [decodeURIComponent(encodeURI(JSON.stringify(json)))],
-    { type: "application/json;charset=utf-8;" }
+    { type: 'application/json;charset=utf-8;' }
   );
-  const link = document.createElement("a");
+  const link = document.createElement('a');
   link.href = URL.createObjectURL(fileContent);
-  link.setAttribute("download", `${filename}.json`);
-  link.target = "_blank";
+  link.setAttribute('download', `${filename}.json`);
+  link.target = '_blank';
 
   // Append to html link element page
   document.body.appendChild(link);

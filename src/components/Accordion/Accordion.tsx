@@ -1,5 +1,5 @@
-import classNames from "classnames";
-import { createSignal, JSXElement } from "solid-js";
+import classNames from 'classnames';
+import { createSignal, JSXElement } from 'solid-js';
 
 type Props = {
   children: JSXElement;
@@ -11,13 +11,13 @@ type Props = {
 export default (props: Props) => {
   const [isOpen, setIsOpen] = createSignal(props.startsOpen ?? false);
   return (
-    <div class={classNames("border rounded", props.class)}>
+    <div class={classNames('border rounded', props.class)}>
       <button
         class={classNames(
-          "px-8 py-5 bg-gray-50 px-5 py-3 flex w-full justify-between",
+          'px-8 py-5 bg-gray-50 px-5 py-3 flex w-full justify-between',
           {
-            "border-b": isOpen(),
-            "cursor-default": props.notCollapsible
+            'border-b': isOpen(),
+            'cursor-default': props.notCollapsible,
           }
         )}
         onclick={() => !props.notCollapsible && setIsOpen((prev) => !prev)}
@@ -58,7 +58,7 @@ export default (props: Props) => {
           )}
         </div>
       </button>
-      <div class={classNames("px-8 py-5", { hidden: !isOpen() })}>
+      <div class={classNames('px-8 py-5', { hidden: !isOpen() })}>
         {props.children}
       </div>
     </div>

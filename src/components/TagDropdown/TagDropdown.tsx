@@ -1,6 +1,6 @@
-import { createMemo } from "solid-js";
-import { useMainContext } from "../../hooks/MainContext";
-import Dropdown from "../Dropdown";
+import { createMemo } from 'solid-js';
+import { useMainContext } from '../../hooks/MainContext';
+import Dropdown from '../Dropdown';
 
 type Props = {
   tagName: string;
@@ -19,9 +19,9 @@ export default (props: Props) => {
   );
   return (
     <Dropdown
-      value={props.selectedProduct ?? ""}
+      value={props.selectedProduct ?? ''}
       values={[
-        { text: `Select item in tag ${props.tagName}`, value: "" },
+        { text: `Select item in tag ${props.tagName}`, value: '' },
         ...tagValues(),
       ]}
       onChange={(newValue) => props.onSelectProduct(`${newValue}`)}

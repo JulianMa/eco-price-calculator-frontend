@@ -1,4 +1,4 @@
-import { Accessor, createEffect, createSignal } from "solid-js";
+import { Accessor, createEffect, createSignal } from 'solid-js';
 
 export default (handler: () => void, mounted: Accessor<boolean>) => {
   const [isClicked, setIsClicked] = createSignal(false);
@@ -14,11 +14,11 @@ export default (handler: () => void, mounted: Accessor<boolean>) => {
 
   createEffect(() => {
     if (mounted()) {
-      document.addEventListener("click", handleEvent);
-      window.addEventListener("blur", handleEvent);
+      document.addEventListener('click', handleEvent);
+      window.addEventListener('blur', handleEvent);
     } else {
-      document.removeEventListener("click", handleEvent);
-      window.removeEventListener("blur", handleEvent);
+      document.removeEventListener('click', handleEvent);
+      window.removeEventListener('blur', handleEvent);
     }
   });
 

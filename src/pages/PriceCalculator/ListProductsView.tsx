@@ -1,26 +1,25 @@
-import { For } from "solid-js";
-import { Survivalist } from "./context/createListProductsStore";
+import { For } from 'solid-js';
+import { Survivalist } from './context/createListProductsStore';
 import Table, {
   TableHeader,
   TableHeaderCol,
   TableBody,
-} from "../../components/Table";
-import SearchInput from "../../components/SearchInput";
-import Dropdown from "../../components/Dropdown";
-import Tooltip from "../../components/Tooltip";
-import Pagination from "../../components/Pagination";
-import { filterByTextEqual } from "../../utils/helpers";
-import Button from "../../components/Button";
-import { useMainContext } from "../../hooks/MainContext";
-import PersonalPrice from "../../components/PersonalPrice/PersonalPrice";
-import AveragePrice from "../../components/AveragePrice";
-import { useCalcContext } from "./context/CalcContext";
-import classNames from "classnames";
-import Checkbox from "../../components/Checkbox";
+} from '../../components/Table';
+import SearchInput from '../../components/SearchInput';
+import Dropdown from '../../components/Dropdown';
+import Tooltip from '../../components/Tooltip';
+import Pagination from '../../components/Pagination';
+import { filterByTextEqual } from '../../utils/helpers';
+import Button from '../../components/Button';
+import { useMainContext } from '../../hooks/MainContext';
+import PersonalPrice from '../../components/PersonalPrice/PersonalPrice';
+import AveragePrice from '../../components/AveragePrice';
+import { useCalcContext } from './context/CalcContext';
+import classNames from 'classnames';
+import Checkbox from '../../components/Checkbox';
 
 export default () => {
-  const { mainState, allProfessions, allCraftStations } =
-    useMainContext();
+  const { mainState, allProfessions, allCraftStations } = useMainContext();
   const { listProductsStore: props, priceCalcStore } = useCalcContext();
   return (
     <>
@@ -48,7 +47,7 @@ export default () => {
               <Dropdown
                 value={props.state.filterProfession}
                 values={[
-                  { value: "", text: "Filter by Profession" },
+                  { value: '', text: 'Filter by Profession' },
                   ...(allProfessions()?.map((name) => ({
                     value: name,
                     text: name,
@@ -63,7 +62,10 @@ export default () => {
               <Dropdown
                 value={props.state.filterCraftStation}
                 values={[
-                  { value: "", text: "Filter by crafting station" },
+                  {
+                    value: '',
+                    text: 'Filter by crafting station',
+                  },
                   ...(allCraftStations()?.map((name) => ({
                     value: name,
                     text: name,
@@ -75,7 +77,9 @@ export default () => {
                 origin="SE"
                 direction="SW"
               />
-              <Button onClick={() => props.update.clearFilters()}>Clear filters</Button>
+              <Button onClick={() => props.update.clearFilters()}>
+                Clear filters
+              </Button>
             </div>
           </div>
           <Table>
@@ -90,13 +94,16 @@ export default () => {
                 {(product) => (
                   <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <Tooltip noStyle
+                      <Tooltip
+                        noStyle
                         text="Click to calculate price for this item"
                         origin="NW"
                         direction="NE"
                       >
                         <Button
-                          onClick={() => priceCalcStore.setSelectedProduct(product.Name)}
+                          onClick={() =>
+                            priceCalcStore.setSelectedProduct(product.Name)
+                          }
                         >
                           {product.Name}
                         </Button>
@@ -107,7 +114,12 @@ export default () => {
                         recipeVariant.Recipe.CraftStation.map((craftStation) =>
                           (recipeVariant.Recipe.SkillNeeds.length > 0
                             ? recipeVariant.Recipe.SkillNeeds
-                            : [{ Skill: Survivalist, Level: 0 }]
+                            : [
+                                {
+                                  Skill: Survivalist,
+                                  Level: 0,
+                                },
+                              ]
                           ).map((skillNeed) => ({
                             Skill: skillNeed.Skill,
                             SkillLevel: skillNeed.Level,
@@ -139,9 +151,16 @@ export default () => {
                             )
                         )
                         .map((recipe, index) => (
-                          <div class={classNames({ "mt-1": index > 0 })}>
+                          <div
+                            class={classNames({
+                              'mt-1': index > 0,
+                            })}
+                          >
                             <>
-                              <Tooltip noStyle text="Click to filter by profession">
+                              <Tooltip
+                                noStyle
+                                text="Click to filter by profession"
+                              >
                                 <Button
                                   onClick={() =>
                                     props.update.setFilterProfession(
@@ -155,7 +174,10 @@ export default () => {
                               {` lvl${recipe.SkillLevel}`}
                             </>
                             {recipe.Skill && ` @ `}
-                            <Tooltip noStyle text="Click to filter by craft station">
+                            <Tooltip
+                              noStyle
+                              text="Click to filter by craft station"
+                            >
                               <Button
                                 onClick={() =>
                                   props.update.setFilterCraftStation(
@@ -179,7 +201,7 @@ export default () => {
                       />
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {!mainState.currency && "select currency"}
+                      {!mainState.currency && 'select currency'}
                       {mainState.currency && (
                         <div class="flex">
                           <PersonalPrice personalPriceId={product.Name} />

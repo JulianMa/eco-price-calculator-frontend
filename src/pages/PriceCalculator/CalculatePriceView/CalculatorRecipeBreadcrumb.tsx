@@ -1,19 +1,19 @@
-import { createMemo, For } from "solid-js";
-import Button from "../../../components/Button";
-import Tooltip from "../../../components/Tooltip";
-import { useMainContext } from "../../../hooks/MainContext";
-import { getRecipeBreadcrumb } from "../../../utils/recipeHelper";
-import { useCalcContext } from "../context/CalcContext";
+import { createMemo, For } from 'solid-js';
+import Button from '../../../components/Button';
+import Tooltip from '../../../components/Tooltip';
+import { useMainContext } from '../../../hooks/MainContext';
+import { getRecipeBreadcrumb } from '../../../utils/recipeHelper';
+import { useCalcContext } from '../context/CalcContext';
 
 export default () => {
   const { allCraftableProducts, tagsResource, mainState } = useMainContext();
   const { priceCalcStore } = useCalcContext();
   const breadcrumb = createMemo(() =>
-  getRecipeBreadcrumb(
+    getRecipeBreadcrumb(
       allCraftableProducts() ?? [],
       priceCalcStore.selectedRecipes(),
       tagsResource() ?? {},
-      priceCalcStore.selectedProduct() ?? "",
+      priceCalcStore.selectedProduct() ?? '',
       priceCalcStore.state.focusedProdPath
     )
   );
@@ -32,11 +32,11 @@ export default () => {
                       priceCalcStore.update.replaceFocusedProductPath(node.path)
                     }
                   >
-                      {node.productName}
+                    {node.productName}
                   </Button>
                 </Tooltip>
               )}
-              { index() < breadcrumb().length - 1 && (<div>&gt;</div>)}
+              {index() < breadcrumb().length - 1 && <div>&gt;</div>}
               {index() === breadcrumb().length - 1 && (
                 <div class="inline-block py-1 px-1 font-semibold">
                   {node.productName}

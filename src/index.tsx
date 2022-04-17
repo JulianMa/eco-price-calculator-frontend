@@ -1,8 +1,8 @@
-import { render } from "solid-js/web";
-import { Router } from "solid-app-router";
+import { render } from 'solid-js/web';
+import { Router } from 'solid-app-router';
 
-import "./index.css";
-import App from "./App";
+import './index.css';
+import App from './App';
 
 render(
   () => (
@@ -10,5 +10,5 @@ render(
       <App />
     </Router>
   ),
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );

@@ -1,8 +1,8 @@
-import { createContext, JSXElement, useContext } from "solid-js";
+import { createContext, JSXElement, useContext } from 'solid-js';
 import createPriceCalculatorStore, {
   ListProductsStore,
-} from "./createListProductsStore";
-import createPriceCalcStore, { PriceCalcStore } from "./createPriceCalcStore";
+} from './createListProductsStore';
+import createPriceCalcStore, { PriceCalcStore } from './createPriceCalcStore';
 
 type Store = {
   recipeKey?: string;

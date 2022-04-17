@@ -1,4 +1,4 @@
-import { removeXmlTags } from "./helpers";
+import { removeXmlTags } from './helpers';
 import * as constants from './constants';
 
 const endpoints = {
@@ -19,13 +19,18 @@ export const readDB = (fileName: string) =>
   fetchAsync(endpoints.readDB(fileName));
 
 export const getStores = (): Promise<StoresResponse | undefined> =>
-  fetchAsync<StoresResponse>(endpoints.readDB(constants.Stores)).then((response) => response ? ({
-    ...response,
-    Stores: response?.Stores?.map((store) => ({
-      ...store,
-      Name: removeXmlTags(store.Name),
-    })),
-  }):undefined);
+  fetchAsync<StoresResponse>(endpoints.readDB(constants.Stores)).then(
+    (response) =>
+      response
+        ? {
+            ...response,
+            Stores: response?.Stores?.map((store) => ({
+              ...store,
+              Name: removeXmlTags(store.Name),
+            })),
+          }
+        : undefined
+  );
 
 export const getRecipes = (): Promise<RecipesResponse | undefined> =>
   fetchAsync<RecipesResponse>(endpoints.readDB(constants.Recipes));

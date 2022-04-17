@@ -1,1 +1,1 @@
-export { default } from "./LabeledField";
+export { default } from './LabeledField';

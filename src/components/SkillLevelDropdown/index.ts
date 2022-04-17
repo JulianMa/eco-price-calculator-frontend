@@ -1,1 +1,1 @@
-export default "./SkillLevelDropdown";
+export default './SkillLevelDropdown';

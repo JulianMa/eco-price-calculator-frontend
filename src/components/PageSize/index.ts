@@ -1,1 +1,1 @@
-export { default } from "./PageSize";
+export { default } from './PageSize';
