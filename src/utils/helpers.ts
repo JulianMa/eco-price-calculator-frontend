@@ -119,3 +119,7 @@ export const getIngredientId = (ingredient: {
   ingredient.IsSpecificItem
     ? ingredient.Name
     : getTagPersonalPriceId(ingredient.Tag);
+
+export const getDateFromExportedAt = (date: ExportedAt) =>
+  // Month - 1 because in javascript months are zero based
+  new Date(date.Year, date.Month - 1, date.Day, date.Hour, date.Min, date.Sec);

@@ -6,7 +6,8 @@
     "start": "netlify dev",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "pretty": "yarn prettier --write ."
   },
   "license": "MIT",
   "devDependencies": {

@@ -1,4 +1,3 @@
-import NotificationsBar from '../../components/NotificationsBar';
 import styles from './Home.module.css';
 export default () => {
   return (
@@ -67,6 +66,14 @@ export default () => {
       <br />
       <div class={styles.changelog}>
         <h2>Latest changes</h2>
+        <h3>2.6.1 (2022-04-18)</h3>
+        <h4>Features</h4>
+        <ul>
+          <li>
+            Added notifications bar to help admins spot configuration problems
+            and users noting when they are dealing with stale data from server.
+          </li>
+        </ul>
         <h3>2.6.0 (2022-04-16)</h3>
         <h4>Features</h4>
         <ul>
@@ -84,51 +91,6 @@ export default () => {
           <li>
             Added filter buttons that allows filtering of products that are
             being sold or purchased in ingame market page
-          </li>
-        </ul>
-        <h3>2.4.1 (2022-01-04)</h3>
-        <h4>Fixes</h4>
-        <ul>
-          <li>Small firefox fixes</li>
-        </ul>
-        <h3>2.4.0 (2022-01-03)</h3>
-        <h4>Features</h4>
-        <ul>
-          <li>
-            Added breadcrumb in price calculator view (alternative to the
-            previous tree view)
-          </li>
-          <li>
-            Added buttons to make it easy to select a product to calculate price
-            (reduces clicks needed)
-          </li>
-        </ul>
-        <h4>Fixes / Chores</h4>
-        <ul>
-          <li>
-            Fixed a bug that would make the user loose focus when searching for
-            a product in price calculator page
-          </li>
-          <li>Several UX improvements</li>
-        </ul>
-        <h3>2.3.0 (2021-12-31)</h3>
-        <h4>Features</h4>
-        <ul>
-          <li>Moved previous home page into a "less visible" About page</li>
-          <li>
-            When the user types his username for the first time, his own
-            currency gets selected by default
-          </li>
-          <li>Added option to clear all filters for a table</li>
-          <li>
-            Moved currency selector to header (it looked like a regular filter)
-          </li>
-        </ul>
-        <h4>Fixes</h4>
-        <ul>
-          <li>
-            Minor bug fix for the option "only show what i'm selling" also
-            showing buy orders
           </li>
         </ul>
       </div>
