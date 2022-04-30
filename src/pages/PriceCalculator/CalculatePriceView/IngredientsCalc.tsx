@@ -67,7 +67,7 @@ export default () => {
         {priceCalcStore.selectedVariant() && (
           <>
             <div class="flex gap-5 flex-wrap">
-              <LabeledField vertical text="Craft ammount:">
+              <LabeledField vertical text="Craft amount:">
                 <RadioToggle
                   options={[
                     { text: '1', value: 1 },

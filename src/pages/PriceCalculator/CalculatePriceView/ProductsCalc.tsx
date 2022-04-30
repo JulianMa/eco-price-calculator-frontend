@@ -64,7 +64,7 @@ export default () => {
             <Table>
               <TableHeader>
                 <TableHeaderCol>Product name</TableHeaderCol>
-                <TableHeaderCol>Ammount</TableHeaderCol>
+                <TableHeaderCol>Amount</TableHeaderCol>
                 <TableHeaderCol>Cost Percentage</TableHeaderCol>
                 <TableHeaderCol>Production cost</TableHeaderCol>
                 <TableHeaderCol>Retail price</TableHeaderCol>

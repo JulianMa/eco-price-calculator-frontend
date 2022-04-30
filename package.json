@@ -12,7 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^10.4.0",
-    "netlify-cli": "^8.6.4",
+    "netlify-cli": "^9.16.7",
     "postcss": "^8.3.11",
     "prettier": "^2.6.2",
     "tailwindcss": "^2.2.19",
