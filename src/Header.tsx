@@ -2,12 +2,13 @@ import { createEffect } from 'solid-js';
 import Username from './components/Username';
 import Dropdown from './components/Dropdown';
 import { useMainContext } from './hooks/MainContext';
+import Button from './components/Button';
 
 type Props = {
   currentRoute: () => { text: string; description: string } | undefined;
 };
 export default (props: Props) => {
-  const { mainState, update, allCurrencies } = useMainContext();
+  const { currentCurrency, update, allCurrencies } = useMainContext();
   return (
     <header class="bg-white shadow relative">
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -20,7 +21,7 @@ export default (props: Props) => {
         <div class="flex pt-3 gap-4">
           <Username />
           <Dropdown
-            value={mainState.currency}
+            value={currentCurrency()}
             values={[
               { value: '', text: 'Select a currency' },
               ...(allCurrencies()?.map((name) => ({

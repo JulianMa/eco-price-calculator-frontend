@@ -1,4 +1,4 @@
-import { createMemo, createSignal, For } from 'solid-js';
+import { createEffect, createMemo, createSignal, For } from 'solid-js';
 import { useMainContext } from '../../hooks/MainContext';
 import {
   calcTotalPages,
@@ -17,6 +17,7 @@ import Pagination from '../Pagination';
 import Tooltip from '../Tooltip';
 import { useCalcContext } from '../../pages/PriceCalculator/context/CalcContext';
 import Button from '../Button';
+import Checkbox from '../Checkbox';
 const pageSize = 10;
 
 export default () => {
@@ -27,21 +28,28 @@ export default () => {
     },
   } = useCalcContext();
 
-  const { allProductsInStores, mainState, update, tagsResource } =
+  const { allProductsInStores, currentCurrency, update, tagsResource } =
     useMainContext();
   const [currentPage, setCurrentPage] = createSignal(1);
+  const [offersInCurrency, setOffersInCurrency] = createSignal(false);
   const productNames = createMemo(() => {
     if (state.showPricesForProductsModal == undefined) return [];
     return state.showPricesForProductsModal.isSpecificProduct
       ? [state.showPricesForProductsModal.name]
-      : tagsResource()?.[state.showPricesForProductsModal.name] ?? [];
+      : tagsResource()?.Tags?.[state.showPricesForProductsModal.name] ?? [];
   });
+  const hasOffersInCurrency = createMemo(() => allProductsInStores()?.some(
+    (product) =>
+      filterByIncludesAny(productNames(), [product.ItemName]) &&
+      (product.CurrencyName === currentCurrency())
+  ) ?? false)
+  createEffect(() => setOffersInCurrency(hasOffersInCurrency()));
   const filteredProducts = createMemo(() =>
     allProductsInStores()
       ?.filter(
         (product) =>
           filterByIncludesAny(productNames(), [product.ItemName]) &&
-          (!mainState.currency || product.CurrencyName === mainState.currency)
+          (!currentCurrency() || !offersInCurrency() || product.CurrencyName === currentCurrency())
       )
       .sort((a, b) => {
         if (a.Buying === b.Buying) {
@@ -67,7 +75,14 @@ export default () => {
                 {productNames().length > 1 ? 's' : ''}:{' '}
                 {productNames().join(', ')}
               </ModalHeader>
-              <div class="mt-2">
+              <div class="mt-1">
+                <Checkbox
+                  label="Show only offers in selected currency"
+                  checked={offersInCurrency()}
+                  onChange={(checked) => setOffersInCurrency(checked)}
+                />
+              </div>
+              <div class="mt-2 overflow-auto">
                 <Table>
                   <TableHeader>
                     <TableHeaderCol>Product Name</TableHeaderCol>

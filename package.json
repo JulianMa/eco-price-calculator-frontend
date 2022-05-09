@@ -12,6 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^10.4.0",
+    "msw": "^0.39.2",
     "netlify-cli": "^9.16.7",
     "postcss": "^8.3.11",
     "prettier": "^2.6.2",
@@ -30,5 +31,8 @@
     "trailingComma": "es5",
     "semi": true,
     "singleQuote": true
+  },
+  "msw": {
+    "workerDirectory": "dist"
   }
 }

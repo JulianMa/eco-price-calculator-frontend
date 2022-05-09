@@ -10,25 +10,25 @@ type Props = {
   showPricesForProductsModal: (Name: string, IsSpecificItem: boolean) => void;
 };
 export default (props: Props) => {
-  const { mainState, tagsResource, allProductsInStores } = useMainContext();
+  const { currentCurrency, tagsResource, allProductsInStores } = useMainContext();
 
   const avgPrice = createMemo(() => {
     const products = props.isSpecificItem
       ? [props.name]
-      : tagsResource()?.[props.name] ?? [];
+      : tagsResource()?.Tags?.[props.name] ?? [];
     const prodOffersInStores =
       allProductsInStores()?.filter((t) => products.includes(t.ItemName)) ?? [];
     if (prodOffersInStores.length <= 0) return { errorMessage: 'no offers' };
-    const offersInCurrency = !mainState.currency
+    const offersInCurrency = !currentCurrency()
       ? []
       : prodOffersInStores.filter(
-          (t) => t.CurrencyName === mainState.currency
+          (t) => t.CurrencyName === currentCurrency()
         ) ?? [];
-    if (mainState.currency && offersInCurrency.length === 0)
-      return { errorMessage: 'no offers in currency' };
+    if (currentCurrency() && offersInCurrency.length === 0)
+      return { calculatedPrice: 'no offers in currency' };
 
     return {
-      calculatedPrice: !mainState.currency
+      calculatedPrice: !currentCurrency()
         ? 0
         : calcAvgPrice(
             offersInCurrency
@@ -54,10 +54,10 @@ export default (props: Props) => {
           props.showPricesForProductsModal(props.name, props.isSpecificItem)
         }
       >
-        {!mainState.currency && 'select currency'}
-        {mainState.currency &&
+        {!currentCurrency() && 'select currency'}
+        {currentCurrency() &&
           avgPrice() &&
-          `${avgPrice().calculatedPrice ?? '?'} ${mainState.currency}`}
+          `${avgPrice().calculatedPrice ?? '?'} ${currentCurrency()}`}
       </Button>
     </Tooltip>
   );

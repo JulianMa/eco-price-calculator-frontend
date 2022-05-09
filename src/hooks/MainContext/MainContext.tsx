@@ -22,12 +22,14 @@ type MainContextType = {
   recipesResource: Resource<RecipesResponse | undefined>;
   tagsResource: Resource<TagsResponse | undefined>;
   dbs: Accessor<DB[] | undefined>;
+  currentCurrency: Accessor<string>;
   allCurrencies: Accessor<string[] | undefined>;
   allProfessions: Accessor<string[] | undefined>;
   allCraftStations: Accessor<string[] | undefined>;
   allProductsInStores: Accessor<ProductOffer[] | undefined>;
   allCraftableProducts: Accessor<CraftableProduct[] | undefined>;
   mainState: Store<MainStore>;
+  refetch: () => void;
   get: {
     personalPrice: (productName?: string) => number;
     craftAmmount: (productName?: string) => number;
@@ -65,15 +67,16 @@ type MainContextType = {
   };
 };
 
-const [storesResource] = createResource(getStores);
-const [recipesResource] = createResource(getRecipes);
-const [tagsResource] = createResource(getTags);
+const [storesResource, {refetch: refetchStores}] = createResource(getStores);
+const [recipesResource, {refetch: refetchRecipes}] = createResource(getRecipes);
+const [tagsResource, {refetch: refetchTags}] = createResource(getTags);
 
 const MainContext = createContext<MainContextType>({
   storesResource,
   recipesResource,
   tagsResource,
   dbs: () => [],
+  currentCurrency: () => '',
   allCurrencies: () => [],
   allProfessions: () => [],
   allCraftStations: () => [],
@@ -84,6 +87,7 @@ const MainContext = createContext<MainContextType>({
     userName: '',
     calorieCost: 0,
   },
+  refetch: () => undefined,
   get: {
     personalPrice: (productName?: string) => 0,
     craftAmmount: (productName?: string) => 1,
@@ -164,6 +168,27 @@ export const MainContextProvider = (props: Props) => {
       .filter(filterUnique)
       .sort(sortByTextExcludingWord('Credit'))
   );
+
+  const currentCurrency = createMemo<string>(() => {
+    // If there's a valid currency selected, use that one
+    if (allCurrencies()?.includes(mainState.currency)) {
+      return mainState.currency;
+    }
+
+    // Try to select the user's currency otherwise
+    if (mainState.userName.length > 0) {
+      const userPersonalCurrency = allCurrencies()?.find(
+        (t) => t.indexOf(mainState.userName) === 1
+      );
+      if (userPersonalCurrency) {
+        return userPersonalCurrency;
+      }
+    }
+
+    // When everything else fails, just return the first valid one
+    return allCurrencies()?.[0] ?? '';
+  })
+
   const allProductsInStores = createMemo(() =>
     storesResource()
       ?.Stores?.map((store) =>
@@ -265,15 +290,21 @@ export const MainContextProvider = (props: Props) => {
     storesResource,
     recipesResource,
     tagsResource,
+    currentCurrency,
     allCurrencies,
     allProfessions,
     allCraftStations,
     allProductsInStores,
     allCraftableProducts,
     mainState,
+    refetch: () => {
+      refetchStores();
+      refetchRecipes();
+      refetchTags();
+    },
     get: {
       personalPrice: (productName?: string) =>
-        personalPricesState[productName ?? '']?.[mainState.currency],
+        personalPricesState[productName ?? '']?.[currentCurrency()],
       craftAmmount: (productName?: string) =>
         craftAmmoutState[productName ?? ''] ?? 1,
       craftModule: (productName?: string) =>
@@ -292,8 +323,8 @@ export const MainContextProvider = (props: Props) => {
       userName: (username: string) => {
         // If no currency is selected, select the user's currency
         if (
-          mainState.currency.length == 0 ||
-          allCurrencies()?.filter((t) => t === mainState.currency).length === 0
+          currentCurrency().length == 0 ||
+          allCurrencies()?.filter((t) => t === currentCurrency()).length === 0
         ) {
           const userPersonalCurrency = allCurrencies()?.find(
             (t) => t.indexOf(username) === 1
