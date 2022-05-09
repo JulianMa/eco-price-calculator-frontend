@@ -32,7 +32,14 @@ export const getLogLevel = ({
   return LogLevel.None;
 };
 export default () => {
-  const { storesResource, recipesResource, tagsResource } = useMainContext();
+  const { storesResource, recipesResource, tagsResource, refetch } = useMainContext();
+
+  if (process.env.NODE_ENV === 'development') {
+    // Refetch files after 1sec to give time for msw to load
+    setTimeout(() => {
+      refetch();
+    }, 1000);
+  }
   
   const calc = createMemo(() => {
     // Error

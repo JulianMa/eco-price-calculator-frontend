@@ -17,7 +17,6 @@ exports.handler = async function (event) {
 
   return {
     statusCode: 200,
-    // body: JSON.stringify({message: 'hello there !!!', fileToRead, keyToGet, result, listDBs, key: process.env.VITE_STORAGE_MASTERKEY})
     body: JSON.stringify(result),
   };
 };
