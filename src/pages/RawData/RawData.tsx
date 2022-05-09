@@ -1,4 +1,4 @@
-import { createMemo } from 'solid-js';
+import { createEffect, createMemo } from 'solid-js';
 import createDBsStore from './createDBsStore';
 import Table, {
   TableHeader,
@@ -10,7 +10,7 @@ import * as constants from '../../utils/constants';
 import RawDataRow from './RawDataRow';
 import { useMainContext } from '../../hooks/MainContext';
 export default () => {
-  const { storesResource, tagsResource, recipesResource } = useMainContext();
+  const { storesResource, tagsResource, recipesResource, refetch } = useMainContext();
   const { downloadFile } = createDBsStore();
 
   const storesExportedAt = createMemo(
@@ -22,6 +22,7 @@ export default () => {
   const tagsExportedAt = createMemo(
     () => tagsResource()?.ExportedAt?.StringRepresentation ?? 'Not exported'
   );
+  createEffect(() => refetch());
   return (
     <Table>
       <TableHeader>

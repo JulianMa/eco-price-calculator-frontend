@@ -33,12 +33,16 @@ export const getLogLevel = ({
 };
 export default () => {
   const { storesResource, recipesResource, tagsResource } = useMainContext();
+  
   const calc = createMemo(() => {
     // Error
+    const hasStoresData = !!storesResource()?.PluginVersion;
+    const hasRecipesData = !!recipesResource()?.PluginVersion;
+    const hasTagsData = !!tagsResource()?.PluginVersion;
     const hasNoData =
-      !storesResource() && !recipesResource() && !tagsResource();
+      !hasStoresData && !hasRecipesData && !hasTagsData;
     const hasOnlySomeData =
-      !storesResource() || !recipesResource() || !tagsResource();
+      !hasStoresData || !hasRecipesData || !hasTagsData;
 
     // Warning
     const exportedAt = storesResource()?.ExportedAt;
@@ -48,7 +52,7 @@ export default () => {
 
     // Info
     const pluginVersion = storesResource()?.PluginVersion;
-    const isPluginOutdated = pluginVersion !== constants.latestPluginVersion;
+    const isPluginOutdated = !!pluginVersion && pluginVersion !== constants.latestPluginVersion;
 
     return {
       loading:
