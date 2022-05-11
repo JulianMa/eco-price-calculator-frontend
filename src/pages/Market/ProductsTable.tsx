@@ -8,6 +8,8 @@ import Tooltip from '../../components/Tooltip';
 import Button from '../../components/Button';
 import Highlight from '../../components/Highlight';
 import { SortableColumnsProductsTable } from './createMarketStore';
+import TableRowLoadingSpinner from '../../components/LoadingSpinner/TableRowLoadingSpinner';
+import { useMainContext } from '../../hooks/MainContext';
 
 type Props = {
   products: Accessor<ProductOffer[] | undefined>;
@@ -20,106 +22,110 @@ type Props = {
   };
   toggleSortColumn: (column: SortableColumnsProductsTable) => void;
 };
-export default (props: Props) => (
-  <Table>
-    <TableHeader>
-      <TableHeaderCol
-        onSort={() =>
-          props.toggleSortColumn(SortableColumnsProductsTable.PRODUCT)
-        }
-        directionDesc={
-          props.currentSort.column === SortableColumnsProductsTable.PRODUCT
-            ? props.currentSort.directionDesc
-            : undefined
-        }
-      >
-        Product Name
-      </TableHeaderCol>
-      <TableHeaderCol
-        onSort={() =>
-          props.toggleSortColumn(SortableColumnsProductsTable.STORE)
-        }
-        directionDesc={
-          props.currentSort.column === SortableColumnsProductsTable.STORE
-            ? props.currentSort.directionDesc
-            : undefined
-        }
-      >
-        Store Name
-      </TableHeaderCol>
-      <TableHeaderCol>Store Owner</TableHeaderCol>
-      <TableHeaderCol
-        onSort={() =>
-          props.toggleSortColumn(SortableColumnsProductsTable.QUANTITY)
-        }
-        directionDesc={
-          props.currentSort.column === SortableColumnsProductsTable.QUANTITY
-            ? props.currentSort.directionDesc
-            : undefined
-        }
-      >
-        Quantity
-      </TableHeaderCol>
-      <TableHeaderCol
-        onSort={() =>
-          props.toggleSortColumn(SortableColumnsProductsTable.PRICE)
-        }
-        directionDesc={
-          props.currentSort.column === SortableColumnsProductsTable.PRICE
-            ? props.currentSort.directionDesc
-            : undefined
-        }
-      >
-        Price
-      </TableHeaderCol>
-    </TableHeader>
-    <TableBody>
-      <For each={props.products()}>
-        {(product) => (
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              <Tooltip noStyle text="Click to filter by product name">
-                <Button onClick={() => props.setSearch(product.ItemName)}>
-                  {product.ItemName}
-                </Button>
-              </Tooltip>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              <Tooltip noStyle text="Click to show store orders">
-                <Button
-                  onClick={() => props.setShowStoreModal(product.StoreName)}
-                >
-                  {product.StoreName}
-                </Button>
-              </Tooltip>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              <Tooltip noStyle text="Click to filter by store owner">
-                <Button onClick={() => props.setSearch(product.StoreOwner)}>
-                  {product.StoreOwner}
-                </Button>
-              </Tooltip>
-            </td>
+export default (props: Props) => {
+  const { storesResource } = useMainContext();
+  return (
+    <Table>
+      <TableHeader>
+        <TableHeaderCol
+          onSort={() =>
+            props.toggleSortColumn(SortableColumnsProductsTable.PRODUCT)
+          }
+          directionDesc={
+            props.currentSort.column === SortableColumnsProductsTable.PRODUCT
+              ? props.currentSort.directionDesc
+              : undefined
+          }
+        >
+          Product Name
+        </TableHeaderCol>
+        <TableHeaderCol
+          onSort={() =>
+            props.toggleSortColumn(SortableColumnsProductsTable.STORE)
+          }
+          directionDesc={
+            props.currentSort.column === SortableColumnsProductsTable.STORE
+              ? props.currentSort.directionDesc
+              : undefined
+          }
+        >
+          Store Name
+        </TableHeaderCol>
+        <TableHeaderCol>Store Owner</TableHeaderCol>
+        <TableHeaderCol
+          onSort={() =>
+            props.toggleSortColumn(SortableColumnsProductsTable.QUANTITY)
+          }
+          directionDesc={
+            props.currentSort.column === SortableColumnsProductsTable.QUANTITY
+              ? props.currentSort.directionDesc
+              : undefined
+          }
+        >
+          Quantity
+        </TableHeaderCol>
+        <TableHeaderCol
+          onSort={() =>
+            props.toggleSortColumn(SortableColumnsProductsTable.PRICE)
+          }
+          directionDesc={
+            props.currentSort.column === SortableColumnsProductsTable.PRICE
+              ? props.currentSort.directionDesc
+              : undefined
+          }
+        >
+          Price
+        </TableHeaderCol>
+      </TableHeader>
+      <TableBody>
+        <TableRowLoadingSpinner resource={storesResource} />
+        <For each={props.products()}>
+          {(product) => (
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <Tooltip noStyle text="Click to filter by product name">
+                  <Button onClick={() => props.setSearch(product.ItemName)}>
+                    {product.ItemName}
+                  </Button>
+                </Tooltip>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <Tooltip noStyle text="Click to show store orders">
+                  <Button
+                    onClick={() => props.setShowStoreModal(product.StoreName)}
+                  >
+                    {product.StoreName}
+                  </Button>
+                </Tooltip>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <Tooltip noStyle text="Click to filter by store owner">
+                  <Button onClick={() => props.setSearch(product.StoreOwner)}>
+                    {product.StoreOwner}
+                  </Button>
+                </Tooltip>
+              </td>
 
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
-              {product.Buying ? (
-                <>
-                  Buying <Highlight text={`${product.Limit}`} /> for
-                </>
-              ) : (
-                <>
-                  Selling <Highlight text={`${product.MaxNumWanted}`} /> for
-                </>
-              )}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              <Highlight text={`${product.Price}`} />
-              &nbsp;
-              {product.CurrencyName}
-            </td>
-          </tr>
-        )}
-      </For>
-    </TableBody>
-  </Table>
-);
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
+                {product.Buying ? (
+                  <>
+                    Buying <Highlight text={`${product.Limit}`} /> for
+                  </>
+                ) : (
+                  <>
+                    Selling <Highlight text={`${product.MaxNumWanted}`} /> for
+                  </>
+                )}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <Highlight text={`${product.Price}`} />
+                &nbsp;
+                {product.CurrencyName}
+              </td>
+            </tr>
+          )}
+        </For>
+      </TableBody>
+    </Table>
+  );
+};
