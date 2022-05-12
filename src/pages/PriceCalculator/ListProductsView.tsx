@@ -17,6 +17,7 @@ import AveragePrice from '../../components/AveragePrice';
 import { useCalcContext } from './context/CalcContext';
 import classNames from 'classnames';
 import Checkbox from '../../components/Checkbox';
+import ItemImage from '../../components/ItemImage';
 
 export default () => {
   const { mainState, allProfessions, allCraftStations } = useMainContext();
@@ -93,7 +94,8 @@ export default () => {
               <For each={props.paginatedProducts()}>
                 {(product) => (
                   <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-2 py-1 whitespace-nowrap text-sm text-gray-500">
+                      <ItemImage Name={product.Name} class={"w-16 inline mr-2 border-2 border-gray-200"} style={{"border-radius": "0.25rem"}}/>
                       <Tooltip
                         noStyle
                         text="Click to calculate price for this item"
@@ -104,6 +106,7 @@ export default () => {
                           onClick={() =>
                             priceCalcStore.setSelectedProduct(product.Name)
                           }
+                          class={"flex-1"}
                         >
                           {product.Name}
                         </Button>
