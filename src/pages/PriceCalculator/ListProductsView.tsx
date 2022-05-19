@@ -17,9 +17,11 @@ import AveragePrice from '../../components/AveragePrice';
 import { useCalcContext } from './context/CalcContext';
 import classNames from 'classnames';
 import Checkbox from '../../components/Checkbox';
+import TableRowLoadingSpinner from '../../components/TableRowLoadingSpinner';
 
 export default () => {
-  const { mainState, allProfessions, allCraftStations } = useMainContext();
+  const { isLoadingResources, mainState, allProfessions, allCraftStations } =
+    useMainContext();
   const { listProductsStore: props, priceCalcStore } = useCalcContext();
   return (
     <>
@@ -90,6 +92,7 @@ export default () => {
               <TableHeaderCol>Personal price</TableHeaderCol>
             </TableHeader>
             <TableBody>
+              <TableRowLoadingSpinner show={isLoadingResources} />
               <For each={props.paginatedProducts()}>
                 {(product) => (
                   <tr>

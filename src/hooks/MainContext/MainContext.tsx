@@ -21,6 +21,7 @@ type MainContextType = {
   storesResource: Resource<StoresResponse | undefined>;
   recipesResource: Resource<RecipesResponse | undefined>;
   tagsResource: Resource<TagsResponse | undefined>;
+  isLoadingResources: Accessor<boolean>;
   dbs: Accessor<DB[] | undefined>;
   currentCurrency: Accessor<string>;
   allCurrencies: Accessor<string[] | undefined>;
@@ -67,14 +68,20 @@ type MainContextType = {
   };
 };
 
-const [storesResource, {refetch: refetchStores}] = createResource(getStores);
-const [recipesResource, {refetch: refetchRecipes}] = createResource(getRecipes);
-const [tagsResource, {refetch: refetchTags}] = createResource(getTags);
+const [storesResource, { refetch: refetchStores }] = createResource(getStores);
+const [recipesResource, { refetch: refetchRecipes }] =
+  createResource(getRecipes);
+const [tagsResource, { refetch: refetchTags }] = createResource(getTags);
+
+const isLoadingResources = createMemo(
+  () => !storesResource() || !recipesResource() || !tagsResource()
+);
 
 const MainContext = createContext<MainContextType>({
   storesResource,
   recipesResource,
   tagsResource,
+  isLoadingResources,
   dbs: () => [],
   currentCurrency: () => '',
   allCurrencies: () => [],
@@ -187,7 +194,7 @@ export const MainContextProvider = (props: Props) => {
 
     // When everything else fails, just return the first valid one
     return allCurrencies()?.[0] ?? '';
-  })
+  });
 
   const allProductsInStores = createMemo(() =>
     storesResource()
@@ -290,6 +297,7 @@ export const MainContextProvider = (props: Props) => {
     storesResource,
     recipesResource,
     tagsResource,
+    isLoadingResources,
     currentCurrency,
     allCurrencies,
     allProfessions,

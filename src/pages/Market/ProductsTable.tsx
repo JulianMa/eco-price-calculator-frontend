@@ -8,10 +8,12 @@ import Tooltip from '../../components/Tooltip';
 import Button from '../../components/Button';
 import Highlight from '../../components/Highlight';
 import { SortableColumnsProductsTable } from './createMarketStore';
+import TableRowLoadingSpinner from '../../components/TableRowLoadingSpinner';
 
 type Props = {
   products: Accessor<ProductOffer[] | undefined>;
   setSearch: (search: string) => void;
+  isLoadingResources: Accessor<boolean>;
   setCurrencyFilter: (currency: string) => void;
   setShowStoreModal: (storeName: string) => void;
   currentSort: {
@@ -74,18 +76,19 @@ export default (props: Props) => (
       </TableHeaderCol>
     </TableHeader>
     <TableBody>
+      <TableRowLoadingSpinner show={props.isLoadingResources} />
       <For each={props.products()}>
         {(product) => (
           <tr>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              <Tooltip noStyle text="Click to filter by product name">
+            <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+              <Tooltip noStyle text='Click to filter by product name'>
                 <Button onClick={() => props.setSearch(product.ItemName)}>
                   {product.ItemName}
                 </Button>
               </Tooltip>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              <Tooltip noStyle text="Click to show store orders">
+            <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+              <Tooltip noStyle text='Click to show store orders'>
                 <Button
                   onClick={() => props.setShowStoreModal(product.StoreName)}
                 >
@@ -93,15 +96,15 @@ export default (props: Props) => (
                 </Button>
               </Tooltip>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              <Tooltip noStyle text="Click to filter by store owner">
+            <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+              <Tooltip noStyle text='Click to filter by store owner'>
                 <Button onClick={() => props.setSearch(product.StoreOwner)}>
                   {product.StoreOwner}
                 </Button>
               </Tooltip>
             </td>
 
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
+            <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right'>
               {product.Buying ? (
                 <>
                   Buying <Highlight text={`${product.Limit}`} /> for
@@ -112,7 +115,7 @@ export default (props: Props) => (
                 </>
               )}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
               <Highlight text={`${product.Price}`} />
               &nbsp;
               {product.CurrencyName}
