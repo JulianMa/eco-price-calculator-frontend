@@ -16,6 +16,7 @@ export default () => {
   const {
     state,
     stores,
+    isLoadingResources,
     setSearch,
     setCurrencyFilter,
     toggleTableType,
@@ -77,6 +78,7 @@ export default () => {
       <Show when={state.isStoresTable}>
         <StoresTable
           stores={stores}
+          isLoadingResource={isLoadingResources}
           setSearch={setSearch}
           setCurrencyFilter={setCurrencyFilter}
           setShowStoreModal={setShowStoreModal}
@@ -92,6 +94,7 @@ export default () => {
       <Show when={!state.isStoresTable}>
         <ProductsTable
           products={products}
+          isLoadingResources={isLoadingResources}
           setSearch={setSearch}
           setCurrencyFilter={setCurrencyFilter}
           setShowStoreModal={setShowStoreModal}

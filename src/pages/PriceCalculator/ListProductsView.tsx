@@ -1,4 +1,4 @@
-import { For, Show } from 'solid-js';
+import { For } from 'solid-js';
 import { Survivalist } from './context/createListProductsStore';
 import Table, {
   TableHeader,
@@ -17,10 +17,10 @@ import AveragePrice from '../../components/AveragePrice';
 import { useCalcContext } from './context/CalcContext';
 import classNames from 'classnames';
 import Checkbox from '../../components/Checkbox';
-import TableRowLoadingSpinner from '../../components/LoadingSpinner/TableRowLoadingSpinner';
+import TableRowLoadingSpinner from '../../components/TableRowLoadingSpinner';
 
 export default () => {
-  const { recipesResource, mainState, allProfessions, allCraftStations } =
+  const { isLoadingResources, mainState, allProfessions, allCraftStations } =
     useMainContext();
   const { listProductsStore: props, priceCalcStore } = useCalcContext();
   return (
@@ -92,7 +92,7 @@ export default () => {
               <TableHeaderCol>Personal price</TableHeaderCol>
             </TableHeader>
             <TableBody>
-              <TableRowLoadingSpinner resource={recipesResource} />
+              <TableRowLoadingSpinner show={isLoadingResources} />
               <For each={props.paginatedProducts()}>
                 {(product) => (
                   <tr>

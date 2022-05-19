@@ -71,7 +71,7 @@ const sortByProductsColumn = (
 };
 
 export default () => {
-  const { storesResource, allProductsInStores, mainState, update } =
+  const { storesResource, allProductsInStores, isLoadingResources, mainState, update } =
     useMainContext();
   const [state, setState] = createLocalStore<Store>(
     {
@@ -171,6 +171,7 @@ export default () => {
   return {
     state,
     stores,
+    isLoadingResources,
     setSearch,
     setCurrencyFilter: (newValue: string) => update.currency(newValue),
     toggleTableType: () =>
