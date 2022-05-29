@@ -1,12 +1,20 @@
 import { rest } from 'msw';
+import Servers from './data/Servers.json';
 import Stores from './data/Stores.json';
 import Recipes from './data/Recipes.json';
 import Tags from './data/Tags.json';
 import * as constants from '../utils/constants';
 
 export const handlers = [
-  // Handles a GET /user request
-  rest.get('/.netlify/functions/filesDb', (req, res, ctx) => {
+  // Handles Servers request
+  rest.get('/.netlify/functions/servers', (req, res, ctx) =>
+    res(
+      ctx.status(200),
+      ctx.json(Servers),
+    )
+  ),
+  // Handles file requests
+  rest.get('/.netlify/functions/files', (req, res, ctx) => {
     const file = req.url.searchParams.get('file');
     if (file === constants.Stores) {
       return res(
@@ -26,5 +34,5 @@ export const handlers = [
         ctx.status(200),
         ctx.json(Tags),
       )
-  })
+  }),
 ]

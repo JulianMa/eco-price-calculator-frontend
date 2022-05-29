@@ -63,35 +63,36 @@ export default () => {
         over discord.{' '}
       </p>
       <br />
+      If you like this tool and you wish to thank me for my efforts and/or you'd
+      like to contribute to it's further development and maintenance consider{' '}
+      <a
+        class="no-underline hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+        target="_blank"
+        href="https://www.buymeacoffee.com/pricecalculator"
+      >
+        buying me a coffee
+      </a>{' '}
+      for inspiration in future coding sessions. Thanks for appreciating my
+      efforts.
+      <br />
       <br />
       <div class={styles.changelog}>
         <h2>Latest changes</h2>
-        <h3>2.6.1 (2022-04-18)</h3>
+        <h3>3.0.1 (2022-05-22)</h3>
         <h4>Features</h4>
         <ul>
           <li>
-            Added notifications bar to help admins spot configuration problems
-            and users noting when they are dealing with stale data from server.
+            Removed dependency of a third party to keep json files exported from
+            server. Server files are now exported to disk on same server that's
+            running eco server. Price calculator accesses the files using the
+            server web interface.
           </li>
-        </ul>
-        <h3>2.6.0 (2022-04-16)</h3>
-        <h4>Features</h4>
-        <ul>
+          <li>Added buy me a coffee link on about page</li>
           <li>
-            Switched json storage provider (old one started charging for it's
-            service)
+            Added dropdown to select between multiple servers on main eco price
+            calculator page
           </li>
-        </ul>
-        <h3>2.5.0 (2022-01-07)</h3>
-        <h4>Features</h4>
-        <ul>
-          <li>
-            Added store modal that lists buy and sell orders of a single store
-          </li>
-          <li>
-            Added filter buttons that allows filtering of products that are
-            being sold or purchased in ingame market page
-          </li>
+          <li>Added config to only select a server when config is set</li>
         </ul>
       </div>
     </div>

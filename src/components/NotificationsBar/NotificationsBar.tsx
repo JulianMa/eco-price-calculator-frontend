@@ -32,40 +32,32 @@ export const getLogLevel = ({
   return LogLevel.None;
 };
 export default () => {
-  const { storesResource, recipesResource, tagsResource, refetch } = useMainContext();
+  const { storesResource, recipesResource, tagsResource } = useMainContext();
 
-  if (process.env.NODE_ENV === 'development') {
-    // Refetch files after 1sec to give time for msw to load
-    setTimeout(() => {
-      refetch();
-    }, 1000);
-  }
-  
   const calc = createMemo(() => {
     // Error
-    const hasStoresData = !!storesResource()?.PluginVersion;
-    const hasRecipesData = !!recipesResource()?.PluginVersion;
-    const hasTagsData = !!tagsResource()?.PluginVersion;
-    const hasNoData =
-      !hasStoresData && !hasRecipesData && !hasTagsData;
-    const hasOnlySomeData =
-      !hasStoresData || !hasRecipesData || !hasTagsData;
+    const hasStoresData = !!storesResource?.()?.PluginVersion;
+    const hasRecipesData = !!recipesResource?.()?.PluginVersion;
+    const hasTagsData = !!tagsResource?.()?.PluginVersion;
+    const hasNoData = !hasStoresData && !hasRecipesData && !hasTagsData;
+    const hasOnlySomeData = !hasStoresData || !hasRecipesData || !hasTagsData;
 
     // Warning
-    const exportedAt = storesResource()?.ExportedAt;
+    const exportedAt = storesResource?.()?.ExportedAt;
     const lastUpdateInHours = exportedAt
       ? getLastUpdateInHours(getDateFromExportedAt(exportedAt))
       : 0;
 
     // Info
-    const pluginVersion = storesResource()?.PluginVersion;
-    const isPluginOutdated = !!pluginVersion && pluginVersion !== constants.latestPluginVersion;
+    const pluginVersion = storesResource?.()?.PluginVersion;
+    const isPluginOutdated =
+      !!pluginVersion && pluginVersion !== constants.latestPluginVersion;
 
     return {
       loading:
-        storesResource.loading ||
-        recipesResource.loading ||
-        tagsResource.loading,
+        storesResource?.loading ||
+        recipesResource?.loading ||
+        tagsResource?.loading,
       logLevel: getLogLevel({
         hasNoData,
         hasOnlySomeData,

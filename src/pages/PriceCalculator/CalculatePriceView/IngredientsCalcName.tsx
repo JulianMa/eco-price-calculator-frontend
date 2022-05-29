@@ -37,7 +37,9 @@ export default (props: Props) => {
   if (!isCraftableProduct && !props.ingredient.IsSpecificItem) {
     return (
       <Tooltip
-        text={`One of: ${tagsResource()?.[props.ingredient.Tag]?.join(', ')}`}
+        text={`One of: ${tagsResource?.()?.Tags?.[props.ingredient.Tag]?.join(
+          ', '
+        )}`}
         origin="NW"
         direction="NE"
       >
@@ -48,7 +50,7 @@ export default (props: Props) => {
   return (
     <Tooltip
       noStyle
-      text={`Click to calculate price for one of: ${tagsResource()?.[
+      text={`Click to calculate price for one of: ${tagsResource?.()?.Tags?.[
         props.ingredient.Tag
       ]?.join(', ')}`}
       origin="NW"

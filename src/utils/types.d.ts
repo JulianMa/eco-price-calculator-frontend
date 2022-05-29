@@ -113,3 +113,8 @@ declare interface SetSignal<T> {
 declare interface TagsResponse extends TypedResponse {
   Tags: Record<string, string[]>;
 }
+
+declare interface ServersResponse {
+  key: string,
+  name: string,
+}

@@ -12,7 +12,7 @@ export default () => {
     getRecipeBreadcrumb(
       allCraftableProducts() ?? [],
       priceCalcStore.selectedRecipes(),
-      tagsResource() ?? {},
+      tagsResource?.()?.Tags ?? {},
       priceCalcStore.selectedProduct() ?? '',
       priceCalcStore.state.focusedProdPath
     )

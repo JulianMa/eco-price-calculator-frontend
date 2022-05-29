@@ -108,7 +108,7 @@ export default (): PriceCalcStore => {
     getFlatRecipeIngredients(
       allCraftableProducts() ?? [],
       selectedRecipes(),
-      tagsResource() ?? {},
+      tagsResource?.()?.Tags ?? {},
       selectedProduct() ?? ''
     )
   );
@@ -200,7 +200,7 @@ export default (): PriceCalcStore => {
   const unitCostWithProfit = createMemo(() =>
     formatNumber(
       (totalIngredientCost() / craftAmmount()) *
-        convertToMarginMultiplier(recipeMargin())
+      convertToMarginMultiplier(recipeMargin())
     )
   );
 
@@ -215,7 +215,7 @@ export default (): PriceCalcStore => {
         costPercentage,
         productionCost: formatNumber(
           ((totalIngredientCost() / craftAmmount()) * (costPercentage / 100)) /
-            product.Ammount
+          product.Ammount
         ),
         retailPrice: formatNumber(
           (unitCostWithProfit() * (costPercentage / 100)) / product.Ammount

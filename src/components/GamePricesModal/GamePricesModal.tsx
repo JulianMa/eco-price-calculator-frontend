@@ -36,7 +36,7 @@ export default () => {
     if (state.showPricesForProductsModal == undefined) return [];
     return state.showPricesForProductsModal.isSpecificProduct
       ? [state.showPricesForProductsModal.name]
-      : tagsResource()?.Tags?.[state.showPricesForProductsModal.name] ?? [];
+      : tagsResource?.()?.Tags?.[state.showPricesForProductsModal.name] ?? [];
   });
   const hasOffersInCurrency = createMemo(() => allProductsInStores()?.some(
     (product) =>

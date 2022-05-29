@@ -15,7 +15,7 @@ export default (props: Props) => {
   const avgPrice = createMemo(() => {
     const products = props.isSpecificItem
       ? [props.name]
-      : tagsResource()?.Tags?.[props.name] ?? [];
+      : tagsResource?.()?.Tags?.[props.name] ?? [];
     const prodOffersInStores =
       allProductsInStores()?.filter((t) => products.includes(t.ItemName)) ?? [];
     if (prodOffersInStores.length <= 0) return { errorMessage: 'no offers' };

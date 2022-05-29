@@ -20,7 +20,7 @@ export default () => {
     getFlatRecipeIngredients(
       allCraftableProducts() ?? [],
       priceCalcStore.selectedRecipes(),
-      tagsResource() ?? {},
+      tagsResource?.()?.Tags ?? {},
       priceCalcStore.selectedProduct() ?? ''
     )
   );

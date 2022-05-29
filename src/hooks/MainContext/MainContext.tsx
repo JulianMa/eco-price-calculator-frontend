@@ -6,6 +6,7 @@ import {
   useContext,
   createResource,
   Resource,
+  createEffect,
 } from 'solid-js';
 import { Store } from 'solid-js/store';
 import { createLocalStore } from '../../utils/createLocalStore';
@@ -15,12 +16,19 @@ import {
   sortByTextExcludingWord,
 } from '../../utils/helpers';
 import { getSelectedRecipeVariant } from '../../utils/recipeHelper';
-import { getRecipes, getStores, getTags } from '../../utils/restDbSdk';
+import {
+  getServers,
+  getRecipes,
+  getStores,
+  getTags,
+} from '../../utils/restDbSdk';
 
 type MainContextType = {
-  storesResource: Resource<StoresResponse | undefined>;
-  recipesResource: Resource<RecipesResponse | undefined>;
-  tagsResource: Resource<TagsResponse | undefined>;
+  serversResource: Resource<ServersResponse[] | undefined> | undefined;
+  storesResource: Resource<StoresResponse | undefined> | undefined;
+  recipesResource: Resource<RecipesResponse | undefined> | undefined;
+  tagsResource: Resource<TagsResponse | undefined> | undefined;
+  currentServer: Accessor<string>;
   isLoadingResources: Accessor<boolean>;
   dbs: Accessor<DB[] | undefined>;
   currentCurrency: Accessor<string>;
@@ -30,7 +38,12 @@ type MainContextType = {
   allProductsInStores: Accessor<ProductOffer[] | undefined>;
   allCraftableProducts: Accessor<CraftableProduct[] | undefined>;
   mainState: Store<MainStore>;
-  refetch: () => void;
+  forceRefetch: {
+    servers: () => void;
+    stores: () => void;
+    recipes: () => void;
+    tags: () => void;
+  };
   get: {
     personalPrice: (productName?: string) => number;
     craftAmmount: (productName?: string) => number;
@@ -45,6 +58,7 @@ type MainContextType = {
     }[];
   };
   update: {
+    server: (newServer: string) => void;
     currency: (newCurrency: string) => void;
     userName: (username: string) => void;
     personalPrice: (
@@ -68,20 +82,13 @@ type MainContextType = {
   };
 };
 
-const [storesResource, { refetch: refetchStores }] = createResource(getStores);
-const [recipesResource, { refetch: refetchRecipes }] =
-  createResource(getRecipes);
-const [tagsResource, { refetch: refetchTags }] = createResource(getTags);
-
-const isLoadingResources = createMemo(
-  () => !storesResource() || !recipesResource() || !tagsResource()
-);
-
 const MainContext = createContext<MainContextType>({
-  storesResource,
-  recipesResource,
-  tagsResource,
-  isLoadingResources,
+  serversResource: undefined,
+  storesResource: undefined,
+  recipesResource: undefined,
+  tagsResource: undefined,
+  currentServer: () => '',
+  isLoadingResources: () => true,
   dbs: () => [],
   currentCurrency: () => '',
   allCurrencies: () => [],
@@ -90,11 +97,17 @@ const MainContext = createContext<MainContextType>({
   allProductsInStores: () => [],
   allCraftableProducts: () => [],
   mainState: {
+    server: '',
     currency: '',
     userName: '',
     calorieCost: 0,
   },
-  refetch: () => undefined,
+  forceRefetch: {
+    servers: () => undefined,
+    stores: () => undefined,
+    recipes: () => undefined,
+    tags: () => undefined,
+  },
   get: {
     personalPrice: (productName?: string) => 0,
     craftAmmount: (productName?: string) => 1,
@@ -106,6 +119,7 @@ const MainContext = createContext<MainContextType>({
     craftLevel: (productName?: string) => 0,
   },
   update: {
+    server: () => undefined,
     currency: () => undefined,
     userName: () => undefined,
     personalPrice: (product: string, currency: string, newPrice: number) =>
@@ -123,6 +137,7 @@ type Props = {
   children: JSXElement;
 };
 type MainStore = {
+  server: string;
   currency: string;
   userName: string;
   calorieCost: number;
@@ -162,11 +177,49 @@ export const MainContextProvider = (props: Props) => {
 
   const [mainState, setState] = createLocalStore<MainStore>(
     {
+      server: 'local',
       currency: '',
       userName: '',
       calorieCost: 0,
     },
     'MainStore'
+  );
+  const [serversResource, { refetch: refetchServers }] =
+    createResource(getServers);
+
+  const currentServer = createMemo<string>(() => {
+    // If there's a server config, then always pick that server
+    if (!!import.meta.env.VITE_SERVER && import.meta.env.VITE_SERVER !== true) {
+      return import.meta.env.VITE_SERVER;
+    }
+    // If there's a valid server selected, use that one
+    if (
+      (serversResource?.() ?? [])?.map((t) => t.key).includes(mainState.server)
+    ) {
+      return mainState.server;
+    }
+
+    // Return the first valid one
+    return serversResource?.()?.length ?? 0 > 0
+      ? serversResource()?.[0].key ?? ''
+      : mainState.server;
+  });
+
+  const [storesResource, { refetch: refetchStores }] = createResource(
+    currentServer,
+    getStores
+  );
+  const [recipesResource, { refetch: refetchRecipes }] = createResource(
+    currentServer,
+    getRecipes
+  );
+  const [tagsResource, { refetch: refetchTags }] = createResource(
+    currentServer,
+    getTags
+  );
+
+  const isLoadingResources = createMemo(
+    () => !storesResource() || !recipesResource() || !tagsResource()
   );
 
   const allCurrencies = createMemo(() =>
@@ -294,9 +347,11 @@ export const MainContextProvider = (props: Props) => {
   );
 
   const value = {
+    serversResource,
     storesResource,
     recipesResource,
     tagsResource,
+    currentServer,
     isLoadingResources,
     currentCurrency,
     allCurrencies,
@@ -305,10 +360,11 @@ export const MainContextProvider = (props: Props) => {
     allProductsInStores,
     allCraftableProducts,
     mainState,
-    refetch: () => {
-      refetchStores();
-      refetchRecipes();
-      refetchTags();
+    forceRefetch: {
+      servers: refetchServers,
+      stores: refetchStores,
+      recipes: refetchRecipes,
+      tags: refetchTags,
     },
     get: {
       personalPrice: (productName?: string) =>
@@ -327,6 +383,7 @@ export const MainContextProvider = (props: Props) => {
         CostPercentagesState[variantKey ?? ''],
     },
     update: {
+      server: (newServer: string) => setState({ server: newServer }),
       currency: (newCurrency: string) => setState({ currency: newCurrency }),
       userName: (username: string) => {
         // If no currency is selected, select the user's currency

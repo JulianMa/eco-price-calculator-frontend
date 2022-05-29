@@ -12,7 +12,7 @@ export default (props: Props) => {
   const { tagsResource } = useMainContext();
   const tagValues = createMemo(
     () =>
-      tagsResource()?.[props.tagName]?.map((prodName) => ({
+      tagsResource?.()?.Tags?.[props.tagName]?.map((prodName) => ({
         value: prodName,
         text: prodName,
       })) ?? []

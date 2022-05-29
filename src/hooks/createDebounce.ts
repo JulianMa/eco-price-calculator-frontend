@@ -8,7 +8,7 @@ const createDebounce = <T extends (...args: any[]) => void>(
     if (timeoutId !== undefined) {
       clear();
     }
-    timeoutId = setTimeout(() => func(...args), wait);
+    timeoutId = window.setTimeout(() => func(...args), wait);
   };
   return [trigger, clear];
 };

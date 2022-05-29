@@ -10,19 +10,19 @@ import * as constants from '../../utils/constants';
 import RawDataRow from './RawDataRow';
 import { useMainContext } from '../../hooks/MainContext';
 export default () => {
-  const { storesResource, tagsResource, recipesResource, refetch } = useMainContext();
+  const { storesResource, tagsResource, recipesResource } = useMainContext();
   const { downloadFile } = createDBsStore();
 
   const storesExportedAt = createMemo(
-    () => storesResource()?.ExportedAt?.StringRepresentation ?? 'Not exported'
+    () => storesResource?.()?.ExportedAt?.StringRepresentation ?? 'Not exported'
   );
   const recipesExportedAt = createMemo(
-    () => recipesResource()?.ExportedAt?.StringRepresentation ?? 'Not exported'
+    () =>
+      recipesResource?.()?.ExportedAt?.StringRepresentation ?? 'Not exported'
   );
   const tagsExportedAt = createMemo(
-    () => tagsResource()?.ExportedAt?.StringRepresentation ?? 'Not exported'
+    () => tagsResource?.()?.ExportedAt?.StringRepresentation ?? 'Not exported'
   );
-  createEffect(() => refetch());
   return (
     <Table>
       <TableHeader>
@@ -31,21 +31,21 @@ export default () => {
         <TableHeaderColAction>Download</TableHeaderColAction>
       </TableHeader>
       <TableBody>
-        {storesResource()?.ExportedAt && (
+        {storesResource?.()?.ExportedAt && (
           <RawDataRow
             name="Stores"
             exportedAt={storesExportedAt}
             downloadFile={() => downloadFile(constants.Stores)}
           />
         )}
-        {recipesResource()?.ExportedAt && (
+        {recipesResource?.()?.ExportedAt && (
           <RawDataRow
             name="Recipes"
             exportedAt={recipesExportedAt}
             downloadFile={() => downloadFile(constants.Recipes)}
           />
         )}
-        {tagsResource()?.ExportedAt && (
+        {tagsResource?.()?.ExportedAt && (
           <RawDataRow
             name="Tags"
             exportedAt={tagsExportedAt}

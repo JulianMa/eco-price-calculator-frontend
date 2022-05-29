@@ -5,6 +5,7 @@
   "scripts": {
     "start": "netlify dev",
     "dev": "vite",
+    "msw": "vite --mode msw",
     "build": "vite build",
     "serve": "vite preview",
     "pretty": "yarn prettier --write ."

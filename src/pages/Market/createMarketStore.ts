@@ -97,7 +97,7 @@ export default () => {
 
   const stores = createMemo(
     () =>
-      storesResource()
+      storesResource?.()
         ?.Stores.filter(
           (store) =>
             (filterByText(state.search, store.Name ?? '') ||
@@ -121,7 +121,7 @@ export default () => {
         ) as Stores[]
   );
   const storesTotalPages = createMemo(() =>
-    Math.ceil((storesResource()?.Stores?.length ?? 0) / state.pageSize)
+    Math.ceil((storesResource?.()?.Stores?.length ?? 0) / state.pageSize)
   );
 
   const filteredProducts = createMemo(() =>
