@@ -19,6 +19,7 @@ import {
 } from '../../../utils/helpers';
 
 type StoreType = {
+  simpleMode: boolean;
   showRecipes: boolean;
   showPersonalPrices: boolean;
   showRecipeTree: boolean;
@@ -26,6 +27,7 @@ type StoreType = {
 };
 
 type StoreUpdate = {
+  toggleSimpleMode: () => void;
   setShowRecipes: (showRecipes: boolean) => void;
   setShowPersonalPrices: (showPersonalProces: boolean) => void;
   toggleShowRecipeTree: () => void;
@@ -89,6 +91,7 @@ export default (): PriceCalcStore => {
     useMainContext();
   const [state, setState] = createLocalStore<StoreType>(
     {
+      simpleMode: true,
       showRecipes: false,
       showPersonalPrices: false,
       showRecipeTree: false,
@@ -136,12 +139,12 @@ export default (): PriceCalcStore => {
 
   const variantId = createMemo(() => selectedVariant()?.Variant.Key ?? '');
 
-  const craftModule = createMemo(() => get.craftModule(variantId()));
-  const craftAmmount = createMemo(() => get.craftAmmount(variantId()));
-  const craftLavish = createMemo(() => get.craftLavish(variantId()));
-  const craftLevel = createMemo(() => get.craftLevel(recipeSkill()));
+  const craftModule = createMemo(() => state.simpleMode ? 0 : get.craftModule(variantId()));
+  const craftAmmount = createMemo(() => state.simpleMode ? 1 : get.craftAmmount(variantId()));
+  const craftLavish = createMemo(() => state.simpleMode ? false : get.craftLavish(variantId()));
+  const craftLevel = createMemo(() => state.simpleMode ? 1 : get.craftLevel(recipeSkill()));
 
-  const recipeMargin = createMemo(() => get.recipeMargin(variantId()));
+  const recipeMargin = createMemo(() => state.simpleMode ? 20 : get.recipeMargin(variantId()));
 
   const costPercentages = createMemo(() => {
     const variant = selectedVariant()?.Variant;
@@ -252,6 +255,7 @@ export default (): PriceCalcStore => {
     },
     setSelectedRecipes,
     update: {
+      toggleSimpleMode: () => setState(prev => ({ simpleMode: !prev.simpleMode })),
       setShowRecipes: (newValue: boolean) =>
         setState({ showRecipes: newValue }),
       setShowPersonalPrices: (newValue: boolean) =>

@@ -19,18 +19,30 @@ export default () => {
             >
               Back
             </Button>
-            <RadioToggle
-              options={[
-                { text: 'Breadcrumb', value: 'Breadcrumb' },
-                { text: 'Recipe tree', value: 'RecipeTree' },
-              ]}
-              onChange={priceCalcStore.update.toggleShowRecipeTree}
-              selected={
-                priceCalcStore.state.showRecipeTree
-                  ? 'RecipeTree'
-                  : 'Breadcrumb'
-              }
-            />
+            <div class="flex gap-2">
+              <RadioToggle
+                options={[
+                  { text: 'Simple', value: 'Simple' },
+                  { text: 'Expanded', value: 'Expanded' },
+                ]}
+                onChange={priceCalcStore.update.toggleSimpleMode}
+                selected={
+                  priceCalcStore.state.simpleMode ? 'Simple' : 'Expanded'
+                }
+              />
+              <RadioToggle
+                options={[
+                  { text: 'Breadcrumb', value: 'Breadcrumb' },
+                  { text: 'Recipe tree', value: 'RecipeTree' },
+                ]}
+                onChange={priceCalcStore.update.toggleShowRecipeTree}
+                selected={
+                  priceCalcStore.state.showRecipeTree
+                    ? 'RecipeTree'
+                    : 'Breadcrumb'
+                }
+              />
+            </div>
           </div>
           {priceCalcStore.state.showRecipeTree && <CalculatorRecipeTree />}
           {!priceCalcStore.state.showRecipeTree && (
