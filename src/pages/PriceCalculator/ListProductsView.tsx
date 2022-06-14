@@ -9,7 +9,7 @@ import SearchInput from '../../components/SearchInput';
 import Dropdown from '../../components/Dropdown';
 import Tooltip from '../../components/Tooltip';
 import Pagination from '../../components/Pagination';
-import { filterByTextEqual } from '../../utils/helpers';
+import { filterByTextEqual, getIngredientId } from '../../utils/helpers';
 import Button from '../../components/Button';
 import { useMainContext } from '../../hooks/MainContext';
 import PersonalPrice from '../../components/PersonalPrice/PersonalPrice';
@@ -196,6 +196,11 @@ export default () => {
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <AveragePrice
+                        id={getIngredientId({
+                          IsSpecificItem: true,
+                          Name: product.Name,
+                          Tag: '',
+                        })}
                         name={product.Name}
                         isSpecificItem={true}
                         showPricesForProductsModal={

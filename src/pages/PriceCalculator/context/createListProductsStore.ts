@@ -35,7 +35,7 @@ export type ListProductsStore = {
 };
 export const Survivalist = 'Survivalist';
 export default (): ListProductsStore => {
-  const { allCraftableProducts, allProductsInStores, mainState } =
+  const { allCraftableProductsWithOffers, allProductsInStores, mainState } =
     useMainContext();
   const [state, setState] = createLocalStore<StoreType>(
     {
@@ -59,7 +59,7 @@ export default (): ListProductsStore => {
   });
 
   const filteredProducts = createMemo(() =>
-    allCraftableProducts()?.filter(
+    allCraftableProductsWithOffers()?.filter(
       (product) =>
         filterByText(state.search, product.Name ?? '') &&
         filterByIncludesAny(

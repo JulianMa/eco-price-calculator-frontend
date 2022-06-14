@@ -37,6 +37,7 @@ export default () => {
               <td class={cellClass}>{ingredient.calcQuantity}</td>
               <td class={cellClass}>
                 <AveragePrice
+                  id={getIngredientId(ingredient)}
                   name={
                     ingredient.IsSpecificItem ? ingredient.Name : ingredient.Tag
                   }

@@ -6,12 +6,14 @@ import {
   useContext,
   createResource,
   Resource,
-  createEffect,
 } from 'solid-js';
 import { Store } from 'solid-js/store';
 import { createLocalStore } from '../../utils/createLocalStore';
 import {
+  calcAvgPrice,
   filterUnique,
+  getIngredient,
+  getIngredientId,
   sortByText,
   sortByTextExcludingWord,
 } from '../../utils/helpers';
@@ -36,7 +38,11 @@ type MainContextType = {
   allProfessions: Accessor<string[] | undefined>;
   allCraftStations: Accessor<string[] | undefined>;
   allProductsInStores: Accessor<ProductOffer[] | undefined>;
-  allCraftableProducts: Accessor<CraftableProduct[] | undefined>;
+  allCraftableProducts: Accessor<{ [key: string]: CraftableProduct }>;
+  allCraftableProductsWithOffers: Accessor<
+    CraftableProductWithOffers[] | undefined
+  >;
+  allItemsWithPrice: Accessor<{ [key: string]: ItemOrTagPrice }>;
   mainState: Store<MainStore>;
   forceRefetch: {
     servers: () => void;
@@ -95,7 +101,9 @@ const MainContext = createContext<MainContextType>({
   allProfessions: () => [],
   allCraftStations: () => [],
   allProductsInStores: () => [],
-  allCraftableProducts: () => [],
+  allCraftableProducts: () => ({}),
+  allCraftableProductsWithOffers: () => [],
+  allItemsWithPrice: () => ({}),
   mainState: {
     server: '',
     currency: '',
@@ -273,8 +281,9 @@ export const MainContextProvider = (props: Props) => {
         return a.Buying ? 1 : -1;
       })
   );
-  const allCraftableProducts = createMemo(() => {
-    const CraftableProductsDict =
+
+  const allCraftableProducts = createMemo(
+    () =>
       recipesResource()
         ?.Recipes?.map((recipe) =>
           recipe.Variants.map((variant) =>
@@ -298,9 +307,11 @@ export const MainContextProvider = (props: Props) => {
             } as CraftableProduct,
           }),
           {} as { [name: string]: CraftableProduct }
-        ) ?? {};
+        ) ?? {}
+  );
 
-    return Object.values(CraftableProductsDict)
+  const allCraftableProductsWithOffers = createMemo(() => {
+    return Object.values(allCraftableProducts())
       .map(
         (prod) =>
           ({
@@ -346,6 +357,62 @@ export const MainContextProvider = (props: Props) => {
       .sort(sortByText)
   );
 
+  const allItems = createMemo(() => {
+    const ingredients = [
+      ...Object.values(allCraftableProducts()).map((t) => ({
+        Name: t.Name,
+        IsSpecificItem: true,
+        Tag: '',
+      })),
+      ...Object.values(allCraftableProducts())
+        .map((prod) =>
+          prod.RecipeVariants.map((variant) => variant.Variant.Ingredients)
+        )
+        .flat()
+        .flat(),
+    ];
+
+    return ingredients.reduce((agg, ing) => {
+      const key = getIngredientId(ing);
+      if (agg[key] === undefined) {
+        agg[key] = {
+          ...getIngredient(ing),
+          RecipeVariants:
+            allCraftableProducts()[ing.Name]?.RecipeVariants ?? [],
+        };
+      }
+
+      return agg;
+    }, {} as { [key: string]: ItemOrTagWithRecipe });
+  });
+
+  const allItemsWithPrice = createMemo(() =>
+    Object.entries(allItems()).reduce((agg, [key, item]) => {
+      const products = item.IsSpecificItem
+        ? [item.Name]
+        : tagsResource?.()?.Tags?.[item.Name] ?? [];
+      const offersInCurrency =
+        allProductsInStores()?.filter(
+          (t) =>
+            products.includes(t.ItemName) &&
+            t.CurrencyName === currentCurrency()
+        ) ?? [];
+      agg[key] = {
+        ...item,
+        Offers: offersInCurrency,
+        AvgPrice: calcAvgPrice(
+          offersInCurrency
+            .filter((t) => !t.Buying && t.Quantity > 0)
+            ?.map((offer) => ({
+              price: offer.Price,
+              quantity: offer.Quantity,
+            })) ?? []
+        ),
+      };
+      return agg;
+    }, {} as { [key: string]: ItemOrTagPrice })
+  );
+
   const value = {
     serversResource,
     storesResource,
@@ -359,6 +426,8 @@ export const MainContextProvider = (props: Props) => {
     allCraftStations,
     allProductsInStores,
     allCraftableProducts,
+    allCraftableProductsWithOffers,
+    allItemsWithPrice,
     mainState,
     forceRefetch: {
       servers: refetchServers,

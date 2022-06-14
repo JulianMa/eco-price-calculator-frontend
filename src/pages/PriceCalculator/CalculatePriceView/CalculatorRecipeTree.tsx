@@ -18,7 +18,7 @@ export default () => {
   const { priceCalcStore } = useCalcContext();
   const flatRecipeIngredients = createMemo(() =>
     getFlatRecipeIngredients(
-      allCraftableProducts() ?? [],
+      Object.values(allCraftableProducts()) ?? [],
       priceCalcStore.selectedRecipes(),
       tagsResource?.()?.Tags ?? {},
       priceCalcStore.selectedProduct() ?? ''

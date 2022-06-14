@@ -36,8 +36,8 @@ export const sortByText = (a: string, b: string) =>
   a.toLowerCase().localeCompare(b.toLowerCase());
 export const sortByTextFn =
   <T>(fn: (c: T) => string) =>
-  (a: T, b: T) =>
-    fn(a).toLowerCase().localeCompare(fn(b).toLowerCase());
+    (a: T, b: T) =>
+      fn(a).toLowerCase().localeCompare(fn(b).toLowerCase());
 
 export const sortByTextExcludingWord =
   (word: string) => (a: string, b: string) => {
@@ -110,15 +110,32 @@ export const fixPercentages = (
   });
 };
 
-export const getTagPersonalPriceId = (tagName: string) => `TAGID_${tagName}`;
+export const getTagId = (tagName: string) => `T_${tagName}`;
+export const getItemId = (itemName: string) => `I_${itemName}`;
 export const getIngredientId = (ingredient: {
   IsSpecificItem: boolean;
   Tag: string;
   Name: string;
-}) =>
+}): string =>
   ingredient.IsSpecificItem
-    ? ingredient.Name
-    : getTagPersonalPriceId(ingredient.Tag);
+    ? getItemId(ingredient.Name)
+    : getTagId(ingredient.Tag);
+
+export const getIngredient = (ingredient: {
+  IsSpecificItem: boolean;
+  Tag: string;
+  Name: string;
+}) => ({
+  Name: ingredient.IsSpecificItem ? ingredient.Name : ingredient.Tag,
+  IsSpecificItem: ingredient.IsSpecificItem
+});
+
+export const getIngredientDisplayName = (ingredient: {
+  IsSpecificItem: boolean;
+  Tag: string;
+  Name: string;
+}) => ingredient.IsSpecificItem ? ingredient.Name : `Tag ${ingredient.Tag}`
+  ;
 
 export const getDateFromExportedAt = (date: ExportedAt) =>
   // Month - 1 because in javascript months are zero based

@@ -7,14 +7,16 @@ import Table, {
   TableHeader,
   TableHeaderCol,
 } from '../../../../components/Table';
-import Tooltip from '../../../../components/Tooltip';
 import { useMainContext } from '../../../../hooks/MainContext';
-import { formatNumber, getIngredientId } from '../../../../utils/helpers';
+import {
+  formatNumber,
+  getIngredientDisplayName,
+  getIngredientId,
+} from '../../../../utils/helpers';
 import { useCalcContext } from '../../context/CalcContext';
 import IngredientsCalcName from '../IngredientsCalcName';
 
 export default () => {
-  const { mainState, get, update } = useMainContext();
   const { priceCalcStore, listProductsStore } = useCalcContext();
   const cellClass = 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
   return (
@@ -29,12 +31,11 @@ export default () => {
         <For each={priceCalcStore.recipeIngredients()}>
           {(ingredient) => (
             <tr>
-              <td class={cellClass}>
-                <IngredientsCalcName ingredient={ingredient} />
-              </td>
+              <td class={cellClass}>{getIngredientDisplayName(ingredient)}</td>
               <td class={cellClass}>{ingredient.calcQuantity}</td>
               <td class={cellClass}>
                 <AveragePrice
+                  id={getIngredientId(ingredient)}
                   name={
                     ingredient.IsSpecificItem ? ingredient.Name : ingredient.Tag
                   }

@@ -1,16 +1,21 @@
 import { useMainContext } from '../../hooks/MainContext';
 import Tooltip from '../Tooltip';
-import { calcAvgPrice } from '../../utils/helpers';
 import { createMemo } from 'solid-js';
 import Button from '../Button';
 
 type Props = {
+  id: string;
   name: string;
   isSpecificItem: boolean;
   showPricesForProductsModal: (Name: string, IsSpecificItem: boolean) => void;
 };
 export default (props: Props) => {
-  const { currentCurrency, tagsResource, allProductsInStores } = useMainContext();
+  const {
+    currentCurrency,
+    tagsResource,
+    allProductsInStores,
+    allItemsWithPrice,
+  } = useMainContext();
 
   const avgPrice = createMemo(() => {
     const products = props.isSpecificItem
@@ -30,16 +35,10 @@ export default (props: Props) => {
     return {
       calculatedPrice: !currentCurrency()
         ? 0
-        : calcAvgPrice(
-            offersInCurrency
-              .filter((t) => !t.Buying && t.Quantity > 0)
-              ?.map((offer) => ({
-                price: offer.Price,
-                quantity: offer.Quantity,
-              })) ?? []
-          ),
+        : allItemsWithPrice()?.[props.id]?.AvgPrice,
     };
   });
+
   if (avgPrice().errorMessage) {
     return <>{avgPrice().errorMessage}</>;
   }

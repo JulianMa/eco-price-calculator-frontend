@@ -4,7 +4,8 @@ import {
   calcTotalPages,
   filterByIncludesAny,
   paginateArray,
-  getTagPersonalPriceId,
+  getTagId,
+  getItemId,
 } from '../../utils/helpers';
 import Table, {
   TableHeader,
@@ -26,6 +27,7 @@ export default () => {
       state,
       update: { hidePricesForProductsModal },
     },
+    priceCalcStore,
   } = useCalcContext();
 
   const { allProductsInStores, currentCurrency, update, tagsResource } =
@@ -38,18 +40,23 @@ export default () => {
       ? [state.showPricesForProductsModal.name]
       : tagsResource?.()?.Tags?.[state.showPricesForProductsModal.name] ?? [];
   });
-  const hasOffersInCurrency = createMemo(() => allProductsInStores()?.some(
-    (product) =>
-      filterByIncludesAny(productNames(), [product.ItemName]) &&
-      (product.CurrencyName === currentCurrency())
-  ) ?? false)
+  const hasOffersInCurrency = createMemo(
+    () =>
+      allProductsInStores()?.some(
+        (product) =>
+          filterByIncludesAny(productNames(), [product.ItemName]) &&
+          product.CurrencyName === currentCurrency()
+      ) ?? false
+  );
   createEffect(() => setOffersInCurrency(hasOffersInCurrency()));
   const filteredProducts = createMemo(() =>
     allProductsInStores()
       ?.filter(
         (product) =>
           filterByIncludesAny(productNames(), [product.ItemName]) &&
-          (!currentCurrency() || !offersInCurrency() || product.CurrencyName === currentCurrency())
+          (!currentCurrency() ||
+            !offersInCurrency() ||
+            product.CurrencyName === currentCurrency())
       )
       .sort((a, b) => {
         if (a.Buying === b.Buying) {
@@ -111,37 +118,41 @@ export default () => {
                               : `Selling ${product.MaxNumWanted} for`}
                           </td>
                           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <Tooltip
-                              noStyle
-                              text="Click to set your personal price"
-                            >
-                              <Button
-                                onClick={() => {
-                                  //Updates both personal price for this product as well as tag price if !isSpecificProduct
-                                  update.personalPrice(
-                                    product.ItemName,
-                                    product.CurrencyName,
-                                    product.Price
-                                  );
-                                  if (
-                                    state.showPricesForProductsModal !=
-                                      undefined &&
-                                    !state.showPricesForProductsModal
-                                      .isSpecificProduct
-                                  ) {
+                            {priceCalcStore.state.simpleMode &&
+                              `${product.Price} ${product.CurrencyName}`}
+                            {!priceCalcStore.state.simpleMode && (
+                              <Tooltip
+                                noStyle
+                                text="Click to set your personal price"
+                              >
+                                <Button
+                                  onClick={() => {
+                                    //Updates both personal price for this product as well as tag price if !isSpecificProduct
                                     update.personalPrice(
-                                      getTagPersonalPriceId(
-                                        state.showPricesForProductsModal.name
-                                      ),
+                                      getItemId(product.ItemName),
                                       product.CurrencyName,
                                       product.Price
                                     );
-                                  }
-                                }}
-                              >
-                                {`${product.Price} ${product.CurrencyName}`}
-                              </Button>
-                            </Tooltip>
+                                    if (
+                                      state.showPricesForProductsModal !=
+                                        undefined &&
+                                      !state.showPricesForProductsModal
+                                        .isSpecificProduct
+                                    ) {
+                                      update.personalPrice(
+                                        getTagId(
+                                          state.showPricesForProductsModal.name
+                                        ),
+                                        product.CurrencyName,
+                                        product.Price
+                                      );
+                                    }
+                                  }}
+                                >
+                                  {`${product.Price} ${product.CurrencyName}`}
+                                </Button>
+                              </Tooltip>
+                            )}
                           </td>
                         </tr>
                       )}

@@ -103,6 +103,11 @@ declare interface RecipeVariant {
 declare interface CraftableProduct {
   Name: string;
   RecipeVariants: RecipeVariant[];
+}
+
+declare interface CraftableProductWithOffers {
+  Name: string;
+  RecipeVariants: RecipeVariant[];
   Offers: ProductOffer[];
 }
 
@@ -115,6 +120,20 @@ declare interface TagsResponse extends TypedResponse {
 }
 
 declare interface ServersResponse {
-  key: string,
-  name: string,
+  key: string;
+  name: string;
+}
+
+declare interface ItemOrTagWithRecipe {
+  Name: string;
+  IsSpecificItem: boolean;
+  RecipeVariants: RecipeVariant[];
+}
+
+declare interface ItemOrTagPrice {
+  Name: string;
+  IsSpecificItem: boolean;
+  RecipeVariants: RecipeVariant[];
+  Offers: ProductOffer[];
+  AvgPrice: number | null
 }

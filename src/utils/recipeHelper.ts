@@ -1,4 +1,4 @@
-import { getTagPersonalPriceId } from './helpers';
+import { getTagId } from './helpers';
 type SelectedRecipeVariants = { [key: string]: string };
 type RecipeNode = {
   ingredientId: string;
@@ -58,14 +58,14 @@ export const getRecipeTreeForProduct = (
   const ancestors = avoidLoop.includes(productName)
     ? []
     : selectedVariant?.Variant.Ingredients.map((t) =>
-        getRecipeTreeForIngredient(
-          allCraftableProducts,
-          selectedVariants,
-          allTags,
-          t,
-          [...avoidLoop, productName]
-        )
-      );
+      getRecipeTreeForIngredient(
+        allCraftableProducts,
+        selectedVariants,
+        allTags,
+        t,
+        [...avoidLoop, productName]
+      )
+    );
 
   return {
     ingredientId: productName,
@@ -86,7 +86,7 @@ const getRecipeTreeForTag = (
   avoidLoop: string[],
   quantity: number
 ): RecipeNodeTree => {
-  const ingredientId = getTagPersonalPriceId(tagName);
+  const ingredientId = getTagId(tagName);
   const productsInTag = allTags[tagName] ?? [];
   const craftableProducts = allCraftableProducts.filter((t) =>
     productsInTag.includes(t.Name)
@@ -108,14 +108,14 @@ const getRecipeTreeForTag = (
     avoidLoop.includes(ingredientId) || selectedVariant == null
       ? []
       : selectedVariant.Variant.Ingredients.map((t) =>
-          getRecipeTreeForIngredient(
-            allCraftableProducts,
-            selectedVariants,
-            allTags,
-            t,
-            [...avoidLoop, ingredientId]
-          )
-        );
+        getRecipeTreeForIngredient(
+          allCraftableProducts,
+          selectedVariants,
+          allTags,
+          t,
+          [...avoidLoop, ingredientId]
+        )
+      );
 
   return {
     ingredientId,
@@ -142,33 +142,33 @@ export const getRecipeTreeForIngredient = (
 ) =>
   ingredient.IsSpecificItem
     ? getRecipeTreeForProduct(
-        allCraftableProducts,
-        selectedVariants,
-        allTags,
-        ingredient.Name,
-        avoidLoop,
-        ingredient.Ammount
-      )
+      allCraftableProducts,
+      selectedVariants,
+      allTags,
+      ingredient.Name,
+      avoidLoop,
+      ingredient.Ammount
+    )
     : getRecipeTreeForTag(
-        allCraftableProducts,
-        selectedVariants,
-        allTags,
-        ingredient.Tag,
-        avoidLoop,
-        ingredient.Ammount
-      );
+      allCraftableProducts,
+      selectedVariants,
+      allTags,
+      ingredient.Tag,
+      avoidLoop,
+      ingredient.Ammount
+    );
 
 const createFlatNode = (node: RecipeNodeTree, level: number, path: string[]) =>
-  ({
-    ingredientId: node.ingredientId,
-    isTag: node.isTag,
-    productName: node.productName,
-    recipeVariants: node.recipeVariants,
-    selectedVariant: node.selectedVariant,
-    level,
-    path,
-    quantity: node.quantity,
-  } as RecipeNodeFlat);
+({
+  ingredientId: node.ingredientId,
+  isTag: node.isTag,
+  productName: node.productName,
+  recipeVariants: node.recipeVariants,
+  selectedVariant: node.selectedVariant,
+  level,
+  path,
+  quantity: node.quantity,
+} as RecipeNodeFlat);
 
 const flattenRecipeTreeNode = (
   node: RecipeNodeTree,

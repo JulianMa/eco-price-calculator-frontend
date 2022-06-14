@@ -87,7 +87,7 @@ export type PriceCalcStore = {
 
 const moduleReductions = [1, 0.9, 0.75, 0.6, 0.55, 0.5];
 export default (): PriceCalcStore => {
-  const { mainState, get, allCraftableProducts, tagsResource } =
+  const { mainState, get, allCraftableProducts, tagsResource, allItemsWithPrice } =
     useMainContext();
   const [state, setState] = createLocalStore<StoreType>(
     {
@@ -109,7 +109,7 @@ export default (): PriceCalcStore => {
   // Ingredients for the selected product (NOT the focused product!)
   const flatRecipeIngredientsTree = createMemo(() =>
     getFlatRecipeIngredients(
-      allCraftableProducts() ?? [],
+      Object.values(allCraftableProducts()) ?? [],
       selectedRecipes(),
       tagsResource?.()?.Tags ?? {},
       selectedProduct() ?? ''
@@ -143,8 +143,7 @@ export default (): PriceCalcStore => {
   const craftAmmount = createMemo(() => state.simpleMode ? 1 : get.craftAmmount(variantId()));
   const craftLavish = createMemo(() => state.simpleMode ? false : get.craftLavish(variantId()));
   const craftLevel = createMemo(() => state.simpleMode ? 1 : get.craftLevel(recipeSkill()));
-
-  const recipeMargin = createMemo(() => state.simpleMode ? 20 : get.recipeMargin(variantId()));
+  const recipeMargin = createMemo(() => state.simpleMode ? 10 : get.recipeMargin(variantId()));
 
   const costPercentages = createMemo(() => {
     const variant = selectedVariant()?.Variant;
@@ -168,11 +167,13 @@ export default (): PriceCalcStore => {
         calcQuantity: quantityBasedOnCraftAmmount,
         unitPrice: calcPrice(
           quantityBasedOnCraftAmmount / craftAmmount(),
-          get.personalPrice(getIngredientId(ingredient))
+          state.simpleMode ? allItemsWithPrice()?.[getIngredientId(ingredient)]?.AvgPrice ?? 0 :
+            get.personalPrice(getIngredientId(ingredient))
         ),
         calcPrice: calcPrice(
           quantityBasedOnCraftAmmount,
-          get.personalPrice(getIngredientId(ingredient))
+          state.simpleMode ? allItemsWithPrice()?.[getIngredientId(ingredient)]?.AvgPrice ?? 0 :
+            get.personalPrice(getIngredientId(ingredient))
         ),
       };
     });

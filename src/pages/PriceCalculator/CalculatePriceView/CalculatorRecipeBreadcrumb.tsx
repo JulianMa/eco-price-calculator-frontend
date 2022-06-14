@@ -10,7 +10,7 @@ export default () => {
   const { priceCalcStore } = useCalcContext();
   const breadcrumb = createMemo(() =>
     getRecipeBreadcrumb(
-      allCraftableProducts() ?? [],
+      Object.values(allCraftableProducts()) ?? [],
       priceCalcStore.selectedRecipes(),
       tagsResource?.()?.Tags ?? {},
       priceCalcStore.selectedProduct() ?? '',
