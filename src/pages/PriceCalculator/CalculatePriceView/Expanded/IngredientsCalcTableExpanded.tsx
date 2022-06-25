@@ -2,6 +2,7 @@ import { For } from 'solid-js';
 import AveragePrice from '../../../../components/AveragePrice';
 import NumericInput from '../../../../components/NumericInput';
 import PersonalPrice from '../../../../components/PersonalPrice';
+import { TooltipIcon } from '../../../../components/Svg';
 import Table, {
   TableBody,
   TableHeader,
@@ -9,14 +10,27 @@ import Table, {
 } from '../../../../components/Table';
 import Tooltip from '../../../../components/Tooltip';
 import { useMainContext } from '../../../../hooks/MainContext';
-import { formatNumber, getIngredientId } from '../../../../utils/helpers';
+import {
+  filterUnique,
+  formatNumber,
+  getIngredientId,
+  sortByText,
+} from '../../../../utils/helpers';
 import { useCalcContext } from '../../context/CalcContext';
 import IngredientsCalcName from '../IngredientsCalcName';
 
 export default () => {
-  const { mainState, get, update } = useMainContext();
+  const { mainState, get, update, allCraftableProducts } = useMainContext();
   const { priceCalcStore, listProductsStore } = useCalcContext();
   const cellClass = 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
+  const a = Object.values(allCraftableProducts())
+    .flatMap((prod) =>
+      prod.RecipeVariants.flatMap((t) => t.Recipe.CraftStation)
+    )
+    .filter(filterUnique)
+    .sort(sortByText);
+
+  console.log(a);
   return (
     <Table>
       <TableHeader>
@@ -78,24 +92,8 @@ export default () => {
                 value={formatNumber(mainState.calorieCost)}
                 onChange={(val) => update.calorieCost(val)}
               />
-              <Tooltip
-                noStyle
-                text="Labor cost is calculated using price per 1000 calories."
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 inline-block self-center"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+              <Tooltip noStyle text="Price per 1000 calories.">
+                <TooltipIcon />
               </Tooltip>
             </div>
           </td>
@@ -107,26 +105,47 @@ export default () => {
               <span class="pr-1">
                 {formatNumber(priceCalcStore.recipeCalorieCost() ?? 0)}
               </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 inline-block"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+              <TooltipIcon />
             </Tooltip>
           </td>
           <td class={cellClass}>
             {formatNumber(priceCalcStore.recipeCalorieTotalCost() ?? 0)}
           </td>
         </tr>
+        {(priceCalcStore.recipeJoules() ?? 0) > 0 && (
+          <tr>
+            <td class={cellClass}>Fuel</td>
+            <td class={cellClass}>
+              <div>
+                {(priceCalcStore.recipeCraftTimeInSeconds() ?? 0) *
+                  priceCalcStore.craftAmmount()}{' '}
+                seconds
+              </div>
+              <div>
+                (
+                {formatNumber(
+                  (priceCalcStore.recipeJoules() ?? 0) *
+                    priceCalcStore.craftAmmount()
+                )}{' '}
+                Joules)
+              </div>
+            </td>
+            <td class={cellClass}></td>
+            <td class={cellClass}>
+              <div class="flex flex-row gap-2">
+                <NumericInput
+                  value={formatNumber(mainState.costPer1kJoule)}
+                  onChange={(val) => update.costPer1kJoule(val)}
+                />
+                <Tooltip noStyle text="Price per 1000 Joules">
+                  <TooltipIcon />
+                </Tooltip>
+              </div>
+            </td>
+            <td class={cellClass}>{priceCalcStore.recipeFuelCost}</td>
+            <td class={cellClass}>{priceCalcStore.recipeFuelTotalCost}</td>
+          </tr>
+        )}
       </TableBody>
     </Table>
   );

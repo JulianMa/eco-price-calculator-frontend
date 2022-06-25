@@ -39,6 +39,17 @@ type SelectedRecipes = {
   [key: string]: string;
 };
 
+const TableWatts = {
+  'Bakery Oven': 10,
+  'Blast Furnace': 50,
+  'Bloomery': 10,
+  'Campfire': 10,
+  'Cast Iron Stove': 10,
+  'Cement Kiln': 50,
+  'Kiln': 50,
+  'Oil Refinery': 50,
+} as Record<string, number>;
+
 export type PriceCalcStore = {
   state: Store<StoreType>;
   craftModule: Accessor<number>;
@@ -61,6 +72,10 @@ export type PriceCalcStore = {
   recipeCalories: Accessor<number | undefined>;
   recipeCalorieCost: Accessor<number | undefined>;
   recipeCalorieTotalCost: Accessor<number | undefined>;
+  recipeCraftTimeInSeconds: Accessor<number | undefined>;
+  recipeJoules: Accessor<number | undefined>;
+  recipeFuelCost: Accessor<number | undefined>;
+  recipeFuelTotalCost: Accessor<number | undefined>;
   totalIngredientCost: Accessor<number>;
   unitCostWithProfit: Accessor<number>;
   recipeProducts: Accessor<
@@ -180,13 +195,12 @@ export default (): PriceCalcStore => {
   });
 
   const skillLevelReductions = [0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2];
-  const recipeCalories = createMemo(() => {
-    const reduction =
-      recipe()?.SkillNeeds.length ?? 0 > 0
-        ? skillLevelReductions[craftLevel()]
-        : 1;
-    return (recipe()?.BaseLaborCost ?? 0) * reduction;
-  });
+  const reduction = createMemo(() => recipe()?.SkillNeeds.length ?? 0 > 0
+    ? skillLevelReductions[craftLevel()]
+    : 1);
+  const recipeCalories = createMemo(() =>
+    (recipe()?.BaseLaborCost ?? 0) * reduction()
+  );
   const recipeCalorieCost = createMemo(
     () => (recipeCalories() / 1000) * mainState.calorieCost
   );
@@ -194,10 +208,25 @@ export default (): PriceCalcStore => {
     () => recipeCalorieCost() * craftAmmount()
   );
 
+  const tableJouleConsumption = createMemo(() => TableWatts[recipe()?.CraftStation[0] ?? ''] ?? 0)
+
+  const recipeCraftTimeInSeconds = createMemo(() =>
+    (recipe()?.BaseCraftTime ?? 0) * 60 * reduction()
+  );
+  const recipeJoules = createMemo(() =>
+    recipeCraftTimeInSeconds() * tableJouleConsumption()
+  );
+  const recipeFuelCost = createMemo(() =>
+    recipeJoules() * mainState.costPer1kJoule / 1000
+  );
+  const recipeFuelTotalCost = createMemo(() =>
+    recipeFuelCost() * craftAmmount()
+  );
+
   const totalIngredientCost = createMemo(() =>
     formatNumber(
       (recipeIngredients()?.reduce((prev, next) => prev + next.calcPrice, 0) ??
-        0) + recipeCalorieTotalCost()
+        0) + recipeCalorieTotalCost() + recipeFuelTotalCost()
     )
   );
 
@@ -239,6 +268,10 @@ export default (): PriceCalcStore => {
     recipeCalories,
     recipeCalorieCost,
     recipeCalorieTotalCost,
+    recipeCraftTimeInSeconds,
+    recipeJoules,
+    recipeFuelCost,
+    recipeFuelTotalCost,
     totalIngredientCost,
     unitCostWithProfit,
     recipeProducts,

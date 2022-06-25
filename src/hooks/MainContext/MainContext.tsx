@@ -85,6 +85,7 @@ type MainContextType = {
       }[]
     ) => void;
     calorieCost: (cost: number) => void;
+    costPer1kJoule: (cost: number) => void;
   };
 };
 
@@ -109,6 +110,7 @@ const MainContext = createContext<MainContextType>({
     currency: '',
     userName: '',
     calorieCost: 0,
+    costPer1kJoule: 0,
   },
   forceRefetch: {
     servers: () => undefined,
@@ -139,6 +141,7 @@ const MainContext = createContext<MainContextType>({
     recipeMargin: (recipeKey: string, module: number) => undefined,
     costPercentage: () => undefined,
     calorieCost: (cost: number) => undefined,
+    costPer1kJoule: (cost: number) => undefined,
   },
 });
 type Props = {
@@ -149,6 +152,7 @@ type MainStore = {
   currency: string;
   userName: string;
   calorieCost: number;
+  costPer1kJoule: number;
 };
 
 type PersonalPricesStore = {
@@ -189,6 +193,7 @@ export const MainContextProvider = (props: Props) => {
       currency: '',
       userName: '',
       calorieCost: 0,
+      costPer1kJoule: 0,
     },
     'MainStore'
   );
@@ -498,6 +503,7 @@ export const MainContextProvider = (props: Props) => {
           [variantKey]: percentages,
         })),
       calorieCost: (cost: number) => setState({ calorieCost: cost }),
+      costPer1kJoule: (cost: number) => setState({ costPer1kJoule: cost }),
     },
   } as MainContextType;
 
