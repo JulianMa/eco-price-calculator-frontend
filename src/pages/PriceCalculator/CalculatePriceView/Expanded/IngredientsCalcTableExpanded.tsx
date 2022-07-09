@@ -1,4 +1,5 @@
 import { For } from 'solid-js';
+import AverageFuelPrice from '../../../../components/AverageFuelPrice';
 import AveragePrice from '../../../../components/AveragePrice';
 import NumericInput from '../../../../components/NumericInput';
 import PersonalPrice from '../../../../components/PersonalPrice';
@@ -20,17 +21,10 @@ import { useCalcContext } from '../../context/CalcContext';
 import IngredientsCalcName from '../IngredientsCalcName';
 
 export default () => {
-  const { mainState, get, update, allCraftableProducts } = useMainContext();
+  const { mainState, update } = useMainContext();
   const { priceCalcStore, listProductsStore } = useCalcContext();
   const cellClass = 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
-  const a = Object.values(allCraftableProducts())
-    .flatMap((prod) =>
-      prod.RecipeVariants.flatMap((t) => t.Recipe.CraftStation)
-    )
-    .filter(filterUnique)
-    .sort(sortByText);
 
-  console.log(a);
   return (
     <Table>
       <TableHeader>
@@ -130,7 +124,13 @@ export default () => {
                 Joules)
               </div>
             </td>
-            <td class={cellClass}></td>
+            <td class={cellClass}>
+              <AverageFuelPrice
+                showPricesForFuelModal={
+                  listProductsStore.update.showPricesForFuelModal
+                }
+              />
+            </td>
             <td class={cellClass}>
               <div class="flex flex-row gap-2">
                 <NumericInput

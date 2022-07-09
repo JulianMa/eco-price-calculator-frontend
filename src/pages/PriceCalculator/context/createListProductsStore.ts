@@ -12,6 +12,7 @@ export type StoreType = {
   filterCraftStation: string;
   currentPage: number;
   showPricesForProductsModal?: { name: string; isSpecificProduct: boolean };
+  showPricesForFuelModal?: boolean;
   filterByOwner: boolean;
 };
 export type StoreUpdate = {
@@ -24,6 +25,8 @@ export type StoreUpdate = {
     isSpecificProduct: boolean
   ) => void;
   hidePricesForProductsModal: () => void;
+  showPricesForFuelModal: () => void;
+  hidePricesForFuelModal: () => void;
   setFilterByOwner: (filterByOwner: boolean) => void;
   clearFilters: () => void;
 };
@@ -44,6 +47,7 @@ export default (): ListProductsStore => {
       filterCraftStation: '',
       currentPage: 1,
       showPricesForProductsModal: undefined,
+      showPricesForFuelModal: false,
       filterByOwner: false,
     },
     'PriceCalculatorListProductsStore'
@@ -114,6 +118,8 @@ export default (): ListProductsStore => {
         }),
       hidePricesForProductsModal: () =>
         setState({ showPricesForProductsModal: undefined }),
+      showPricesForFuelModal: () => setState({ showPricesForFuelModal: true }),
+      hidePricesForFuelModal: () => setState({ showPricesForFuelModal: false }),
       setFilterByOwner: (filterByOwner: boolean) => setState({ filterByOwner }),
       clearFilters: () =>
         setState({

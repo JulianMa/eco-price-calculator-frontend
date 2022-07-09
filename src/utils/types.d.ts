@@ -119,21 +119,26 @@ declare interface TagsResponse extends TypedResponse {
   Tags: Record<string, string[]>;
 }
 
+declare interface AllItemsResponse extends TypedResponse {
+  AllItems: Record<string, {
+    Tags: string[];
+    Fuel: number;
+  }>;
+}
+
 declare interface ServersResponse {
   key: string;
   name: string;
 }
 
-declare interface ItemOrTagWithRecipe {
+declare interface ItemWithRecipe {
   Name: string;
-  IsSpecificItem: boolean;
   RecipeVariants: RecipeVariant[];
 }
 
 declare interface ItemOrTagPrice {
   Name: string;
   IsSpecificItem: boolean;
-  RecipeVariants: RecipeVariant[];
   Offers: ProductOffer[];
   AvgPrice: number | null
 }

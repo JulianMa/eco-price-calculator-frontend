@@ -102,7 +102,7 @@ export type PriceCalcStore = {
 
 const moduleReductions = [1, 0.9, 0.75, 0.6, 0.55, 0.5];
 export default (): PriceCalcStore => {
-  const { mainState, get, allCraftableProducts, tagsResource, allItemsWithPrice } =
+  const { mainState, get, allCraftableProducts, tagsResource, allItemsAndTagsWithPrice } =
     useMainContext();
   const [state, setState] = createLocalStore<StoreType>(
     {
@@ -182,12 +182,12 @@ export default (): PriceCalcStore => {
         calcQuantity: quantityBasedOnCraftAmmount,
         unitPrice: calcPrice(
           quantityBasedOnCraftAmmount / craftAmmount(),
-          state.simpleMode ? allItemsWithPrice()?.[getIngredientId(ingredient)]?.AvgPrice ?? 0 :
+          state.simpleMode ? allItemsAndTagsWithPrice()?.[getIngredientId(ingredient)]?.AvgPrice ?? 0 :
             get.personalPrice(getIngredientId(ingredient))
         ),
         calcPrice: calcPrice(
           quantityBasedOnCraftAmmount,
-          state.simpleMode ? allItemsWithPrice()?.[getIngredientId(ingredient)]?.AvgPrice ?? 0 :
+          state.simpleMode ? allItemsAndTagsWithPrice()?.[getIngredientId(ingredient)]?.AvgPrice ?? 0 :
             get.personalPrice(getIngredientId(ingredient))
         ),
       };

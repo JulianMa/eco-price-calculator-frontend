@@ -140,3 +140,25 @@ export const getIngredientDisplayName = (ingredient: {
 export const getDateFromExportedAt = (date: ExportedAt) =>
   // Month - 1 because in javascript months are zero based
   new Date(date.Year, date.Month - 1, date.Day, date.Hour, date.Min, date.Sec);
+
+
+export const getOffersAndCalculateAvgPrice = (allProductsInStores: ProductOffer[] | undefined, currentCurrency: string, productNames: string[]) => {
+  const offersInCurrency =
+    allProductsInStores?.filter(
+      (t) =>
+        productNames.includes(t.ItemName) &&
+        t.CurrencyName === currentCurrency
+    ) ?? [];
+  const validOffersForAvg = offersInCurrency.filter(
+    (t) => !t.Buying && t.Quantity > 0
+  );
+  return {
+    Offers: offersInCurrency,
+    AvgPrice: calcAvgPrice(
+      validOffersForAvg?.map((offer) => ({
+        price: offer.Price,
+        quantity: offer.Quantity,
+      })) ?? []
+    ),
+  };
+};

@@ -14,7 +14,7 @@ export default (props: Props) => {
     currentCurrency,
     tagsResource,
     allProductsInStores,
-    allItemsWithPrice,
+    allItemsAndTagsWithPrice,
   } = useMainContext();
 
   const avgPrice = createMemo(() => {
@@ -35,7 +35,7 @@ export default (props: Props) => {
     return {
       calculatedPrice: !currentCurrency()
         ? 0
-        : allItemsWithPrice()?.[props.id]?.AvgPrice,
+        : allItemsAndTagsWithPrice()?.[props.id]?.AvgPrice,
     };
   });
 

@@ -41,3 +41,6 @@ export const getRecipes = (serverName: string): Promise<RecipesResponse | undefi
 
 export const getTags = (serverName: string) =>
   fetchAsync<TagsResponse>(endpoints.readDB(serverName, constants.Tags));
+
+export const getAllItems = (serverName: string) =>
+  fetchAsync<AllItemsResponse>(endpoints.readDB(serverName, constants.AllItems));

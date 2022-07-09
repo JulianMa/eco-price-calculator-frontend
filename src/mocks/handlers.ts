@@ -3,6 +3,7 @@ import Servers from './data/Servers.json';
 import Stores from './data/Stores.json';
 import Recipes from './data/Recipes.json';
 import Tags from './data/Tags.json';
+import AllItems from './data/AllItems.json';
 import * as constants from '../utils/constants';
 
 export const handlers = [
@@ -33,6 +34,11 @@ export const handlers = [
       return res(
         ctx.status(200),
         ctx.json(Tags),
+      )
+    if (file === constants.AllItems)
+      return res(
+        ctx.status(200),
+        ctx.json(AllItems),
       )
   }),
 ]

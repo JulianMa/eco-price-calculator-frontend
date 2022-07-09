@@ -6,14 +6,17 @@ import {
   useContext,
   createResource,
   Resource,
+  createEffect,
 } from 'solid-js';
 import { Store } from 'solid-js/store';
 import { createLocalStore } from '../../utils/createLocalStore';
 import {
-  calcAvgPrice,
   filterUnique,
   getIngredient,
   getIngredientId,
+  getItemId,
+  getOffersAndCalculateAvgPrice,
+  getTagId,
   sortByText,
   sortByTextExcludingWord,
 } from '../../utils/helpers';
@@ -23,6 +26,7 @@ import {
   getRecipes,
   getStores,
   getTags,
+  getAllItems,
 } from '../../utils/restDbSdk';
 
 type MainContextType = {
@@ -42,7 +46,7 @@ type MainContextType = {
   allCraftableProductsWithOffers: Accessor<
     CraftableProductWithOffers[] | undefined
   >;
-  allItemsWithPrice: Accessor<{ [key: string]: ItemOrTagPrice }>;
+  allItemsAndTagsWithPrice: Accessor<{ [key: string]: ItemOrTagPrice }>;
   mainState: Store<MainStore>;
   forceRefetch: {
     servers: () => void;
@@ -61,6 +65,11 @@ type MainContextType = {
     costPercentage: (variantKey?: string) => {
       prod: string;
       perc: number;
+    }[];
+    itemsInTag: (tagName: string) => {
+      Name: string;
+      Tags: string[];
+      Fuel: number;
     }[];
   };
   update: {
@@ -104,7 +113,7 @@ const MainContext = createContext<MainContextType>({
   allProductsInStores: () => [],
   allCraftableProducts: () => ({}),
   allCraftableProductsWithOffers: () => [],
-  allItemsWithPrice: () => ({}),
+  allItemsAndTagsWithPrice: () => ({}),
   mainState: {
     server: '',
     currency: '',
@@ -127,6 +136,7 @@ const MainContext = createContext<MainContextType>({
     recipeMargin: (recipeKey?: string) => 0,
     costPercentage: (variantKey?: string) => [],
     craftLevel: (productName?: string) => 0,
+    itemsInTag: (tagName: string) => [],
   },
   update: {
     server: () => undefined,
@@ -229,6 +239,20 @@ export const MainContextProvider = (props: Props) => {
   const [tagsResource, { refetch: refetchTags }] = createResource(
     currentServer,
     getTags
+  );
+  const [allItemsResource, { refetch: refetchAllItems }] = createResource(
+    currentServer,
+    getAllItems
+  );
+
+  const allTags = createMemo(() =>
+    Object.entries(allItemsResource()?.AllItems ?? {}).reduce((tags, item) => {
+      item[1]?.Tags?.forEach((tagName) => {
+        tags[tagName] = [...(tags?.[tagName] ?? []), item[0]];
+      });
+
+      return tags;
+    }, {} as Record<string, string[]>)
   );
 
   const isLoadingResources = createMemo(
@@ -362,61 +386,55 @@ export const MainContextProvider = (props: Props) => {
       .sort(sortByText)
   );
 
-  const allItems = createMemo(() => {
-    const ingredients = [
-      ...Object.values(allCraftableProducts()).map((t) => ({
-        Name: t.Name,
-        IsSpecificItem: true,
-        Tag: '',
-      })),
-      ...Object.values(allCraftableProducts())
-        .map((prod) =>
-          prod.RecipeVariants.map((variant) => variant.Variant.Ingredients)
-        )
-        .flat()
-        .flat(),
-    ];
-
-    return ingredients.reduce((agg, ing) => {
-      const key = getIngredientId(ing);
-      if (agg[key] === undefined) {
-        agg[key] = {
-          ...getIngredient(ing),
+  // List of all available items and their recipes
+  const allItemsWithRecipes = createMemo(() =>
+    Object.keys(allItemsResource()?.AllItems ?? {}).reduce((agg, itemName) => {
+      if (agg[itemName] === undefined) {
+        agg[itemName] = {
+          Name: itemName,
           RecipeVariants:
-            allCraftableProducts()[ing.Name]?.RecipeVariants ?? [],
+            allCraftableProducts()[itemName]?.RecipeVariants ?? [],
         };
       }
 
       return agg;
-    }, {} as { [key: string]: ItemOrTagWithRecipe });
-  });
+    }, {} as { [key: string]: ItemWithRecipe })
+  );
 
   const allItemsWithPrice = createMemo(() =>
-    Object.entries(allItems()).reduce((agg, [key, item]) => {
-      const products = item.IsSpecificItem
-        ? [item.Name]
-        : tagsResource?.()?.Tags?.[item.Name] ?? [];
-      const offersInCurrency =
-        allProductsInStores()?.filter(
-          (t) =>
-            products.includes(t.ItemName) &&
-            t.CurrencyName === currentCurrency()
-        ) ?? [];
-      agg[key] = {
-        ...item,
-        Offers: offersInCurrency,
-        AvgPrice: calcAvgPrice(
-          offersInCurrency
-            .filter((t) => !t.Buying && t.Quantity > 0)
-            ?.map((offer) => ({
-              price: offer.Price,
-              quantity: offer.Quantity,
-            })) ?? []
+    Object.entries(allItemsWithRecipes()).reduce((agg, [itemName, item]) => {
+      agg[getItemId(itemName)] = {
+        Name: item.Name,
+        IsSpecificItem: true,
+        ...getOffersAndCalculateAvgPrice(
+          allProductsInStores(),
+          currentCurrency(),
+          [item.Name]
         ),
       };
       return agg;
     }, {} as { [key: string]: ItemOrTagPrice })
   );
+
+  const allTagsWithPrice = createMemo(() =>
+    Object.entries(allTags()).reduce((agg, [tag, products]) => {
+      agg[getTagId(tag)] = {
+        Name: tag,
+        IsSpecificItem: false,
+        ...getOffersAndCalculateAvgPrice(
+          allProductsInStores(),
+          currentCurrency(),
+          products
+        ),
+      };
+      return agg;
+    }, {} as { [key: string]: ItemOrTagPrice })
+  );
+
+  const allItemsAndTagsWithPrice = createMemo(() => ({
+    ...allItemsWithPrice(),
+    ...allTagsWithPrice(),
+  }));
 
   const value = {
     serversResource,
@@ -432,7 +450,7 @@ export const MainContextProvider = (props: Props) => {
     allProductsInStores,
     allCraftableProducts,
     allCraftableProductsWithOffers,
-    allItemsWithPrice,
+    allItemsAndTagsWithPrice,
     mainState,
     forceRefetch: {
       servers: refetchServers,
@@ -455,6 +473,11 @@ export const MainContextProvider = (props: Props) => {
         recipeMarginState[recipeKey ?? ''] ?? 0,
       costPercentage: (variantKey?: string) =>
         CostPercentagesState[variantKey ?? ''],
+      itemsInTag: (tagName: string) =>
+        allTags()?.[tagName]?.map((itemName) => ({
+          Name: itemName,
+          ...allItemsResource()?.AllItems[itemName],
+        })) ?? [],
     },
     update: {
       server: (newServer: string) => setState({ server: newServer }),
