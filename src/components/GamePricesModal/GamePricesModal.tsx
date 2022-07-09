@@ -34,6 +34,7 @@ export default () => {
     useMainContext();
   const [currentPage, setCurrentPage] = createSignal(1);
   const [offersInCurrency, setOffersInCurrency] = createSignal(false);
+  const [onlyBuyable, setOnlyBuyable] = createSignal(true);
   const productNames = createMemo(() => {
     if (state.showPricesForProductsModal == undefined) return [];
     return state.showPricesForProductsModal.isSpecificProduct
@@ -56,7 +57,8 @@ export default () => {
           filterByIncludesAny(productNames(), [product.ItemName]) &&
           (!currentCurrency() ||
             !offersInCurrency() ||
-            product.CurrencyName === currentCurrency())
+            product.CurrencyName === currentCurrency()) &&
+          (!onlyBuyable() || (!product.Buying && product.Quantity > 0))
       )
       .sort((a, b) => {
         if (a.Buying === b.Buying) {
@@ -82,7 +84,12 @@ export default () => {
                 {productNames().length > 1 ? 's' : ''}:{' '}
                 {productNames().join(', ')}
               </ModalHeader>
-              <div class="mt-1">
+              <div class="mt-1 flex">
+                <Checkbox
+                  label="Show only buyable products"
+                  checked={onlyBuyable()}
+                  onChange={(checked) => setOnlyBuyable(checked)}
+                />
                 <Checkbox
                   label="Show only offers in selected currency"
                   checked={offersInCurrency()}

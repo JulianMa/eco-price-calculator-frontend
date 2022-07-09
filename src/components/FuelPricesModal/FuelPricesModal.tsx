@@ -32,6 +32,7 @@ export default () => {
     useMainContext();
   const [currentPage, setCurrentPage] = createSignal(1);
   const [offersInCurrency, setOffersInCurrency] = createSignal(false);
+  const [onlyBuyable, setOnlyBuyable] = createSignal(true);
   const products = createMemo(() =>
     get.itemsInTag(SpecificTagName.BurnableFuel)
   );
@@ -53,7 +54,8 @@ export default () => {
           filterByIncludesAny(productNames(), [product.ItemName]) &&
           (!currentCurrency() ||
             !offersInCurrency() ||
-            product.CurrencyName === currentCurrency())
+            product.CurrencyName === currentCurrency()) &&
+          (!onlyBuyable() || (!product.Buying && product.Quantity > 0))
       )
       .map((product) => {
         const joules =
@@ -84,7 +86,12 @@ export default () => {
           <div class="sm:flex sm:items-start">
             <div class="flex-grow mt-3 text-center sm:mt-0 sm:text-left">
               <ModalHeader>Ingame prices for burnable fuel</ModalHeader>
-              <div class="mt-1">
+              <div class="mt-1 flex">
+                <Checkbox
+                  label="Show only buyable products"
+                  checked={onlyBuyable()}
+                  onChange={(checked) => setOnlyBuyable(checked)}
+                />
                 <Checkbox
                   label="Show only offers in selected currency"
                   checked={offersInCurrency()}
