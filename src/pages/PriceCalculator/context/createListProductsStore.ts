@@ -4,6 +4,7 @@ import { useMainContext } from '../../../hooks/MainContext';
 import { createLocalStore } from '../../../utils/createLocalStore';
 import { filterByIncludesAny, filterByText } from '../../../utils/helpers';
 import { Store } from 'solid-js/store';
+import levenshtein from 'js-levenshtein';
 
 const pageSize = 100;
 export type StoreType = {
@@ -81,7 +82,7 @@ export default (): ListProductsStore => {
         (!state.filterByOwner ||
           mainState.userName.length === 0 ||
           filterByIncludesAny(mySellingProducts(), [product.Name]))
-    )
+    ).sort((a, b) => levenshtein(a.Name, state.search) - levenshtein(b.Name, state.search))
   );
 
   const paginatedProducts = createMemo(() =>
