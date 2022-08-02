@@ -9,7 +9,7 @@ import Table, {
 } from '../../../../components/Table';
 import Tooltip from '../../../../components/Tooltip';
 import { useMainContext } from '../../../../hooks/MainContext';
-import { fixPercentages } from '../../../../utils/helpers';
+import { fixPercentages, getItemId } from '../../../../utils/helpers';
 import { useCalcContext } from '../../context/CalcContext';
 
 export default () => {
@@ -82,7 +82,7 @@ export default () => {
                 </Tooltip>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <PersonalPrice personalPriceId={product.Name} />
+                <PersonalPrice personalPriceId={getItemId(product.Name)} />
               </td>
             </tr>
           )}
