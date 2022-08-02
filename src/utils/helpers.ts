@@ -68,7 +68,8 @@ export const calcAmmount = (ammount: number, craftAmmout: number) => {
 export const calcPrice = (ammount: number, price?: number) =>
   !price ? 0 : formatNumber(ammount * price);
 
-export const convertToMarginMultiplier = (margin: number) => margin / 100 + 1;
+//https://www.xero.com/au/glossary/margin-vs-markup/
+export const convertToMarginMultiplier = (margin: number) => 1 / (1 - margin / 100);
 
 // When user hasn't picked cost percentages yet, we divide those percentages even
 export const getRecipeEvenPercentages = (recipe: Variant) => {

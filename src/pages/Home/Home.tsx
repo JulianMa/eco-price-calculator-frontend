@@ -78,6 +78,14 @@ export default () => {
       <br />
       <div class={styles.changelog}>
         <h2>Latest changes</h2>
+        <h3>3.1.1 (2022-08-02)</h3>
+        <h4>Bugfix</h4>
+        <ul>
+          <li>
+            Fixed the formula for calculating the price based on margin.
+            Previous formula was using markup instead of margin.
+          </li>
+        </ul>
         <h3>3.1.0 (2022-07-22)</h3>
         <h4>Features</h4>
         <ul>

@@ -18,7 +18,7 @@ import { useCalcContext } from '../context/CalcContext';
 import ProductsCalcTableExpanded from './Expanded/ProductsCalcTableExpanded';
 import ProductsCalcTableSimple from './Simple/ProductsCalcTableSimple';
 
-const recipeMargins = [0, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100].map((t) => ({
+const recipeMargins = [0, 5, 10, 15, 20, 25, 30, 40, 50, 75].map((t) => ({
   value: t,
   text: `${t} %`,
 }));
