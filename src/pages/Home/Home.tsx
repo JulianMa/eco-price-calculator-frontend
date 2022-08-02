@@ -78,6 +78,19 @@ export default () => {
       <br />
       <div class={styles.changelog}>
         <h2>Latest changes</h2>
+        <h3>3.1.0 (2022-07-22)</h3>
+        <h4>Features</h4>
+        <ul>
+          <li>
+            Added simple view on calculator: It is meant as a simple way to
+            calculate price with little to no input from the user (will be
+            improved on future versions)
+          </li>
+          <li>
+            Added fuel cost on expanded view as well as a modal that helps
+            calculate it (can be set to 0 to ignore fuel costs)
+          </li>
+        </ul>
         <h3>3.0.1 (2022-05-22)</h3>
         <h4>Features</h4>
         <ul>
