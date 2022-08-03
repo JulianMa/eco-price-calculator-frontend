@@ -3,6 +3,7 @@ import { createMemo } from 'solid-js';
 import { useMainContext } from '../../hooks/MainContext';
 import * as constants from '../../utils/constants';
 import { getDateFromExportedAt } from '../../utils/helpers';
+import lt from 'semver/functions/lt';
 
 const getLastUpdateInHours = (date: Date) => {
   const dateNow = new Date();
@@ -14,6 +15,9 @@ enum LogLevel {
   Info,
   None,
 }
+
+const isPluginOutdatedFn = (installedPluginVersion: string) =>
+  lt(installedPluginVersion, constants.latestPluginVersion);
 
 export const getLogLevel = ({
   hasNoData,
@@ -31,6 +35,7 @@ export const getLogLevel = ({
   if (isPluginOutdated) return LogLevel.Info;
   return LogLevel.None;
 };
+
 export default () => {
   const { storesResource, recipesResource, tagsResource } = useMainContext();
 
@@ -51,7 +56,7 @@ export default () => {
     // Info
     const pluginVersion = storesResource?.()?.PluginVersion;
     const isPluginOutdated =
-      !!pluginVersion && pluginVersion !== constants.latestPluginVersion;
+      !!pluginVersion && isPluginOutdatedFn(pluginVersion);
 
     return {
       loading:
