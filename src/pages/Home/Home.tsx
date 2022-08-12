@@ -78,6 +78,14 @@ export default () => {
       <br />
       <div class={styles.changelog}>
         <h2>Latest changes</h2>
+        <h3>3.1.2 (2022-08-12)</h3>
+        <h4>Task</h4>
+        <ul>
+          <li>
+            Replaced the now deprecated field 'CraftStation' by the
+            'CraftingTable' field.
+          </li>
+        </ul>
         <h3>3.1.1 (2022-08-02)</h3>
         <h4>Bugfix</h4>
         <ul>
@@ -98,22 +106,6 @@ export default () => {
             Added fuel cost on expanded view as well as a modal that helps
             calculate it (can be set to 0 to ignore fuel costs)
           </li>
-        </ul>
-        <h3>3.0.1 (2022-05-22)</h3>
-        <h4>Features</h4>
-        <ul>
-          <li>
-            Removed dependency of a third party to keep json files exported from
-            server. Server files are now exported to disk on same server that's
-            running eco server. Price calculator accesses the files using the
-            server web interface.
-          </li>
-          <li>Added buy me a coffee link on about page</li>
-          <li>
-            Added dropdown to select between multiple servers on main eco price
-            calculator page
-          </li>
-          <li>Added config to only select a server when config is set</li>
         </ul>
       </div>
     </div>

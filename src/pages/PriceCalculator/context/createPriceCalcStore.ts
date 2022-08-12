@@ -208,7 +208,7 @@ export default (): PriceCalcStore => {
     () => recipeCalorieCost() * craftAmmount()
   );
 
-  const tableJouleConsumption = createMemo(() => TableWatts[recipe()?.CraftStation[0] ?? ''] ?? 0)
+  const tableJouleConsumption = createMemo(() => TableWatts[recipe()?.CraftingTable ?? ''] ?? 0)
 
   const recipeCraftTimeInSeconds = createMemo(() =>
     (recipe()?.BaseCraftTime ?? 0) * 60 * reduction()

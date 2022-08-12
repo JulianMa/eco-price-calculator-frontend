@@ -20,7 +20,7 @@ import Checkbox from '../../components/Checkbox';
 import TableRowLoadingSpinner from '../../components/TableRowLoadingSpinner';
 
 export default () => {
-  const { isLoadingResources, mainState, allProfessions, allCraftStations } =
+  const { isLoadingResources, mainState, allProfessions, allCraftingTables } =
     useMainContext();
   const { listProductsStore: props, priceCalcStore } = useCalcContext();
   return (
@@ -62,19 +62,19 @@ export default () => {
                 direction="SW"
               />
               <Dropdown
-                value={props.state.filterCraftStation}
+                value={props.state.filterCraftingTable}
                 values={[
                   {
                     value: '',
                     text: 'Filter by crafting station',
                   },
-                  ...(allCraftStations()?.map((name) => ({
+                  ...(allCraftingTables()?.map((name) => ({
                     value: name,
                     text: name,
                   })) ?? []),
                 ]}
                 onChange={(newValue) =>
-                  props.update.setFilterCraftStation(`${newValue}`)
+                  props.update.setFilterCraftingTable(`${newValue}`)
                 }
                 origin="SE"
                 direction="SW"
@@ -114,21 +114,21 @@ export default () => {
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {product.RecipeVariants.map((recipeVariant) =>
-                        recipeVariant.Recipe.CraftStation.map((craftStation) =>
-                          (recipeVariant.Recipe.SkillNeeds.length > 0
-                            ? recipeVariant.Recipe.SkillNeeds
-                            : [
-                                {
-                                  Skill: Survivalist,
-                                  Level: 0,
-                                },
-                              ]
-                          ).map((skillNeed) => ({
+                        (recipeVariant.Recipe.SkillNeeds.length > 0
+                          ? recipeVariant.Recipe.SkillNeeds
+                          : [
+                              {
+                                Skill: Survivalist,
+                                Level: 0,
+                              },
+                            ]
+                        )
+                          .map((skillNeed) => ({
                             Skill: skillNeed.Skill,
                             SkillLevel: skillNeed.Level,
-                            craftStation,
+                            craftingTable: recipeVariant.Recipe.CraftingTable,
                           }))
-                        ).flat()
+                          .flat()
                       )
                         .flat()
                         // Remove duplicates:
@@ -138,7 +138,7 @@ export default () => {
                               (t) =>
                                 t.Skill === value.Skill &&
                                 t.SkillLevel === value.SkillLevel &&
-                                t.craftStation === value.craftStation
+                                t.craftingTable === value.craftingTable
                             ) === index
                         )
                         // Filter by profession and crafting station filters
@@ -149,8 +149,8 @@ export default () => {
                               t.Skill
                             ) &&
                             filterByTextEqual(
-                              props.state.filterCraftStation,
-                              t.craftStation
+                              props.state.filterCraftingTable,
+                              t.craftingTable
                             )
                         )
                         .map((recipe, index) => (
@@ -183,12 +183,12 @@ export default () => {
                             >
                               <Button
                                 onClick={() =>
-                                  props.update.setFilterCraftStation(
-                                    recipe.craftStation
+                                  props.update.setFilterCraftingTable(
+                                    recipe.craftingTable
                                   )
                                 }
                               >
-                                {recipe.craftStation}
+                                {recipe.craftingTable}
                               </Button>
                             </Tooltip>
                           </div>

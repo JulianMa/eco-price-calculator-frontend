@@ -67,7 +67,8 @@ declare interface Recipe {
   BaseCraftTime: number;
   BaseLaborCost: number;
   BaseXPGain: number;
-  CraftStation: string[];
+  CraftingTable: string;
+  CraftingTableCanUseModules: boolean;
   DefaultVariant: string;
   NumberOfVariants: number;
   SkillNeeds: {

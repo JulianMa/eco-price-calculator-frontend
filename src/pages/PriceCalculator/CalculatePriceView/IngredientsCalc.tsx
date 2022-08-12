@@ -56,7 +56,7 @@ export default () => {
               <>
                 at table
                 <Highlight
-                  text={priceCalcStore.recipe()?.CraftStation[0]}
+                  text={priceCalcStore.recipe()?.CraftingTable}
                   class="pl-2"
                 />
               </>

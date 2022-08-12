@@ -10,7 +10,7 @@ const pageSize = 100;
 export type StoreType = {
   search: string;
   filterProfession: string;
-  filterCraftStation: string;
+  filterCraftingTable: string;
   currentPage: number;
   showPricesForProductsModal?: { name: string; isSpecificProduct: boolean };
   showPricesForFuelModal?: boolean;
@@ -19,7 +19,7 @@ export type StoreType = {
 export type StoreUpdate = {
   setSearch: (newSearch: string) => void;
   setFilterProfession: (newSearch: string) => void;
-  setFilterCraftStation: (newSearch: string) => void;
+  setFilterCraftingTable: (newSearch: string) => void;
   setCurrentPage: (newPage: number) => void;
   showPricesForProductsModal: (
     name: string,
@@ -45,7 +45,7 @@ export default (): ListProductsStore => {
     {
       search: '',
       filterProfession: '',
-      filterCraftStation: '',
+      filterCraftingTable: '',
       currentPage: 1,
       showPricesForProductsModal: undefined,
       showPricesForFuelModal: false,
@@ -74,9 +74,9 @@ export default (): ListProductsStore => {
           ).flat()
         ) &&
         filterByIncludesAny(
-          [state.filterCraftStation],
+          [state.filterCraftingTable],
           product.RecipeVariants.map(
-            (variant) => variant.Recipe.CraftStation
+            (variant) => variant.Recipe.CraftingTable
           ).flat()
         ) &&
         (!state.filterByOwner ||
@@ -110,8 +110,8 @@ export default (): ListProductsStore => {
           filterProfession: newSearch === Survivalist ? '' : newSearch,
           currentPage: 1,
         }),
-      setFilterCraftStation: (newSearch: string) =>
-        setState({ filterCraftStation: newSearch, currentPage: 1 }),
+      setFilterCraftingTable: (newSearch: string) =>
+        setState({ filterCraftingTable: newSearch, currentPage: 1 }),
       setCurrentPage: (newPage: number) => setState({ currentPage: newPage }),
       showPricesForProductsModal: (name: string, isSpecificProduct: boolean) =>
         setState({
@@ -127,7 +127,7 @@ export default (): ListProductsStore => {
           search: '',
           currentPage: 1,
           filterProfession: '',
-          filterCraftStation: '',
+          filterCraftingTable: '',
           filterByOwner: false,
         }),
     },

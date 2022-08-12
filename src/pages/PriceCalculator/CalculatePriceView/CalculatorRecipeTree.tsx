@@ -90,7 +90,7 @@ export default () => {
                           (t) =>
                             t.Variant.Key ===
                               recipe.selectedVariant?.Variant.Key ?? ''
-                        )?.Recipe.CraftStation[0]
+                        )?.Recipe.CraftingTable
                       }
                     </span>
                   </>

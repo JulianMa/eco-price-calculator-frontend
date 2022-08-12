@@ -40,7 +40,7 @@ type MainContextType = {
   currentCurrency: Accessor<string>;
   allCurrencies: Accessor<string[] | undefined>;
   allProfessions: Accessor<string[] | undefined>;
-  allCraftStations: Accessor<string[] | undefined>;
+  allCraftingTables: Accessor<string[] | undefined>;
   allProductsInStores: Accessor<ProductOffer[] | undefined>;
   allCraftableProducts: Accessor<{ [key: string]: CraftableProduct }>;
   allCraftableProductsWithOffers: Accessor<
@@ -109,7 +109,7 @@ const MainContext = createContext<MainContextType>({
   currentCurrency: () => '',
   allCurrencies: () => [],
   allProfessions: () => [],
-  allCraftStations: () => [],
+  allCraftingTables: () => [],
   allProductsInStores: () => [],
   allCraftableProducts: () => ({}),
   allCraftableProductsWithOffers: () => [],
@@ -378,10 +378,9 @@ export const MainContextProvider = (props: Props) => {
       .sort(sortByText)
   );
 
-  const allCraftStations = createMemo(() =>
+  const allCraftingTables = createMemo(() =>
     recipesResource()
-      ?.Recipes?.map((recipe) => recipe.CraftStation)
-      .flat()
+      ?.Recipes?.map((recipe) => recipe.CraftingTable)
       .filter(filterUnique)
       .sort(sortByText)
   );
@@ -446,7 +445,7 @@ export const MainContextProvider = (props: Props) => {
     currentCurrency,
     allCurrencies,
     allProfessions,
-    allCraftStations,
+    allCraftingTables,
     allProductsInStores,
     allCraftableProducts,
     allCraftableProductsWithOffers,
