@@ -4,7 +4,7 @@ export const Tags = 'Tags';
 export const Stores = 'Stores';
 export const AllItems = 'AllItems';
 export const fileNames = [Stores, Recipes, CraftingTables, Tags];
-export const latestPluginVersion = '3.1.2';
+export const latestPluginVersion = '3.2.2';
 
 export enum OrderTypes {
   BUY,

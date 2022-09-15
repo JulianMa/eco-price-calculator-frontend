@@ -1,5 +1,6 @@
 import {
   getIngredientId,
+  getItemId,
   getRecipeEvenPercentages,
 } from './../../../utils/helpers';
 import {
@@ -285,7 +286,7 @@ export default (): PriceCalcStore => {
     costPercentages,
     setSelectedProduct: (prod: string | undefined) => {
       setSelectedProduct(prod);
-      if (prod != undefined) setState({ focusedProdPath: [prod] });
+      if (prod != undefined) setState({ focusedProdPath: [getItemId(prod)] });
     },
     setSelectedRecipes,
     update: {

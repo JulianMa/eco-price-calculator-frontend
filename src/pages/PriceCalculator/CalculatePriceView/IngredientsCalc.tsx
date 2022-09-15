@@ -1,30 +1,18 @@
-import { For } from 'solid-js';
 import Accordion from '../../../components/Accordion/Accordion';
-import AveragePrice from '../../../components/AveragePrice';
 import Checkbox from '../../../components/Checkbox';
-import Dropdown from '../../../components/Dropdown';
 import Highlight from '../../../components/Highlight';
 import LabeledField from '../../../components/LabeledField';
-import NumericInput from '../../../components/NumericInput';
-import PersonalPrice from '../../../components/PersonalPrice';
 import RadioToggle from '../../../components/RadioToggle';
 import SkillLevelDropdown from '../../../components/SkillLevelDropdown/SkillLevelDropdown';
-import Table, {
-  TableBody,
-  TableHeader,
-  TableHeaderCol,
-} from '../../../components/Table';
-import Tooltip from '../../../components/Tooltip';
 import { useMainContext } from '../../../hooks/MainContext';
-import { formatNumber, getIngredientId } from '../../../utils/helpers';
+import { formatNumber } from '../../../utils/helpers';
 import { useCalcContext } from '../context/CalcContext';
-import IngredientsCalcName from './IngredientsCalcName';
 import RecipePicker from './RecipePicker';
 import IngredientsCalcTableExpanded from './Expanded/IngredientsCalcTableExpanded';
 import IngredientsCalcTableSimple from './Simple/IngredientsCalcTableSimple';
 
 export default () => {
-  const { mainState, get, update } = useMainContext();
+  const { get, update } = useMainContext();
   const { priceCalcStore, listProductsStore } = useCalcContext();
 
   return (

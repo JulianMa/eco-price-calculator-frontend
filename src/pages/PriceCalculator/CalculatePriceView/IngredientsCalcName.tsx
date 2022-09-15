@@ -8,10 +8,11 @@ type Props = {
   ingredient: RecipeIngredient;
 };
 export default (props: Props) => {
-  const { tagsResource } = useMainContext();
+  const { tagsResource, allCraftableProducts } = useMainContext();
   const { priceCalcStore } = useCalcContext();
+  const ingredientId = getIngredientId(props.ingredient);
   const isCraftableProduct =
-    (priceCalcStore.focusedNode()?.recipeVariants?.length ?? 0) > 0;
+    allCraftableProducts()?.[props.ingredient.Name]?.RecipeVariants?.length > 0;
 
   if (!isCraftableProduct && props.ingredient.IsSpecificItem) {
     return <>{props.ingredient.Name}</>;
@@ -23,11 +24,7 @@ export default (props: Props) => {
         text={`Click to calculate price for ${props.ingredient.Name}`}
       >
         <Button
-          onClick={() =>
-            priceCalcStore.update.focusChildProduct(
-              getIngredientId(props.ingredient)
-            )
-          }
+          onClick={() => priceCalcStore.update.focusChildProduct(ingredientId)}
         >
           {props.ingredient.Name}
         </Button>
@@ -57,11 +54,7 @@ export default (props: Props) => {
       direction="NE"
     >
       <Button
-        onClick={() =>
-          priceCalcStore.update.focusChildProduct(
-            getIngredientId(props.ingredient)
-          )
-        }
+        onClick={() => priceCalcStore.update.focusChildProduct(ingredientId)}
       >
         {`Tag ${props.ingredient.Tag}`}
       </Button>

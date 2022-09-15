@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { createEffect, createMemo, For } from 'solid-js';
+import { createMemo, For } from 'solid-js';
 import Accordion from '../../../components/Accordion/Accordion';
 import Button from '../../../components/Button';
 import PersonalPrice from '../../../components/PersonalPrice';

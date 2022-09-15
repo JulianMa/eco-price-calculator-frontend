@@ -1,4 +1,4 @@
-import { getTagId } from './helpers';
+import { getItemId, getTagId } from './helpers';
 type SelectedRecipeVariants = { [key: string]: string };
 type RecipeNode = {
   ingredientId: string;
@@ -43,9 +43,10 @@ export const getRecipeTreeForProduct = (
   const craftableProduct = allCraftableProducts.find(
     (t) => t.Name === productName
   );
+  const ingredientId = getItemId(productName);
   if (craftableProduct == null)
     return {
-      ingredientId: productName,
+      ingredientId,
       productName,
       recipeVariants: [],
       isTag: false,
@@ -53,8 +54,9 @@ export const getRecipeTreeForProduct = (
     };
   const selectedVariant = getSelectedOrFirstRecipeVariant(
     craftableProduct.RecipeVariants,
-    selectedVariants[productName]
+    selectedVariants[ingredientId]
   );
+
   const ancestors = avoidLoop.includes(productName)
     ? []
     : selectedVariant?.Variant.Ingredients.map((t) =>
@@ -67,8 +69,9 @@ export const getRecipeTreeForProduct = (
       )
     );
 
+
   return {
-    ingredientId: productName,
+    ingredientId,
     isTag: false,
     productName,
     recipeVariants: craftableProduct.RecipeVariants,
