@@ -127,6 +127,10 @@ declare interface AllItemsResponse extends TypedResponse {
   }>;
 }
 
+declare interface CraftingTablesResponse extends TypedResponse {
+  CraftingTables: Array<CraftingTable>;
+}
+
 declare interface ServersResponse {
   key: string;
   name: string;
@@ -142,4 +146,14 @@ declare interface ItemOrTagPrice {
   IsSpecificItem: boolean;
   Offers: ProductOffer[];
   AvgPrice: number | null
+}
+
+declare interface CraftingTable {
+  TableName: string;
+  ResourceEfficiencyModule: string;
+  OwnerName: string;
+  AllowedUpgrades: Array<string>;
+  ModuleLevel: number;
+  GenericMultiplier: number;
+  SkillMultiplier: number;
 }

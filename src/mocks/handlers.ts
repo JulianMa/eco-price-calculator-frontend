@@ -4,6 +4,7 @@ import Stores from './data/Stores.json';
 import Recipes from './data/Recipes.json';
 import Tags from './data/Tags.json';
 import AllItems from './data/AllItems.json';
+import CraftingTables from './data/CraftingTables.json';
 import * as constants from '../utils/constants';
 
 export const handlers = [
@@ -35,10 +36,17 @@ export const handlers = [
         ctx.status(200),
         ctx.json(Tags),
       )
+
     if (file === constants.AllItems)
       return res(
         ctx.status(200),
         ctx.json(AllItems),
+      )
+
+    if (file === constants.CraftingTables)
+      return res(
+        ctx.status(200),
+        ctx.json(CraftingTables),
       )
   }),
 ]

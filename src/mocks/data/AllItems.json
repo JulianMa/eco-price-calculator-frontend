@@ -1,5 +1,5 @@
 {
-  "PluginVersion": "3.1.0",
+  "PluginVersion": "3.2.2",
   "Version": 1,
   "AllItems": {
     "Backpack": { "Tags": [], "Fuel": 0.0 },
@@ -168,8 +168,80 @@
       ],
       "Fuel": 4000.0
     },
+    "Black Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Black Glass": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
+    "Black Reinforced Concrete": {
+      "Tags": [
+        "Currency",
+        "Concrete",
+        "Colored Concrete",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Blue Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Blue Glass": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
+    "Blue Reinforced Concrete": {
+      "Tags": [
+        "Currency",
+        "Concrete",
+        "Colored Concrete",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
     "Brick": {
       "Tags": ["Constructable", "Block", "Product", "Ingredient"],
+      "Fuel": 0.0
+    },
+    "Brown Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Brown Glass": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
+    "Brown Reinforced Concrete": {
+      "Tags": [
+        "Currency",
+        "Concrete",
+        "Colored Concrete",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
       "Fuel": 0.0
     },
     "Cedar Log": {
@@ -196,15 +268,8 @@
     },
     "Clay": { "Tags": ["Excavatable", "Block", "Ingredient"], "Fuel": 0.0 },
     "Coal": {
-      "Tags": [
-        "Fuel",
-        "Coal",
-        "Burnable Fuel",
-        "Excavatable",
-        "Block",
-        "Ingredient"
-      ],
-      "Fuel": 20000.0
+      "Tags": ["Currency", "Excavatable", "Block", "Ingredient"],
+      "Fuel": 0.0
     },
     "Composite Birch Lumber": {
       "Tags": [
@@ -352,16 +417,27 @@
     "Cotton Carpet": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
     "Cotton Curtains": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
     "Crushed Basalt": {
-      "Tags": ["CrushedRock", "Excavatable", "Block", "Product", "Ingredient"],
+      "Tags": ["CrushedRock", "Excavatable", "Block", "Ingredient", "Product"],
       "Fuel": 0.0
     },
-    "Crushed Coal": { "Tags": ["Excavatable", "Block"], "Fuel": 0.0 },
+    "Crushed Coal": {
+      "Tags": [
+        "Fuel",
+        "Excavatable",
+        "Coal",
+        "Burnable Fuel",
+        "Block",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 40000.0
+    },
     "Crushed Copper Ore": {
       "Tags": ["Excavatable", "Block", "Ingredient", "Product"],
       "Fuel": 0.0
     },
     "Crushed Gneiss": {
-      "Tags": ["CrushedRock", "Excavatable", "Block", "Product", "Ingredient"],
+      "Tags": ["CrushedRock", "Excavatable", "Block", "Ingredient", "Product"],
       "Fuel": 0.0
     },
     "Crushed Gold Ore": {
@@ -374,8 +450,8 @@
         "Silica",
         "Excavatable",
         "Block",
-        "Product",
-        "Ingredient"
+        "Ingredient",
+        "Product"
       ],
       "Fuel": 0.0
     },
@@ -384,7 +460,7 @@
       "Fuel": 0.0
     },
     "Crushed Limestone": {
-      "Tags": ["CrushedRock", "Excavatable", "Block", "Product", "Ingredient"],
+      "Tags": ["CrushedRock", "Excavatable", "Block", "Ingredient", "Product"],
       "Fuel": 0.0
     },
     "Crushed Mixed Rock": {
@@ -398,13 +474,13 @@
         "Silica",
         "Excavatable",
         "Block",
-        "Product",
-        "Ingredient"
+        "Ingredient",
+        "Product"
       ],
       "Fuel": 0.0
     },
     "Crushed Shale": {
-      "Tags": ["CrushedRock", "Excavatable", "Block", "Product", "Ingredient"],
+      "Tags": ["CrushedRock", "Excavatable", "Block", "Ingredient", "Product"],
       "Fuel": 0.0
     },
     "Crushed Slag": {
@@ -412,6 +488,17 @@
       "Fuel": 0.0
     },
     "Crushed Stone": { "Tags": ["Block"], "Fuel": 0.0 },
+    "DarkRed Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
     "Dirt": {
       "Tags": ["RoadType", "Excavatable", "Block", "Ingredient"],
       "Fuel": 0.0
@@ -437,6 +524,10 @@
       "Fuel": 0.0
     },
     "Garbage": { "Tags": ["Excavatable", "Block"], "Fuel": 0.0 },
+    "Garden Hedges": {
+      "Tags": ["Currency", "Constructable", "Block", "Product"],
+      "Fuel": 0.0
+    },
     "Gasoline": {
       "Tags": ["Fuel", "Liquid Fuel", "Block", "Product"],
       "Fuel": 100000.0
@@ -469,6 +560,54 @@
     },
     "Granite": {
       "Tags": ["Rock", "Excavatable", "Block", "Ingredient"],
+      "Fuel": 0.0
+    },
+    "Green Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Green Glass": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
+    "Green Reinforced Concrete": {
+      "Tags": [
+        "Currency",
+        "Concrete",
+        "Colored Concrete",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Grey Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Grey Glass": { "Tags": ["Block", "Ingredient", "Product"], "Fuel": 0.0 },
+    "Grey Reinforced Concrete": {
+      "Tags": [
+        "Currency",
+        "Concrete",
+        "Colored Concrete",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
       "Fuel": 0.0
     },
     "Hardwood Hewn Log": {
@@ -606,11 +745,117 @@
       ],
       "Fuel": 4000.0
     },
+    "Orange Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Orange Glass": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
+    "Orange Reinforced Concrete": {
+      "Tags": [
+        "Currency",
+        "Concrete",
+        "Colored Concrete",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
     "Palm Log": {
       "Tags": ["Fuel", "Wood", "Burnable Fuel", "Block", "Ingredient"],
       "Fuel": 4000.0
     },
     "Petroleum": { "Tags": ["Block", "Ingredient", "Product"], "Fuel": 0.0 },
+    "Pink Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Pink Glass": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
+    "Pink Reinforced Concrete": {
+      "Tags": [
+        "Currency",
+        "Concrete",
+        "Colored Concrete",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Purple Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Purple Glass": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
+    "Purple Reinforced Concrete": {
+      "Tags": [
+        "Currency",
+        "Concrete",
+        "Colored Concrete",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Rainbow Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Red Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Red Glass": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
+    "Red Reinforced Concrete": {
+      "Tags": [
+        "Currency",
+        "Concrete",
+        "Colored Concrete",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
     "Redwood Log": {
       "Tags": [
         "Fuel",
@@ -709,9 +954,57 @@
       "Tags": ["Excavatable", "Block", "Product"],
       "Fuel": 0.0
     },
+    "White Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "White Glass": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
+    "White Reinforced Concrete": {
+      "Tags": [
+        "Currency",
+        "Concrete",
+        "Colored Concrete",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
     "Wire": { "Tags": ["Block"], "Fuel": 0.0 },
     "Wool Carpet": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
     "Wool Curtains": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
+    "Yellow Bricks": {
+      "Tags": [
+        "Currency",
+        "Colored Bricks",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Yellow Glass": { "Tags": ["Block", "Product"], "Fuel": 0.0 },
+    "Yellow Reinforced Concrete": {
+      "Tags": [
+        "Currency",
+        "Concrete",
+        "Colored Concrete",
+        "Constructable",
+        "Block",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
     "Acorn": { "Tags": ["Seeds", "Food", "Ingredient"], "Fuel": 0.0 },
     "Acorn Powder": { "Tags": ["Food", "Product"], "Fuel": 0.0 },
     "Agave Leaves": {
@@ -830,10 +1123,7 @@
       "Tags": ["Crop Seed", "Seeds", "Food", "Ingredient", "Product"],
       "Fuel": 0.0
     },
-    "Big Bluestem Seed": {
-      "Tags": ["Crop Seed", "Seeds", "Food", "Ingredient"],
-      "Fuel": 0.0
-    },
+    "Big Bluestem Seed": { "Tags": ["Seeds", "Food"], "Fuel": 0.0 },
     "Birch Seed": { "Tags": ["Seeds", "Food"], "Fuel": 0.0 },
     "Bison Chow Fun": { "Tags": ["Food", "Product"], "Fuel": 0.0 },
     "Boiled Grains": { "Tags": ["Food", "Product", "Ingredient"], "Fuel": 0.0 },
@@ -1040,6 +1330,7 @@
     },
     "Fish N Chips": { "Tags": ["Food", "Product"], "Fuel": 0.0 },
     "Flatbread": { "Tags": ["Food", "Product"], "Fuel": 0.0 },
+    "Flax Seed": { "Tags": ["Seeds", "Food"], "Fuel": 0.0 },
     "Flour": { "Tags": ["Food", "Ingredient", "Product"], "Fuel": 0.0 },
     "Fried Camas": {
       "Tags": ["FriedVegetable", "Food", "Product", "Ingredient"],
@@ -1374,7 +1665,7 @@
     "Arctic Willow Seed Pack": { "Tags": [], "Fuel": 0.0 },
     "Arrow": { "Tags": ["Fuel", "Burnable Fuel", "Product"], "Fuel": 500.0 },
     "Barrel Cactus Seed Pack": { "Tags": [], "Fuel": 0.0 },
-    "Basic Circuit": { "Tags": ["Product", "Ingredient"], "Fuel": 0.0 },
+    "Basic Circuit": { "Tags": ["Ingredient", "Product"], "Fuel": 0.0 },
     "Bass": { "Tags": ["Fish", "MediumFish", "Ingredient"], "Fuel": 0.0 },
     "Beans Pack": { "Tags": [], "Fuel": 0.0 },
     "Beaver Carcass": { "Tags": [], "Fuel": 0.0 },
@@ -1401,8 +1692,8 @@
         "Currency",
         "WoodBoard",
         "Burnable Fuel",
-        "Product",
-        "Ingredient"
+        "Ingredient",
+        "Product"
       ],
       "Fuel": 2000.0
     },
@@ -1499,7 +1790,11 @@
     "Filmy Fern Spore Pack": { "Tags": [], "Fuel": 0.0 },
     "Fir Seed Pack": { "Tags": [], "Fuel": 0.0 },
     "Fireweed Seed Pack": { "Tags": [], "Fuel": 0.0 },
+    "Flax Fiber": { "Tags": [], "Fuel": 0.0 },
+    "Flax Seed Pack": { "Tags": [], "Fuel": 0.0 },
+    "Flax Stem": { "Tags": [], "Fuel": 0.0 },
     "Fox Carcass": { "Tags": ["SmallCarcass", "Ingredient"], "Fuel": 0.0 },
+    "Frame": { "Tags": ["Product", "Ingredient"], "Fuel": 0.0 },
     "Fur Pelt": {
       "Tags": ["Currency", "Animal Skin", "Ingredient", "Product"],
       "Fuel": 0.0
@@ -1530,8 +1825,8 @@
         "Currency",
         "WoodBoard",
         "Burnable Fuel",
-        "Product",
-        "Ingredient"
+        "Ingredient",
+        "Product"
       ],
       "Fuel": 2000.0
     },
@@ -1561,6 +1856,7 @@
     "Kelp Seed Pack": { "Tags": [], "Fuel": 0.0 },
     "King Fern Spore Pack": { "Tags": [], "Fuel": 0.0 },
     "Land Claim Papers": { "Tags": ["Currency"], "Fuel": 0.0 },
+    "Large Frame": { "Tags": ["Product", "Ingredient"], "Fuel": 0.0 },
     "Large Hanging Wood Sign": { "Tags": ["Product"], "Fuel": 0.0 },
     "Large Standing Wood Sign": { "Tags": ["Product"], "Fuel": 0.0 },
     "Lattice Mushroom Spores Pack": { "Tags": [], "Fuel": 0.0 },
@@ -1569,6 +1865,9 @@
       "Fuel": 0.0
     },
     "Light Bulb": { "Tags": ["Product", "Ingredient"], "Fuel": 0.0 },
+    "Linen Fabric": { "Tags": [], "Fuel": 0.0 },
+    "Linen Yarn": { "Tags": [], "Fuel": 0.0 },
+    "Long Frame": { "Tags": ["Product", "Ingredient"], "Fuel": 0.0 },
     "Lupine Seed Pack": { "Tags": [], "Fuel": 0.0 },
     "Marmot Carcass": { "Tags": [], "Fuel": 0.0 },
     "Metallurgy Research Paper Advanced": {
@@ -1622,6 +1921,7 @@
       "Fuel": 0.0
     },
     "Phosphate Fertilizer": { "Tags": ["Fertilizer", "Product"], "Fuel": 0.0 },
+    "Picture": { "Tags": [], "Fuel": 0.0 },
     "Pineapple Seed Pack": { "Tags": [], "Fuel": 0.0 },
     "Piston": { "Tags": ["Ingredient", "Product"], "Fuel": 0.0 },
     "Plant Fibers": {
@@ -1675,11 +1975,12 @@
         "Currency",
         "WoodBoard",
         "Burnable Fuel",
-        "Product",
-        "Ingredient"
+        "Ingredient",
+        "Product"
       ],
       "Fuel": 2000.0
     },
+    "Spoiled Food": { "Tags": [], "Fuel": 0.0 },
     "Spruce Seed Pack": { "Tags": [], "Fuel": 0.0 },
     "Steam Tractor Harvester": {
       "Tags": ["Harvester", "Tool", "Product"],
@@ -1703,6 +2004,7 @@
     "Sugarcane Pack": { "Tags": [], "Fuel": 0.0 },
     "Sunflower Seed Pack": { "Tags": [], "Fuel": 0.0 },
     "Synthetic Rubber": { "Tags": ["Ingredient", "Product"], "Fuel": 0.0 },
+    "Tall Frame": { "Tags": ["Product", "Ingredient"], "Fuel": 0.0 },
     "Taro Seed Pack": { "Tags": [], "Fuel": 0.0 },
     "Tomato Seed Pack": { "Tags": [], "Fuel": 0.0 },
     "Trash Item": { "Tags": [], "Fuel": 0.0 },
@@ -1796,99 +2098,126 @@
       ],
       "Fuel": 0.0
     },
-    "Advanced Baking Skill Book": {
-      "Tags": ["Skill Books", "Product"],
+    "Advanced Baking Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Advanced Cooking Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Advanced Masonry Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Advanced Smelting Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Baking Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Basic Engineering Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Butchery Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Carpentry Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Composites Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Cooking Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Cutting Edge Cooking Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Electronics Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Farming Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Fertilizers Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Glassworking Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Industry Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Masonry Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Mechanics Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Milling Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Oil Drilling Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Paper Milling Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Pottery Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Smelting Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Tailoring Skill Book": { "Tags": ["Skill Books"], "Fuel": 0.0 },
+    "Advanced Baking Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
       "Fuel": 0.0
     },
-    "Advanced Cooking Skill Book": {
-      "Tags": ["Skill Books", "Product"],
+    "Advanced Cooking Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
       "Fuel": 0.0
     },
-    "Advanced Masonry Skill Book": {
-      "Tags": ["Skill Books", "Product"],
+    "Advanced Masonry Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
       "Fuel": 0.0
     },
-    "Advanced Smelting Skill Book": {
-      "Tags": ["Skill Books", "Product"],
-      "Fuel": 0.0
-    },
-    "Baking Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Basic Engineering Skill Book": {
-      "Tags": ["Skill Books", "Product"],
-      "Fuel": 0.0
-    },
-    "Butchery Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Carpentry Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Composites Skill Book": {
-      "Tags": ["Skill Books", "Product"],
-      "Fuel": 0.0
-    },
-    "Cooking Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Cutting Edge Cooking Skill Book": {
-      "Tags": ["Skill Books", "Product"],
-      "Fuel": 0.0
-    },
-    "Electronics Skill Book": {
-      "Tags": ["Skill Books", "Product"],
-      "Fuel": 0.0
-    },
-    "Farming Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Fertilizers Skill Book": {
-      "Tags": ["Skill Books", "Product"],
-      "Fuel": 0.0
-    },
-    "Glassworking Skill Book": {
-      "Tags": ["Skill Books", "Product"],
-      "Fuel": 0.0
-    },
-    "Industry Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Masonry Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Mechanics Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Milling Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Oil Drilling Skill Book": {
-      "Tags": ["Skill Books", "Product"],
-      "Fuel": 0.0
-    },
-    "Paper Milling Skill Book": {
-      "Tags": ["Skill Books", "Product"],
-      "Fuel": 0.0
-    },
-    "Pottery Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Smelting Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Tailoring Skill Book": { "Tags": ["Skill Books", "Product"], "Fuel": 0.0 },
-    "Advanced Baking Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Advanced Cooking Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Advanced Masonry Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
     "Advanced Smelting Skill Scroll": {
-      "Tags": ["Skill Scrolls"],
+      "Tags": ["Skill Scrolls", "Product"],
       "Fuel": 0.0
     },
-    "Baking Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
+    "Baking Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
     "Basic Engineering Skill Scroll": {
-      "Tags": ["Skill Scrolls"],
+      "Tags": ["Skill Scrolls", "Product"],
       "Fuel": 0.0
     },
-    "Butchery Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Carpentry Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Composites Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Cooking Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
+    "Butchery Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Carpentry Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Composites Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Cooking Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
     "Cutting Edge Cooking Skill Scroll": {
-      "Tags": ["Skill Scrolls"],
+      "Tags": ["Skill Scrolls", "Product"],
       "Fuel": 0.0
     },
-    "Electronics Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Farming Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Fertilizers Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Glassworking Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Industry Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Masonry Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Mechanics Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Milling Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Oil Drilling Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Paper Milling Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Pottery Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Smelting Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
-    "Tailoring Skill Scroll": { "Tags": ["Skill Scrolls"], "Fuel": 0.0 },
+    "Electronics Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Farming Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Fertilizers Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Glassworking Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Industry Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Masonry Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Mechanics Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Milling Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Oil Drilling Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Paper Milling Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Pottery Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Smelting Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
+    "Tailoring Skill Scroll": {
+      "Tags": ["Skill Scrolls", "Product"],
+      "Fuel": 0.0
+    },
     "Advanced Baking": { "Tags": ["Chef Specialty", "Specialty"], "Fuel": 0.0 },
     "Advanced Cooking": {
       "Tags": ["Chef Specialty", "Specialty"],
@@ -1955,13 +2284,11 @@
     "Survivalist": { "Tags": ["Profession"], "Fuel": 0.0 },
     "Tailor": { "Tags": ["Profession"], "Fuel": 0.0 },
     "Tailoring": { "Tags": ["Tailor Specialty", "Specialty"], "Fuel": 0.0 },
-    "Aggressive Angler: Hunting": { "Tags": [], "Fuel": 0.0 },
     "Arrow Recovery: Hunting": { "Tags": [], "Fuel": 0.0 },
     "Cleanup Crew: Logging": { "Tags": [], "Fuel": 0.0 },
     "Deadeye: Hunting": { "Tags": [], "Fuel": 0.0 },
-    "Diver: SelfImprovement": { "Tags": [], "Fuel": 0.0 },
+    "Deeper Pockets: SelfImprovement": { "Tags": [], "Fuel": 0.0 },
     "Experienced Farmhand: Gathering": { "Tags": [], "Fuel": 0.0 },
-    "Fisherman: Hunting": { "Tags": [], "Fuel": 0.0 },
     "Focused Workflow: AdvancedBaking": { "Tags": [], "Fuel": 0.0 },
     "Focused Workflow: AdvancedCooking": { "Tags": [], "Fuel": 0.0 },
     "Focused Workflow: AdvancedMasonry": { "Tags": [], "Fuel": 0.0 },
@@ -2012,6 +2339,7 @@
     "Frugal Workspace: Pottery": { "Tags": [], "Fuel": 0.0 },
     "Frugal Workspace: Smelting": { "Tags": [], "Fuel": 0.0 },
     "Frugal Workspace: Tailoring": { "Tags": [], "Fuel": 0.0 },
+    "Glutton: SelfImprovement": { "Tags": [], "Fuel": 0.0 },
     "Lavish Workspace: AdvancedBaking": { "Tags": [], "Fuel": 0.0 },
     "Lavish Workspace: AdvancedCooking": { "Tags": [], "Fuel": 0.0 },
     "Lavish Workspace: AdvancedMasonry": { "Tags": [], "Fuel": 0.0 },
@@ -2039,6 +2367,7 @@
     "Lavish Workspace: Tailoring": { "Tags": [], "Fuel": 0.0 },
     "Loggers Luck: Logging": { "Tags": [], "Fuel": 0.0 },
     "Lucky Break: Mining": { "Tags": [], "Fuel": 0.0 },
+    "Master Tracker: Hunting": { "Tags": [], "Fuel": 0.0 },
     "Natural Gatherer: Gathering": { "Tags": [], "Fuel": 0.0 },
     "Nature Adventurer: SelfImprovement": { "Tags": [], "Fuel": 0.0 },
     "Parallel Processing: AdvancedBaking": { "Tags": [], "Fuel": 0.0 },
@@ -2066,7 +2395,7 @@
     "Parallel Processing: Pottery": { "Tags": [], "Fuel": 0.0 },
     "Parallel Processing: Smelting": { "Tags": [], "Fuel": 0.0 },
     "Parallel Processing: Tailoring": { "Tags": [], "Fuel": 0.0 },
-    "Sprinter: SelfImprovement": { "Tags": [], "Fuel": 0.0 },
+    "Power Shot: Hunting": { "Tags": [], "Fuel": 0.0 },
     "Sweeping Hands: Mining": { "Tags": [], "Fuel": 0.0 },
     "Tool Efficiency: Gathering": { "Tags": [], "Fuel": 0.0 },
     "Tool Efficiency: Logging": { "Tags": [], "Fuel": 0.0 },
@@ -2078,6 +2407,7 @@
     "Axe": { "Tags": ["Logging", "Tools"], "Fuel": 0.0 },
     "Blasting Charge": { "Tags": ["Tools"], "Fuel": 0.0 },
     "Bow": { "Tags": ["Harvester", "Tools"], "Fuel": 0.0 },
+    "Camera Item": { "Tags": ["Tools"], "Fuel": 0.0 },
     "Chainsaw": {
       "Tags": ["Logging", "Tool", "Tools", "Product"],
       "Fuel": 0.0
@@ -2086,6 +2416,7 @@
       "Tags": ["Tool", "Harvester", "Tools", "Product"],
       "Fuel": 0.0
     },
+    "Deed Map": { "Tags": ["Tools"], "Fuel": 0.0 },
     "Dev Flood Tool": { "Tags": ["Tools"], "Fuel": 0.0 },
     "Dev Tool": { "Tags": ["Construction", "Tools"], "Fuel": 0.0 },
     "Drill": { "Tags": ["Tools"], "Fuel": 0.0 },
@@ -2212,8 +2543,7 @@
       "Tags": ["Tool", "Harvester", "Tools", "Product"],
       "Fuel": 0.0
     },
-    "Surveyor Tool": { "Tags": ["Tools"], "Fuel": 0.0 },
-    "Torch": { "Tags": ["Fuel", "Torch", "Tools", "Product"], "Fuel": 1000.0 },
+    "Torch": { "Tags": ["Fuel", "Torch", "Tools", "Product"], "Fuel": 8000.0 },
     "Wooden Bow": {
       "Tags": ["Tool", "Harvester", "Tools", "Product"],
       "Fuel": 0.0
@@ -2291,6 +2621,7 @@
       "Tags": ["Upgrade", "Product"],
       "Fuel": 0.0
     },
+    "Hunting Upgrade": { "Tags": ["Upgrade", "Product"], "Fuel": 0.0 },
     "Industry Upgrade": { "Tags": ["Upgrade", "Product"], "Fuel": 0.0 },
     "Logging Advanced Upgrade": { "Tags": ["Upgrade", "Product"], "Fuel": 0.0 },
     "Logging Basic Upgrade": { "Tags": ["Upgrade", "Product"], "Fuel": 0.0 },
@@ -2327,6 +2658,7 @@
     "Smelting Upgrade": { "Tags": ["Upgrade", "Product"], "Fuel": 0.0 },
     "Tailoring Basic Upgrade": { "Tags": ["Upgrade", "Product"], "Fuel": 0.0 },
     "Tailoring Modern Upgrade": { "Tags": ["Upgrade", "Product"], "Fuel": 0.0 },
+    "A Stop Sign": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Adorned Ashlar Basalt Bench": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -2419,10 +2751,15 @@
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Advanced Painting Table": {
+      "Tags": ["World Object", "Crafting Table", "Product"],
+      "Fuel": 0.0
+    },
     "Advanced Tailoring Table": {
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Ahead Sign": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Air Pollution Generator": {
       "Tags": ["World Object", "Polluter"],
       "Fuel": 0.0
@@ -2681,6 +3018,10 @@
     },
     "Ballot Box": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Bank": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Bass Mount": {
+      "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
+      "Fuel": 0.0
+    },
     "Bathtub": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -2689,6 +3030,7 @@
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Black Stained Glass": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Blackboard": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Blast Furnace": {
       "Tags": [
@@ -2711,6 +3053,8 @@
       ],
       "Fuel": 0.0
     },
+    "Blue Stained Glass": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Blueprint Item": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Board Of Elections": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Bookshelf": {
       "Tags": [
@@ -2742,6 +3086,7 @@
       ],
       "Fuel": 0.0
     },
+    "Brown Stained Glass": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Butchery Table": {
       "Tags": [
         "Housing",
@@ -2845,7 +3190,11 @@
       "Fuel": 0.0
     },
     "Census Bureau": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
-    "Chair": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Chair": { "Tags": ["World Object", "Housing Objects"], "Fuel": 0.0 },
+    "Cod Mount": {
+      "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
+      "Fuel": 0.0
+    },
     "Combustion Generator": {
       "Tags": [
         "World Object",
@@ -3074,7 +3423,7 @@
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
-    "Country Marker Item": {
+    "Country Foundation Item": {
       "Tags": ["World Object", "Storage Container"],
       "Fuel": 0.0
     },
@@ -3095,11 +3444,15 @@
       "Tags": ["World Object", "Economy", "Product"],
       "Fuel": 0.0
     },
+    "Customer Parking Sign": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
     "Distribution Station": {
       "Tags": ["World Object", "Economy", "Storage Container", "Product"],
       "Fuel": 0.0
     },
-    "Door": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Dual Arrow": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Dumpster Compost": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Dumpster Garbage": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Dumpster Recycle": { "Tags": ["World Object"], "Fuel": 0.0 },
@@ -3130,7 +3483,10 @@
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Elegant Door": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Elegant Double Door": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Elevator Call Post": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Elevator Door": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Elk Mount": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -3152,20 +3508,26 @@
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
-    "Federation Marker Item": {
+    "Federation Foundation Item": {
       "Tags": ["World Object", "Storage Container"],
       "Fuel": 0.0
     },
     "Feminine Mannequin": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Fiber Scutching Station": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Fish Trap": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Fishery": {
-      "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
+      "Tags": ["World Object", "Crafting Table", "Product"],
       "Fuel": 0.0
     },
     "Flat Steel Door": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Forward Arrow": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Framed Glass Door": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Froth Floatation Cell": {
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
+      "Fuel": 0.0
+    },
+    "Glassworking Table": {
+      "Tags": ["World Object", "Crafting Table", "Product"],
       "Fuel": 0.0
     },
     "Global Calorie Buff Item": { "Tags": ["World Object"], "Fuel": 0.0 },
@@ -3174,6 +3536,13 @@
       "Fuel": 0.0
     },
     "Government Office": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Granite Rolling Stone Door": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Great Hall Door": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Green Stained Glass": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Grey Stained Glass": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Hand Plow": {
       "Tags": ["World Object", "Plow", "Vehicles", "Product"],
       "Fuel": 0.0
@@ -3277,6 +3646,10 @@
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Homestead Claim Stake Item": {
+      "Tags": ["World Object", "Storage Container"],
+      "Fuel": 0.0
+    },
     "Huge Banner Sign": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Huge Iron Banner Sign": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Huge Iron Sign": { "Tags": ["World Object"], "Fuel": 0.0 },
@@ -3296,7 +3669,7 @@
     "Immigration Desk Item": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Industrial Elevator": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Industrial Refrigerator": {
-      "Tags": ["World Object", "Storage Container"],
+      "Tags": ["World Object", "Storage Container", "Product"],
       "Fuel": 0.0
     },
     "Injection Mold Machine": { "Tags": ["World Object"], "Fuel": 0.0 },
@@ -3304,6 +3677,8 @@
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Keep Left Sign": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Keep Right Sign": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Kiln": {
       "Tags": [
         "World Object",
@@ -3332,7 +3707,27 @@
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Large Black Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Large Blue Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Large Brown Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
     "Large Corrugated Steel Door": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Large Green Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Large Grey Stained Glass": {
       "Tags": ["World Object", "Product"],
       "Fuel": 0.0
     },
@@ -3433,8 +3828,32 @@
       "Fuel": 0.0
     },
     "Large Hanging Stone Sign": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Large Log Pile": {
+      "Tags": ["World Object", "Storage Container", "Product"],
+      "Fuel": 0.0
+    },
     "Large Lumber Door": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Large Lumber Stockpile": {
+      "Tags": ["World Object", "Storage Container", "Product"],
+      "Fuel": 0.0
+    },
+    "Large Orange Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Large Pink Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Large Purple Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Large Red Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Large Rock Pile": {
       "Tags": ["World Object", "Storage Container", "Product"],
       "Fuel": 0.0
     },
@@ -3535,12 +3954,22 @@
       "Fuel": 0.0
     },
     "Large Standing Stone Sign": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Large White Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
     "Large Windowed Lumber Door": {
       "Tags": ["World Object", "Product"],
       "Fuel": 0.0
     },
+    "Large Wood Gate": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Large Wooden Bookshelf": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Large Yellow Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
     "Laser": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Left Arrow": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Limestone Bison Statue": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -3554,12 +3983,68 @@
       "Fuel": 0.0
     },
     "Limestone Podium": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Limestone Rolling Stone Door": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
     "Limestone Wolf Statue": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
     "Liquid Converter": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Logic Gate Item": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Long Black Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long Blue Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long Brown Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long Green Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long Grey Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long Metal Sliding Window": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long Orange Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long Pink Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long Purple Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long Red Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long White Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long Wood Sliding Window": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Long Yellow Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
     "Loom": {
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -3601,6 +4086,16 @@
       "Tags": ["World Object", "Product"],
       "Fuel": 0.0
     },
+    "Medium Log Pile": {
+      "Tags": ["World Object", "Storage Container", "Product"],
+      "Fuel": 0.0
+    },
+    "Medium Rock Pile": {
+      "Tags": ["World Object", "Storage Container", "Product"],
+      "Fuel": 0.0
+    },
+    "Medium Wood Gate": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Metal Barrier": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Mill": {
       "Tags": [
         "Housing",
@@ -3721,6 +4216,7 @@
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "No Entry Sign": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Nylon Futon Bed": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -3741,12 +4237,22 @@
       ],
       "Fuel": 0.0
     },
+    "Orange Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
     "Padded Chair": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
     "Paper Machine": { "Tags": ["World Object"], "Fuel": 0.0 },
-    "Personal Claim Stake Item": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Park Bench": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Picture Frame": {
+      "Tags": ["World Object", "Housing Objects"],
+      "Fuel": 0.0
+    },
+    "Picture Printer": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Pink Stained Glass": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Plastic Bench Blue": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Plastic Bench Green": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Plastic Bench Red": { "Tags": ["World Object"], "Fuel": 0.0 },
@@ -3763,17 +4269,210 @@
         "Storage Container",
         "Polluter",
         "Vehicles",
-        "Product"
+        "Product",
+        "Ingredient"
       ],
       "Fuel": 0.0
     },
-    "Powered Storage Silo": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Powered Cart Alligator": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart Black": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart Brown": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart Cow": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart DarkBlue": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart Green": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart Grey": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart Jaguar": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart LightBlue": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart Orange": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart Pink": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart Purple": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart Red": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart White": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Cart Yellow": {
+      "Tags": [
+        "ColoredPoweredCart",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Powered Storage Silo": {
+      "Tags": ["World Object", "Storage Container", "Product"],
+      "Fuel": 0.0
+    },
+    "Primitive Painting Table": {
+      "Tags": ["World Object", "Crafting Table", "Product"],
+      "Fuel": 0.0
+    },
     "Printing Press": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Pump Jack": {
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Purple Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
     "Real Estate Desk": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Red Stained Glass": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Refrigerator": {
       "Tags": [
         "Housing",
@@ -3789,6 +4488,8 @@
       "Tags": ["World Object", "Crafting Table", "Product"],
       "Fuel": 0.0
     },
+    "Right Arrow": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Road Barricade": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Robotic Assembly Line": {
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -3801,6 +4502,7 @@
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Rolling Stone Door": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Round Pot": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -3817,7 +4519,19 @@
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Salmon Mount": {
+      "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
+      "Fuel": 0.0
+    },
     "Salt Basket": {
+      "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
+      "Fuel": 0.0
+    },
+    "Sandstone Rolling Stone Door": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Sardine Mount": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
@@ -3837,7 +4551,10 @@
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
-    "Settlement Claim Stake Item": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Settlement Claim Stake Item": {
+      "Tags": ["World Object", "Storage Container"],
+      "Fuel": 0.0
+    },
     "Sheep Mount": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -3870,6 +4587,7 @@
       ],
       "Fuel": 0.0
     },
+    "Sliding Door": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Small Bath Mat": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -3971,8 +4689,16 @@
       "Fuel": 0.0
     },
     "Small Hanging Stone Sign": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Small Log Pile": {
+      "Tags": ["World Object", "Storage Container", "Product"],
+      "Fuel": 0.0
+    },
     "Small Meeting Chair": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Small Meeting Table": { "Tags": ["World Object"], "Fuel": 0.0 },
+    "Small Rock Pile": {
+      "Tags": ["World Object", "Storage Container", "Product"],
+      "Fuel": 0.0
+    },
     "Small Sink": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -4080,9 +4806,181 @@
     },
     "Small Table": { "Tags": ["World Object", "Housing Objects"], "Fuel": 0.0 },
     "Small Wood Cart": {
-      "Tags": ["World Object", "Storage Container", "Vehicles", "Product"],
+      "Tags": [
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
       "Fuel": 0.0
     },
+    "Small Wood Cart Alligator": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart Black": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart Brown": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart Cow": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart DarkBlue": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart Green": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart Grey": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart Jaguar": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart LightBlue": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart Orange": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart Pink": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart Purple": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart Red": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart White": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Cart Yellow": {
+      "Tags": [
+        "ColoredSmallWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Small Wood Gate": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Small Wooden Boat Item": {
       "Tags": ["World Object", "Vehicles"],
       "Fuel": 0.0
@@ -4117,10 +5015,12 @@
       "Tags": ["World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Spinning Jenny": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Square Pot": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Stained Glass Door": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Stamp Mill": {
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -4161,7 +5061,200 @@
         "Storage Container",
         "Polluter",
         "Vehicles",
-        "Product"
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Alligator": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Black": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Brown": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck DarkBlue": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Galaxy": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Green": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck LightBlue": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Magma": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Orange": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Pink": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Plasma": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Psychedelic": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Purple": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Steampunk": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck White": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Steam Truck Yellow": {
+      "Tags": [
+        "ColoredSteamTruck",
+        "World Object",
+        "Storage Container",
+        "Polluter",
+        "Vehicles",
+        "Product",
+        "Ingredient"
       ],
       "Fuel": 0.0
     },
@@ -4228,7 +5321,10 @@
       "Tags": ["World Object", "Storage Container", "Product"],
       "Fuel": 0.0
     },
-    "Store": { "Tags": ["World Object", "Economy", "Product"], "Fuel": 0.0 },
+    "Store": {
+      "Tags": ["World Object", "Economy", "Ingredient", "Product"],
+      "Fuel": 0.0
+    },
     "Stove": {
       "Tags": [
         "Housing",
@@ -4272,6 +5368,10 @@
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
+    "Stuffed Shark": {
+      "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
+      "Fuel": 0.0
+    },
     "Stuffed Wolf": {
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
@@ -4280,6 +5380,58 @@
     "Table": { "Tags": ["World Object"], "Fuel": 0.0 },
     "Tailoring Table": {
       "Tags": ["World Object", "Crafting Table", "Housing Objects", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Black Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Blue Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Brown Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Green Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Grey Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Metal Sliding Window": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Orange Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Pink Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Purple Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Red Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall White Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Wood Sliding Window": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
+    "Tall Yellow Stained Glass": {
+      "Tags": ["World Object", "Product"],
       "Fuel": 0.0
     },
     "Tallow Candle": {
@@ -4347,24 +5499,154 @@
       "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
-    "Town Hall Item": {
+    "Town Foundation Item": {
       "Tags": ["World Object", "Storage Container"],
       "Fuel": 0.0
     },
+    "Traffic Cone": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Trailer Truck": {
       "Tags": ["World Object", "Storage Container", "Polluter", "Vehicles"],
       "Fuel": 0.0
     },
     "Transmission Pole": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Treasury": { "Tags": ["World Object", "Economy", "Product"], "Fuel": 0.0 },
+    "Trout Mount": {
+      "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
+      "Fuel": 0.0
+    },
     "Truck": {
       "Tags": [
         "World Object",
         "Storage Container",
         "Polluter",
         "Vehicles",
-        "Product"
+        "Product",
+        "Ingredient"
       ],
+      "Fuel": 0.0
+    },
+    "Truck Black": {
+      "Tags": [
+        "ColoredTruck",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Polluter",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Truck Brown": {
+      "Tags": [
+        "ColoredTruck",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Polluter",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Truck DarkBlue": {
+      "Tags": [
+        "ColoredTruck",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Polluter",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Truck Green": {
+      "Tags": [
+        "ColoredTruck",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Polluter",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Truck LightBlue": {
+      "Tags": [
+        "ColoredTruck",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Polluter",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Truck Orange": {
+      "Tags": [
+        "ColoredTruck",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Polluter",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Truck Pink": {
+      "Tags": [
+        "ColoredTruck",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Polluter",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Truck Purple": {
+      "Tags": [
+        "ColoredTruck",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Polluter",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Truck White": {
+      "Tags": [
+        "ColoredTruck",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Polluter",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Truck Yellow": {
+      "Tags": [
+        "ColoredTruck",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Polluter",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Tuna Mount": {
+      "Tags": ["Housing", "World Object", "Housing Objects", "Product"],
       "Fuel": 0.0
     },
     "Upholstered Chair": {
@@ -4398,12 +5680,18 @@
       "Fuel": 0.0
     },
     "Waste Filter": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "Water Tank Barrier": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
     "Waterwheel": {
       "Tags": ["World Object", "Housing Objects", "Ingredient", "Product"],
       "Fuel": 0.0
     },
     "Wheelbarrow": {
       "Tags": ["World Object", "Storage Container", "Vehicles", "Product"],
+      "Fuel": 0.0
+    },
+    "White Stained Glass": { "Tags": ["World Object", "Product"], "Fuel": 0.0 },
+    "White Water Tank Barrier": {
+      "Tags": ["World Object", "Product"],
       "Fuel": 0.0
     },
     "Wind Turbine": {
@@ -4415,7 +5703,188 @@
       "Fuel": 0.0
     },
     "Wood Cart": {
-      "Tags": ["World Object", "Storage Container", "Vehicles", "Product"],
+      "Tags": [
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Product",
+        "Ingredient"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Alligator": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Black": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Brown": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Cow": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart DarkBlue": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Green": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Grey": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Jaguar": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart LightBlue": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Orange": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Pink": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Purple": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Red": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart White": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Cart Yellow": {
+      "Tags": [
+        "ColoredWoodCart",
+        "World Object",
+        "Storage Container",
+        "Vehicles",
+        "Ingredient",
+        "Product"
+      ],
+      "Fuel": 0.0
+    },
+    "Wood Shop Cart": {
+      "Tags": [
+        "World Object",
+        "Economy",
+        "Storage Container",
+        "Vehicles",
+        "Product"
+      ],
       "Fuel": 0.0
     },
     "Wood Sign": { "Tags": ["World Object"], "Fuel": 0.0 },
@@ -4454,16 +5923,20 @@
       "Tags": ["World Object", "Crafting Table", "Product"],
       "Fuel": 0.0
     },
+    "Yellow Stained Glass": {
+      "Tags": ["World Object", "Product"],
+      "Fuel": 0.0
+    },
     "Zoning Office": { "Tags": ["World Object", "Product"], "Fuel": 0.0 }
   },
   "ExportedAt": {
-    "Ticks": 637929522798595582,
+    "Ticks": 637988581798518986,
     "Year": 2022,
-    "Month": 7,
-    "Day": 9,
-    "Hour": 8,
-    "Min": 31,
-    "Sec": 19,
-    "StringRepresentation": "2022-07-09, 8:31:19"
+    "Month": 9,
+    "Day": 15,
+    "Hour": 17,
+    "Min": 2,
+    "Sec": 59,
+    "StringRepresentation": "2022-09-15, 17:02:59"
   }
 }

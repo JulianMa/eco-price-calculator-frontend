@@ -44,3 +44,6 @@ export const getTags = (serverName: string) =>
 
 export const getAllItems = (serverName: string) =>
   fetchAsync<AllItemsResponse>(endpoints.readDB(serverName, constants.AllItems));
+
+export const getCraftingTables = (serverName: string) =>
+  fetchAsync<CraftingTablesResponse>(endpoints.readDB(serverName, constants.CraftingTables));

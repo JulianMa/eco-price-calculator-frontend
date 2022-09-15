@@ -10,7 +10,12 @@ import * as constants from '../../utils/constants';
 import RawDataRow from './RawDataRow';
 import { useMainContext } from '../../hooks/MainContext';
 export default () => {
-  const { storesResource, tagsResource, recipesResource } = useMainContext();
+  const {
+    storesResource,
+    tagsResource,
+    recipesResource,
+    craftingTablesResource,
+  } = useMainContext();
   const { downloadFile } = createDBsStore();
 
   const storesExportedAt = createMemo(
@@ -22,6 +27,11 @@ export default () => {
   );
   const tagsExportedAt = createMemo(
     () => tagsResource?.()?.ExportedAt?.StringRepresentation ?? 'Not exported'
+  );
+  const craftingTablesExportedAt = createMemo(
+    () =>
+      craftingTablesResource?.()?.ExportedAt?.StringRepresentation ??
+      'Not exported'
   );
   return (
     <Table>
@@ -50,6 +60,13 @@ export default () => {
             name="Tags"
             exportedAt={tagsExportedAt}
             downloadFile={() => downloadFile(constants.Tags)}
+          />
+        )}
+        {craftingTablesResource?.()?.ExportedAt && (
+          <RawDataRow
+            name="Crafting Tables"
+            exportedAt={craftingTablesExportedAt}
+            downloadFile={() => downloadFile(constants.CraftingTables)}
           />
         )}
       </TableBody>

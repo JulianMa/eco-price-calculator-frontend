@@ -27,6 +27,7 @@ import {
   getStores,
   getTags,
   getAllItems,
+  getCraftingTables,
 } from '../../utils/restDbSdk';
 
 type MainContextType = {
@@ -34,6 +35,9 @@ type MainContextType = {
   storesResource: Resource<StoresResponse | undefined> | undefined;
   recipesResource: Resource<RecipesResponse | undefined> | undefined;
   tagsResource: Resource<TagsResponse | undefined> | undefined;
+  craftingTablesResource:
+    | Resource<CraftingTablesResponse | undefined>
+    | undefined;
   currentServer: Accessor<string>;
   isLoadingResources: Accessor<boolean>;
   dbs: Accessor<DB[] | undefined>;
@@ -47,12 +51,15 @@ type MainContextType = {
     CraftableProductWithOffers[] | undefined
   >;
   allItemsAndTagsWithPrice: Accessor<{ [key: string]: ItemOrTagPrice }>;
+  allTablesPerUser: Accessor<{ [key: string]: CraftingTable[] }>;
   mainState: Store<MainStore>;
   forceRefetch: {
     servers: () => void;
     stores: () => void;
     recipes: () => void;
     tags: () => void;
+    allItems: () => void;
+    craftingTables: () => void;
   };
   get: {
     personalPrice: (productName?: string) => number;
@@ -103,6 +110,7 @@ const MainContext = createContext<MainContextType>({
   storesResource: undefined,
   recipesResource: undefined,
   tagsResource: undefined,
+  craftingTablesResource: undefined,
   currentServer: () => '',
   isLoadingResources: () => true,
   dbs: () => [],
@@ -114,6 +122,7 @@ const MainContext = createContext<MainContextType>({
   allCraftableProducts: () => ({}),
   allCraftableProductsWithOffers: () => [],
   allItemsAndTagsWithPrice: () => ({}),
+  allTablesPerUser: () => ({}),
   mainState: {
     server: '',
     currency: '',
@@ -126,6 +135,8 @@ const MainContext = createContext<MainContextType>({
     stores: () => undefined,
     recipes: () => undefined,
     tags: () => undefined,
+    allItems: () => undefined,
+    craftingTables: () => undefined,
   },
   get: {
     personalPrice: (productName?: string) => 0,
@@ -244,6 +255,8 @@ export const MainContextProvider = (props: Props) => {
     currentServer,
     getAllItems
   );
+  const [craftingTablesResource, { refetch: refetchCraftingTables }] =
+    createResource(currentServer, getCraftingTables);
 
   const allTags = createMemo(() =>
     Object.entries(allItemsResource()?.AllItems ?? {}).reduce((tags, item) => {
@@ -256,7 +269,11 @@ export const MainContextProvider = (props: Props) => {
   );
 
   const isLoadingResources = createMemo(
-    () => !storesResource() || !recipesResource() || !tagsResource()
+    () =>
+      !storesResource() ||
+      !recipesResource() ||
+      !tagsResource() ||
+      !craftingTablesResource()
   );
 
   const allCurrencies = createMemo(() =>
@@ -435,11 +452,19 @@ export const MainContextProvider = (props: Props) => {
     ...allTagsWithPrice(),
   }));
 
+  const allTablesPerUser = createMemo(() =>
+    craftingTablesResource()?.CraftingTables.reduce((agg, table) => {
+      agg[table.OwnerName] = [...(agg[table.OwnerName] ?? []), table];
+      return agg;
+    }, {} as { [key: string]: CraftingTable[] })
+  );
+
   const value = {
     serversResource,
     storesResource,
     recipesResource,
     tagsResource,
+    craftingTablesResource,
     currentServer,
     isLoadingResources,
     currentCurrency,
@@ -450,12 +475,15 @@ export const MainContextProvider = (props: Props) => {
     allCraftableProducts,
     allCraftableProductsWithOffers,
     allItemsAndTagsWithPrice,
+    allTablesPerUser,
     mainState,
     forceRefetch: {
       servers: refetchServers,
       stores: refetchStores,
       recipes: refetchRecipes,
       tags: refetchTags,
+      allItems: refetchAllItems,
+      craftingTables: refetchCraftingTables,
     },
     get: {
       personalPrice: (productName?: string) =>
