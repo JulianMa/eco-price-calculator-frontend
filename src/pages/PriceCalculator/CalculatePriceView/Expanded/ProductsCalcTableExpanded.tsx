@@ -13,8 +13,9 @@ import { fixPercentages, getItemId } from '../../../../utils/helpers';
 import { useCalcContext } from '../../context/CalcContext';
 
 export default () => {
-  const { mainState, update } = useMainContext();
+  const { currentCurrency, update } = useMainContext();
   const { priceCalcStore } = useCalcContext();
+
   return (
     <Table>
       <TableHeader>
@@ -55,13 +56,13 @@ export default () => {
                   <Button
                     onClick={() =>
                       update.personalPrice(
-                        product.Name,
-                        mainState.currency,
+                        getItemId(product.Name),
+                        currentCurrency(),
                         product.productionCost
                       )
                     }
                   >
-                    {`${product.productionCost} ${mainState.currency}`}
+                    {`${product.productionCost} ${currentCurrency()}`}
                   </Button>
                 </Tooltip>
               </td>
@@ -71,13 +72,13 @@ export default () => {
                     class="px-2 py-1"
                     onClick={() =>
                       update.personalPrice(
-                        product.Name,
-                        mainState.currency,
+                        getItemId(product.Name),
+                        currentCurrency(),
                         product.retailPrice
                       )
                     }
                   >
-                    {`${product.retailPrice} ${mainState.currency}`}
+                    {`${product.retailPrice} ${currentCurrency()}`}
                   </Button>
                 </Tooltip>
               </td>

@@ -14,7 +14,8 @@ import RecipePicker from './RecipePicker';
 import RecipeTreeCheckboxes from './RecipeTreeCheckboxes';
 
 export default () => {
-  const { allCraftableProducts, tagsResource, mainState } = useMainContext();
+  const { allCraftableProducts, tagsResource, currentCurrency } =
+    useMainContext();
   const { priceCalcStore } = useCalcContext();
   const flatRecipeIngredients = createMemo(() =>
     getFlatRecipeIngredients(
@@ -102,7 +103,7 @@ export default () => {
                     class="mx-2"
                     personalPriceId={recipe.ingredientId}
                   />
-                  {mainState.currency}
+                  {currentCurrency()}
                 </>
               )}
             </div>

@@ -71,7 +71,7 @@ const sortByProductsColumn = (
 };
 
 export default () => {
-  const { storesResource, allProductsInStores, isLoadingResources, mainState, update } =
+  const { storesResource, allProductsInStores, isLoadingResources, mainState, update, currentCurrency } =
     useMainContext();
   const [state, setState] = createLocalStore<Store>(
     {
@@ -102,7 +102,7 @@ export default () => {
           (store) =>
             (filterByText(state.search, store.Name ?? '') ||
               filterByText(state.search, store.Owner ?? '')) &&
-            filterByText(mainState.currency, store.CurrencyName ?? '') &&
+            filterByText(currentCurrency(), store.CurrencyName ?? '') &&
             (!state.filterByOwner ||
               mainState.userName.length === 0 ||
               filterByText(mainState.userName, store.Owner ?? ''))
@@ -130,7 +130,7 @@ export default () => {
         (filterByText(state.search, product.ItemName ?? '') ||
           filterByText(state.search, product.StoreName ?? '') ||
           filterByText(state.search, product.StoreOwner ?? '')) &&
-        filterByText(mainState.currency, product.CurrencyName ?? '') &&
+        filterByText(currentCurrency(), product.CurrencyName ?? '') &&
         (!state.filterByOwner ||
           mainState.userName.length === 0 ||
           filterByText(mainState.userName, product.StoreOwner ?? '')) &&

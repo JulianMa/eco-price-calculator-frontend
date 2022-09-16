@@ -20,8 +20,12 @@ import Checkbox from '../../components/Checkbox';
 import TableRowLoadingSpinner from '../../components/TableRowLoadingSpinner';
 
 export default () => {
-  const { isLoadingResources, mainState, allProfessions, allCraftingTables } =
-    useMainContext();
+  const {
+    isLoadingResources,
+    currentCurrency,
+    allProfessions,
+    allCraftingTables,
+  } = useMainContext();
   const { listProductsStore: props, priceCalcStore } = useCalcContext();
   return (
     <>
@@ -209,8 +213,8 @@ export default () => {
                       />
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {!mainState.currency && 'select currency'}
-                      {mainState.currency && (
+                      {!currentCurrency() && 'select currency'}
+                      {currentCurrency() && (
                         <div class="flex">
                           <PersonalPrice personalPriceId={product.Name} />
                           <Button

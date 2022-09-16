@@ -1,19 +1,16 @@
 import { For } from 'solid-js';
-import Button from '../../../../components/Button';
 import NumericInput from '../../../../components/NumericInput';
-import PersonalPrice from '../../../../components/PersonalPrice';
 import Table, {
   TableBody,
   TableHeader,
   TableHeaderCol,
 } from '../../../../components/Table';
-import Tooltip from '../../../../components/Tooltip';
 import { useMainContext } from '../../../../hooks/MainContext';
 import { fixPercentages } from '../../../../utils/helpers';
 import { useCalcContext } from '../../context/CalcContext';
 
 export default () => {
-  const { mainState, update } = useMainContext();
+  const { currentCurrency, update } = useMainContext();
   const { priceCalcStore } = useCalcContext();
   return (
     <Table>
@@ -49,7 +46,7 @@ export default () => {
                 />
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {`${product.retailPrice} ${mainState.currency}`}
+                {`${product.retailPrice} ${currentCurrency()}`}
               </td>
             </tr>
           )}

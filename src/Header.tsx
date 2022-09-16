@@ -1,8 +1,6 @@
-import { createEffect } from 'solid-js';
 import Username from './components/Username';
 import Dropdown from './components/Dropdown';
 import { useMainContext } from './hooks/MainContext';
-import Button from './components/Button';
 import LabeledField from './components/LabeledField';
 
 type Props = {

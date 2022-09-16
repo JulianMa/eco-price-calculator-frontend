@@ -1,19 +1,8 @@
-import { For } from 'solid-js';
 import Accordion from '../../../components/Accordion/Accordion';
-import Button from '../../../components/Button';
 import Highlight from '../../../components/Highlight';
 import LabeledField from '../../../components/LabeledField';
-import NumericInput from '../../../components/NumericInput';
-import PersonalPrice from '../../../components/PersonalPrice';
 import RadioToggle from '../../../components/RadioToggle';
-import Table, {
-  TableBody,
-  TableHeader,
-  TableHeaderCol,
-} from '../../../components/Table';
-import Tooltip from '../../../components/Tooltip';
 import { useMainContext } from '../../../hooks/MainContext';
-import { fixPercentages } from '../../../utils/helpers';
 import { useCalcContext } from '../context/CalcContext';
 import ProductsCalcTableExpanded from './Expanded/ProductsCalcTableExpanded';
 import ProductsCalcTableSimple from './Simple/ProductsCalcTableSimple';
@@ -24,7 +13,7 @@ const recipeMargins = [0, 5, 10, 15, 20, 25, 30, 40, 50, 75].map((t) => ({
 }));
 
 export default () => {
-  const { mainState, update } = useMainContext();
+  const { currentCurrency, update } = useMainContext();
   const { priceCalcStore } = useCalcContext();
   return (
     <Accordion
@@ -63,7 +52,7 @@ export default () => {
               class="px-1"
               text={`${priceCalcStore.unitCostWithProfit()}`}
             />
-            {mainState.currency}
+            {currentCurrency()}
           </div>
           <div class="mt-8">
             {priceCalcStore.state.simpleMode && ProductsCalcTableSimple}
