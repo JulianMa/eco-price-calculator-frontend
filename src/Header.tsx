@@ -4,7 +4,9 @@ import { useMainContext } from './hooks/MainContext';
 import LabeledField from './components/LabeledField';
 
 type Props = {
-  currentRoute: () => { text: string; description: string } | undefined;
+  currentRoute: () =>
+    | { text: string; description: string; includeHeaderFields?: boolean }
+    | undefined;
 };
 export default (props: Props) => {
   const {
@@ -23,45 +25,47 @@ export default (props: Props) => {
           </h1>
           <span>{props.currentRoute()?.description}</span>
         </div>
-        <div class="flex justify-between pt-3">
-          <LabeledField text="Username:" vertical>
-            <Username />
-          </LabeledField>
-          <div class="flex gap-4">
-            <LabeledField text="Currency:" vertical>
-              <Dropdown
-                value={currentCurrency()}
-                values={[
-                  { value: '', text: 'Select a currency' },
-                  ...(allCurrencies()?.map((name) => ({
-                    value: name,
-                    text: name,
-                  })) ?? []),
-                ]}
-                onChange={(newValue) => update.currency(`${newValue}`)}
-                origin="SE"
-                direction="SW"
-              />
+        {props.currentRoute()?.includeHeaderFields && (
+          <div class="flex justify-between pt-3">
+            <LabeledField text="Username:" vertical>
+              <Username />
             </LabeledField>
-            {!import.meta.env.VITE_SERVER && (
-              <LabeledField text="Eco Server:" vertical>
+            <div class="flex gap-4">
+              <LabeledField text="Currency:" vertical>
                 <Dropdown
-                  value={currentServer()}
+                  value={currentCurrency()}
                   values={[
-                    { value: '', text: 'Select your server' },
-                    ...(serversResource?.()?.map((server) => ({
-                      value: server.key,
-                      text: server.name,
+                    { value: '', text: 'Select a currency' },
+                    ...(allCurrencies()?.map((name) => ({
+                      value: name,
+                      text: name,
                     })) ?? []),
                   ]}
-                  onChange={(newValue) => update.server(`${newValue}`)}
+                  onChange={(newValue) => update.currency(`${newValue}`)}
                   origin="SE"
                   direction="SW"
                 />
               </LabeledField>
-            )}
+              {!import.meta.env.VITE_SERVER && (
+                <LabeledField text="Eco Server:" vertical>
+                  <Dropdown
+                    value={currentServer()}
+                    values={[
+                      { value: '', text: 'Select your server' },
+                      ...(serversResource?.()?.map((server) => ({
+                        value: server.key,
+                        text: server.name,
+                      })) ?? []),
+                    ]}
+                    onChange={(newValue) => update.server(`${newValue}`)}
+                    origin="SE"
+                    direction="SW"
+                  />
+                </LabeledField>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </header>
   );

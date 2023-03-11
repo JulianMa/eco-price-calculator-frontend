@@ -135,8 +135,29 @@ export const getIngredientDisplayName = (ingredient: {
   IsSpecificItem: boolean;
   Tag: string;
   Name: string;
-}) => ingredient.IsSpecificItem ? ingredient.Name : `Tag ${ingredient.Tag}`
-  ;
+}) => ingredient.IsSpecificItem ? ingredient.Name : `Tag ${ingredient.Tag}`;
+
+export const getIngredientById = (id: string) => {
+  if (id.startsWith(getItemId(''))) {
+    return {
+      IsSpecificItem: true,
+      Name: id.substring(getItemId('').length),
+      Tag: ''
+    }
+  }
+  if (id.startsWith(getTagId(''))) {
+    return {
+      IsSpecificItem: false,
+      Name: '',
+      Tag: id.substring(getTagId('').length)
+    }
+  }
+  return {
+    IsSpecificItem: true,
+    Name: 'old_' + id,
+    Tag: ''
+  }
+}
 
 export const getDateFromExportedAt = (date: ExportedAt) =>
   // Month - 1 because in javascript months are zero based

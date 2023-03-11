@@ -49,12 +49,12 @@ export default () => {
           https://youtu.be/sUkygO9QyOE
         </a>
       </p>
-      <br />
       <p>
-        This is very much a work in progress and more sections should be added
-        in the future.
+        <b>Personal</b> page is where you can see and edit all the personal
+        prices and other default values you used. The tool remembers your last
+        choices so that you don't have to.
+        <br />
       </p>
-      <p>So stay tuned, and i hope you enjoy it</p>
       <br />
       <br />
       <p>
@@ -78,34 +78,10 @@ export default () => {
       <br />
       <div class={styles.changelog}>
         <h2>Latest changes</h2>
-        <h3>3.1.2 (2022-08-12)</h3>
-        <h4>Task</h4>
-        <ul>
-          <li>
-            Replaced the now deprecated field 'CraftStation' by the
-            'CraftingTable' field.
-          </li>
-        </ul>
-        <h3>3.1.1 (2022-08-02)</h3>
-        <h4>Bugfix</h4>
-        <ul>
-          <li>
-            Fixed the formula for calculating the price based on margin.
-            Previous formula was using markup instead of margin.
-          </li>
-        </ul>
-        <h3>3.1.0 (2022-07-22)</h3>
+        <h3>3.2.0 (2023-03-11)</h3>
         <h4>Features</h4>
         <ul>
-          <li>
-            Added simple view on calculator: It is meant as a simple way to
-            calculate price with little to no input from the user (will be
-            improved on future versions)
-          </li>
-          <li>
-            Added fuel cost on expanded view as well as a modal that helps
-            calculate it (can be set to 0 to ignore fuel costs)
-          </li>
+          <li>Added the Personal page to list and set user personal prices</li>
         </ul>
       </div>
     </div>

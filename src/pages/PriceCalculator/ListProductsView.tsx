@@ -216,7 +216,13 @@ export default () => {
                       {!currentCurrency() && 'select currency'}
                       {currentCurrency() && (
                         <div class="flex">
-                          <PersonalPrice personalPriceId={product.Name} />
+                          <PersonalPrice
+                            personalPriceId={getIngredientId({
+                              IsSpecificItem: true,
+                              Name: product.Name,
+                              Tag: '',
+                            })}
+                          />
                           <Button
                             class="ml-2"
                             onClick={() =>

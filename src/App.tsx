@@ -9,6 +9,7 @@ import NotificationsBar from './components/NotificationsBar';
 
 const Market = lazy(() => import('./pages/Market'));
 const RawData = lazy(() => import('./pages/RawData'));
+const Personal = lazy(() => import('./pages/Personal'));
 const Home = lazy(() => import('./pages/Home'));
 
 const routes = {
@@ -17,11 +18,13 @@ const routes = {
     description:
       'Allows calculation of price for products in a recipe based on all ingredients / raw materials necessary',
     href: '/',
+    includeHeaderFields: true,
   },
   Market: {
     text: 'Ingame market',
     description: 'Buy/sell orders of all stores ingame',
     href: '/market',
+    includeHeaderFields: true,
   },
   RawData: {
     text: 'Raw data',
@@ -29,11 +32,23 @@ const routes = {
       'Download the raw files that this app uses for your own personal uses',
     href: '/rawData',
   },
+  Personal: {
+    text: 'Personal',
+    description: 'List and edit current cached personal values',
+    href: '/personal',
+  },
   Home: { text: 'About', description: '', href: '/about' },
   // Items: { text: "Items", description: "", href: "/items" },
   // Currencies: { text: "Currencies", description: "", href: "/currencies" },
   // Stores: { text: "Stores", description: "", href: "/stores" },
-} as { [key: string]: { text: string; description: string; href: string } };
+} as {
+  [key: string]: {
+    text: string;
+    description: string;
+    href: string;
+    includeHeaderFields?: boolean;
+  };
+};
 
 const App: Component = () => {
   const location = useLocation();
@@ -59,6 +74,7 @@ const App: Component = () => {
           <Routes>
             <Route path={routes.Market.href} element={<Market />} />
             <Route path={routes.RawData.href} element={<RawData />} />
+            <Route path={routes.Personal.href} element={<Personal />} />
             <Route path={routes.Home.href} element={<Home />} />
             <Route path="/" element={<PriceCalculator />} />
             <Route path="/*all" element={<PriceCalculator />} />

@@ -6,21 +6,17 @@ import {
   useContext,
   createResource,
   Resource,
-  createEffect,
 } from 'solid-js';
-import { Store } from 'solid-js/store';
+import { produce, Store } from 'solid-js/store';
 import { createLocalStore } from '../../utils/createLocalStore';
 import {
   filterUnique,
-  getIngredient,
-  getIngredientId,
   getItemId,
   getOffersAndCalculateAvgPrice,
   getTagId,
   sortByText,
   sortByTextExcludingWord,
 } from '../../utils/helpers';
-import { getSelectedRecipeVariant } from '../../utils/recipeHelper';
 import {
   getServers,
   getRecipes,
@@ -79,6 +75,9 @@ type MainContextType = {
       Fuel: number;
     }[];
   };
+  getState: {
+    personalPrice: Store<PersonalPricesStore>;
+  };
   update: {
     server: (newServer: string) => void;
     currency: (newCurrency: string) => void;
@@ -102,6 +101,11 @@ type MainContextType = {
     ) => void;
     calorieCost: (cost: number) => void;
     costPer1kJoule: (cost: number) => void;
+  };
+  clear: {
+    personalPriceCurrency: (product: string, currency: string) => void;
+    personalPriceProduct: (product: string) => void;
+    personalCurrency: (currency: string) => void;
   };
 };
 
@@ -149,6 +153,9 @@ const MainContext = createContext<MainContextType>({
     craftLevel: (productName?: string) => 0,
     itemsInTag: (tagName: string) => [],
   },
+  getState: {
+    personalPrice: {},
+  },
   update: {
     server: () => undefined,
     currency: () => undefined,
@@ -163,6 +170,11 @@ const MainContext = createContext<MainContextType>({
     costPercentage: () => undefined,
     calorieCost: (cost: number) => undefined,
     costPer1kJoule: (cost: number) => undefined,
+  },
+  clear: {
+    personalPriceCurrency: (product: string, currency: string) => undefined,
+    personalPriceProduct: (product: string) => undefined,
+    personalCurrency: (currency: string) => undefined,
   },
 });
 type Props = {
@@ -506,6 +518,9 @@ export const MainContextProvider = (props: Props) => {
           ...allItemsResource()?.AllItems[itemName],
         })) ?? [],
     },
+    getState: {
+      personalPrice: personalPricesState,
+    },
     update: {
       server: (newServer: string) => setState({ server: newServer }),
       currency: (newCurrency: string) => setState({ currency: newCurrency }),
@@ -554,6 +569,36 @@ export const MainContextProvider = (props: Props) => {
         })),
       calorieCost: (cost: number) => setState({ calorieCost: cost }),
       costPer1kJoule: (cost: number) => setState({ costPer1kJoule: cost }),
+    },
+    clear: {
+      personalPriceCurrency: (product: string, currency: string) =>
+        setPersonalPricesState(
+          produce<PersonalPricesStore>((s) => {
+            // Delete currency in product
+            delete s[product][currency];
+
+            // Delete product when there is no other currency price on it
+            if (Object.keys(s[product]).length === 0) {
+              delete s[product];
+            }
+          })
+        ),
+      personalPriceProduct: (product: string) =>
+        setPersonalPricesState(product, () => undefined),
+      personalCurrency: (currency: string) =>
+        setPersonalPricesState(
+          produce<PersonalPricesStore>((s) => {
+            Object.entries(s).forEach(([productId, value]) => {
+              // Delete currency in product
+              delete value[currency];
+
+              // Delete product when there is no price set for it
+              if (Object.keys(value).length === 0) {
+                delete s[productId];
+              }
+            });
+          })
+        ),
     },
   } as MainContextType;
 
