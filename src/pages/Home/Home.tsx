@@ -78,6 +78,11 @@ export default () => {
       <br />
       <div class={styles.changelog}>
         <h2>Latest changes</h2>
+        <h3>3.3.0 (2023-03-11)</h3>
+        <h4>Features</h4>
+        <ul>
+          <li>Added click to copy calculation to clipboard</li>
+        </ul>
         <h3>3.2.0 (2023-03-11)</h3>
         <h4>Features</h4>
         <ul>

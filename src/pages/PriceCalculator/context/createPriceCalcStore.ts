@@ -1,4 +1,5 @@
 import {
+  getIngredientDisplayName,
   getIngredientId,
   getItemId,
   getRecipeEvenPercentages,
@@ -99,6 +100,7 @@ export type PriceCalcStore = {
   setSelectedProduct: (prod: string | undefined) => void;
   setSelectedRecipes: SetSignal<SelectedRecipes>;
   update: StoreUpdate;
+  calcExplanation: (prodName: string, currencyName: string) => string;
 };
 
 const moduleReductions = [1, 0.9, 0.75, 0.6, 0.55, 0.5];
@@ -258,6 +260,22 @@ export default (): PriceCalcStore => {
     });
   });
 
+  const calcExplanation =
+    (productName: string, currencyName: string) => {
+      const ingredients = recipeIngredients()
+      const ingredientsStr = ingredients.map(ingredient => ` - ${ingredient.calcQuantity}(${craftAmmount() === 1 ? '' : craftAmmount() + 'x'}${ingredient.Ammount}${!ingredient.IsStatic ? 'x' + moduleReductions[craftModule()] : ''}${!ingredient.IsStatic && craftLavish() ? 'x0.95' : ''}) ${getIngredientDisplayName(ingredient)} @ ${get.personalPrice(getIngredientId(ingredient))} ${currencyName} = ${ingredient.calcPrice} ${currencyName}`)
+      const product = recipeProducts().find(product => product.Name === productName)
+      return [
+        `Calculated cost of ${productName} = ${product?.productionCost} ${currencyName}`,
+        `Using recipe ${focusedNode()?.selectedVariant?.Variant.Key} at table ${recipe()?.CraftingTable} with module lvl ${craftModule()}`,
+        `From ${product?.Ammount !== 1 ? `1/${product?.Ammount} of ` : ''}${product?.costPercentage !== 100 ? `${product?.costPercentage}% of ` : ''}${formatNumber(totalIngredientCost() / craftAmmount())} ${currencyName} ${craftAmmount() > 1 ? `(total of ${totalIngredientCost()} each) ` : ''}from the sum of ingredients for ${craftAmmount()} repetition(s):`,
+        ...ingredientsStr,
+        recipeCalorieTotalCost() > 0 ?
+          ` - Labor ${formatNumber(recipeCalorieTotalCost() ?? 0)} ${currencyName}` : undefined,
+        recipeJoules() > 0 ? ` - Fuel ${formatNumber(recipeFuelTotalCost())} ${currencyName}` : undefined,
+      ].filter(t => !!t).join('\n');
+    }
+
   return {
     state,
     craftModule,
@@ -304,5 +322,6 @@ export default (): PriceCalcStore => {
           focusedProdPath: [...prev.focusedProdPath, focusedProd],
         })),
     } as StoreUpdate,
+    calcExplanation,
   };
 };

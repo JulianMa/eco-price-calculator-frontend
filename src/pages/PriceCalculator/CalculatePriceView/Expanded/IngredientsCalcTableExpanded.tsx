@@ -142,8 +142,10 @@ export default () => {
                 </Tooltip>
               </div>
             </td>
-            <td class={cellClass}>{priceCalcStore.recipeFuelCost}</td>
-            <td class={cellClass}>{priceCalcStore.recipeFuelTotalCost}</td>
+            <td class={cellClass}>{priceCalcStore.recipeFuelCost()}</td>
+            <td class={cellClass}>
+              {formatNumber(priceCalcStore.recipeFuelTotalCost() ?? 0)}
+            </td>
           </tr>
         )}
       </TableBody>

@@ -3,7 +3,7 @@ import Tooltip from '../Tooltip';
 import { createEffect, createMemo } from 'solid-js';
 import Button from '../Button';
 import { SpecificTagName } from '../../utils/constants';
-import { getItemId } from '../../utils/helpers';
+import { formatNumber, getItemId } from '../../utils/helpers';
 
 type Props = {
   showPricesForFuelModal: () => void;
@@ -63,7 +63,7 @@ export default (props: Props) => {
     return {
       calculatedPrice: !currentCurrency()
         ? 0
-        : cheaperAvgPricePerJoule.PricePerJoule * 1000,
+        : formatNumber(cheaperAvgPricePerJoule.PricePerJoule * 1000),
     };
   });
 

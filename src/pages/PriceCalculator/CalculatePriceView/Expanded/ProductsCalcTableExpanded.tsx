@@ -31,7 +31,23 @@ export default () => {
           {(product) => (
             <tr>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {product.Name}
+                <Tooltip
+                  noStyle
+                  text="Click to copy this fancy math to clipboard"
+                >
+                  <Button
+                    onClick={() =>
+                      navigator.clipboard.writeText(
+                        priceCalcStore.calcExplanation(
+                          product.Name,
+                          currentCurrency()
+                        )
+                      )
+                    }
+                  >
+                    {product.Name}
+                  </Button>
+                </Tooltip>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 {product.Ammount}
