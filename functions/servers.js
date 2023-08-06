@@ -6,7 +6,7 @@ async function fetchServersAsync() {
     const response = await fetch(url);
     return response.json();
   } catch (e) {
-    console.log(`Could not fetch from ${url}`);
+    console.log(`Functions - Could not fetch servers.json`);
   }
   return {};
 }

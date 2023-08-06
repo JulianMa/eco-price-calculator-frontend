@@ -78,15 +78,15 @@ export default () => {
       <br />
       <div class={styles.changelog}>
         <h2>Latest changes</h2>
-        <h3>3.3.0 (2023-03-11)</h3>
+        <h3>3.4.0 (2023-08-06)</h3>
         <h4>Features</h4>
         <ul>
-          <li>Added click to copy calculation to clipboard</li>
+          <li>Hide offline servers on server list</li>
+          <li>Select first online server by default</li>
         </ul>
-        <h3>3.2.0 (2023-03-11)</h3>
-        <h4>Features</h4>
+        <h4>Bugfix</h4>
         <ul>
-          <li>Added the Personal page to list and set user personal prices</li>
+          <li>Minor fix to error when offline server was selected</li>
         </ul>
       </div>
     </div>

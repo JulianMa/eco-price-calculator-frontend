@@ -11,7 +11,8 @@ async function fetchAsync<T>(url: string): Promise<T | undefined> {
     const response = await fetch(url);
     return (await response.json()) as T;
   } catch (e) {
-    console.log(`Could not fetch from ${url}`);
+    // Swallow error and return undefined
+    // console.log(`Could not fetch from ${url}`);
   }
   return undefined;
 }
@@ -47,3 +48,9 @@ export const getAllItems = (serverName: string) =>
 
 export const getCraftingTables = (serverName: string) =>
   fetchAsync<CraftingTablesResponse>(endpoints.readDB(serverName, constants.CraftingTables));
+
+export const testServerOnline = async (key: string, name: string) => ({
+  key,
+  name,
+  isOnline: (await getTags(key))?.Tags !== undefined
+});

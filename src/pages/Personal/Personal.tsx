@@ -1,12 +1,9 @@
-import { createEffect, createMemo, For } from 'solid-js';
+import { createMemo, For } from 'solid-js';
 import Table, {
   TableHeader,
   TableHeaderCol,
-  TableHeaderColAction,
   TableBody,
 } from '../../components/Table';
-import * as constants from '../../utils/constants';
-import RawDataRow from './PersonalRow';
 import { useMainContext } from '../../hooks/MainContext';
 import {
   formatNumber,
@@ -31,7 +28,6 @@ export default () => {
       ),
     ].sort(sortByText)
   );
-  createEffect(() => console.log('personal', unwrap(getState.personalPrice)));
 
   return (
     <Table>

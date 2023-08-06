@@ -24,10 +24,12 @@ import {
   getTags,
   getAllItems,
   getCraftingTables,
+  testServerOnline,
 } from '../../utils/restDbSdk';
 
 type MainContextType = {
   serversResource: Resource<ServersResponse[] | undefined> | undefined;
+  onlineServersResource: Resource<OnlineServers[] | undefined> | undefined;
   storesResource: Resource<StoresResponse | undefined> | undefined;
   recipesResource: Resource<RecipesResponse | undefined> | undefined;
   tagsResource: Resource<TagsResponse | undefined> | undefined;
@@ -111,6 +113,7 @@ type MainContextType = {
 
 const MainContext = createContext<MainContextType>({
   serversResource: undefined,
+  onlineServersResource: undefined,
   storesResource: undefined,
   recipesResource: undefined,
   tagsResource: undefined,
@@ -233,6 +236,19 @@ export const MainContextProvider = (props: Props) => {
   const [serversResource, { refetch: refetchServers }] =
     createResource(getServers);
 
+  const [onlineServersResource] = createResource(
+    serversResource,
+    async (servers) => {
+      // const serverTags = servers?.map(server => ({...server, tags: getTags(server.name)}))
+      if (servers == undefined) {
+        return undefined;
+      }
+      return await Promise.all(
+        servers?.map((server) => testServerOnline(server.key, server.name))
+      );
+    }
+  );
+
   const currentServer = createMemo<string>(() => {
     // If there's a server config, then always pick that server
     if (!!import.meta.env.VITE_SERVER && import.meta.env.VITE_SERVER !== true) {
@@ -246,8 +262,8 @@ export const MainContextProvider = (props: Props) => {
     }
 
     // Return the first valid one
-    return serversResource?.()?.length ?? 0 > 0
-      ? serversResource()?.[0].key ?? ''
+    return onlineServersResource?.()?.length ?? 0 > 0
+      ? onlineServersResource()?.[0].key ?? ''
       : mainState.server;
   });
 
@@ -465,7 +481,7 @@ export const MainContextProvider = (props: Props) => {
   }));
 
   const allTablesPerUser = createMemo(() =>
-    craftingTablesResource()?.CraftingTables.reduce((agg, table) => {
+    craftingTablesResource()?.CraftingTables?.reduce((agg, table) => {
       agg[table.OwnerName] = [...(agg[table.OwnerName] ?? []), table];
       return agg;
     }, {} as { [key: string]: CraftingTable[] })
@@ -473,6 +489,7 @@ export const MainContextProvider = (props: Props) => {
 
   const value = {
     serversResource,
+    onlineServersResource,
     storesResource,
     recipesResource,
     tagsResource,

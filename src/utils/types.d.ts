@@ -136,6 +136,12 @@ declare interface ServersResponse {
   name: string;
 }
 
+declare interface OnlineServers {
+  key: string;
+  name: string;
+  isOnline: boolean;
+}
+
 declare interface ItemWithRecipe {
   Name: string;
   RecipeVariants: RecipeVariant[];

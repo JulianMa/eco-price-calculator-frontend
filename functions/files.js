@@ -7,7 +7,7 @@ async function fetchServerUrlAsync(serverName) {
     const jsonResponse = await response.json();
     return jsonResponse[serverName]?.url;
   } catch (e) {
-    console.log(`Could not fetch from ${url}`);
+    console.log(`Functions - Could not fetch from servers.json`);
   }
   return {};
 }
@@ -18,7 +18,7 @@ async function fetchFileAsync(serverUrl, fileName) {
     const response = await fetch(url);
     return response.json();
   } catch (e) {
-    console.log(`Could not fetch from ${url}`);
+    console.log(`Functions - Could not fetch file ${fileName}`);
   }
   return {};
 }

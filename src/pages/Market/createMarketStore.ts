@@ -98,7 +98,7 @@ export default () => {
   const stores = createMemo(
     () =>
       storesResource?.()
-        ?.Stores.filter(
+        ?.Stores?.filter(
           (store) =>
             (filterByText(state.search, store.Name ?? '') ||
               filterByText(state.search, store.Owner ?? '')) &&
