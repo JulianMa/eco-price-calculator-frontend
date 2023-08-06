@@ -243,6 +243,12 @@ export const MainContextProvider = (props: Props) => {
       if (servers == undefined) {
         return undefined;
       }
+      if (
+        !!import.meta.env.VITE_SERVER &&
+        import.meta.env.VITE_SERVER !== true
+      ) {
+        return servers.map((t) => ({ ...t, isOnline: true }));
+      }
       return await Promise.all(
         servers?.map((server) => testServerOnline(server.key, server.name))
       );
