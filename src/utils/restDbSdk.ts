@@ -48,9 +48,3 @@ export const getAllItems = (serverName: string) =>
 
 export const getCraftingTables = (serverName: string) =>
   fetchAsync<CraftingTablesResponse>(endpoints.readDB(serverName, constants.CraftingTables));
-
-export const testServerOnline = async (key: string, name: string) => ({
-  key,
-  name,
-  isOnline: (await getTags(key))?.Tags !== undefined
-});

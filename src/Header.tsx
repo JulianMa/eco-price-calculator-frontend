@@ -12,7 +12,6 @@ type Props = {
 export default (props: Props) => {
   const {
     serversResource,
-    onlineServersResource,
     currentServer,
     currentCurrency,
     update,
@@ -20,7 +19,7 @@ export default (props: Props) => {
   } = useMainContext();
   const servers = createMemo(() => {
     const online =
-      onlineServersResource?.()
+      serversResource?.()
         ?.filter((t) => t.isOnline)
         ?.map((server) => ({
           value: server.key,
@@ -78,7 +77,7 @@ export default (props: Props) => {
                       values={[
                         { value: '', text: 'Select your server' },
                         ...servers(),
-                        ...(onlineServersResource?.loading ?? true
+                        ...(serversResource?.loading ?? true
                           ? [{ value: '', text: 'Loading online servers...' }]
                           : []),
                       ]}
@@ -89,10 +88,10 @@ export default (props: Props) => {
                       direction="SW"
                     />
                   )}
-                  {(onlineServersResource?.loading ?? true) &&
+                  {(serversResource?.loading ?? true) &&
                     servers()?.length <= 0 &&
                     'loading...'}
-                  {!(onlineServersResource?.loading ?? true) &&
+                  {!(serversResource?.loading ?? true) &&
                     servers()?.length <= 0 &&
                     'try again later'}
                 </LabeledField>

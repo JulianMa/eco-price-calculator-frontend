@@ -78,6 +78,11 @@ export default () => {
       <br />
       <div class={styles.changelog}>
         <h2>Latest changes</h2>
+        <h3>3.4.1 (2023-08-07)</h3>
+        <h4>Bugfix</h4>
+        <ul>
+          <li>Check for online servers on the backend</li>
+        </ul>
         <h3>3.4.0 (2023-08-06)</h3>
         <h4>Features</h4>
         <ul>

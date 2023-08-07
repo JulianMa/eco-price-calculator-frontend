@@ -134,11 +134,6 @@ declare interface CraftingTablesResponse extends TypedResponse {
 declare interface ServersResponse {
   key: string;
   name: string;
-}
-
-declare interface OnlineServers {
-  key: string;
-  name: string;
   isOnline: boolean;
 }
 
