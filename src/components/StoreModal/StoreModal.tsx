@@ -3,6 +3,7 @@ import { useMainContext } from '../../hooks/MainContext';
 import Modal from '../Modal';
 import ModalHeader from '../Modal/ModalHeader';
 import Table, { TableBody, TableHeader, TableHeaderCol } from '../Table';
+import Tooltip from '../Tooltip/Tooltip';
 
 type Props = {
   storeName?: string;
@@ -40,7 +41,12 @@ export default (props: Props) => {
                       {(product) => (
                         <tr>
                           <td class="px-6 py-4 whitespace-nowrap text-sm">
-                            {product.ItemName}
+                            {product.ItemName.length <= 25 && product.ItemName}
+                            {product.ItemName.length > 25 && (
+                              <Tooltip text={product.ItemName}>
+                                {product.ItemName.substring(0, 17)}...
+                              </Tooltip>
+                            )}
                           </td>
                           <td class="px-6 py-4 whitespace-nowrap text-sm">
                             {product.Price}
@@ -64,7 +70,12 @@ export default (props: Props) => {
                       {(product) => (
                         <tr>
                           <td class="px-6 py-4 whitespace-nowrap text-sm">
-                            {product.ItemName}
+                            {product.ItemName.length <= 25 && product.ItemName}
+                            {product.ItemName.length > 25 && (
+                              <Tooltip text={product.ItemName}>
+                                {product.ItemName.substring(0, 17)}...
+                              </Tooltip>
+                            )}
                           </td>
                           <td class="px-6 py-4 whitespace-nowrap text-sm">
                             {product.Price}

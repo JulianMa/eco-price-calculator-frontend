@@ -3,6 +3,7 @@ import { useMainContext } from '../../hooks/MainContext';
 import {
   calcTotalPages,
   filterByIncludesAny,
+  formatNumber,
   paginateArray,
 } from '../../utils/helpers';
 import Table, {
@@ -63,7 +64,7 @@ export default () => {
         return {
           ...product,
           Joules: joules,
-          PricePer1kJ: (product.Price / joules) * 1000,
+          PricePer1kJ: formatNumber((product.Price / joules) * 1000),
         };
       })
       .sort((a, b) => {
