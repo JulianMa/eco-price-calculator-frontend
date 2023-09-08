@@ -11,10 +11,15 @@ type Props = {
 export default (props: Props) => {
   const [isOpen, setIsOpen] = createSignal(props.startsOpen ?? false);
   return (
-    <div class={classNames('border rounded', props.class)}>
+    <div
+      class={classNames(
+        'border-borderColor-primary text-textColor border rounded',
+        props.class
+      )}
+    >
       <button
         class={classNames(
-          'px-8 py-5 bg-gray-50 px-5 py-3 flex w-full justify-between',
+          'bg-bgColor-primary-hover border-borderColor-primary px-8 py-5 px-5 py-3 flex w-full justify-between',
           {
             'border-b': isOpen(),
             'cursor-default': props.notCollapsible,

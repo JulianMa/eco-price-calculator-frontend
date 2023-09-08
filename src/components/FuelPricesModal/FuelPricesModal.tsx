@@ -113,28 +113,28 @@ export default () => {
                     <For each={paginatedProducts()}>
                       {(product) => (
                         <tr>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm">
                             {product.ItemName}
                           </td>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm">
                             {product.StoreName}
                           </td>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm">
                             {product.StoreOwner}
                           </td>
 
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm text-right">
                             {product.Buying
                               ? `Buying ${product.Limit} for`
                               : `Selling ${product.MaxNumWanted} for`}
                           </td>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm">
                             {product.Price}
                           </td>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm">
                             {product.Joules} J
                           </td>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm">
                             <Tooltip
                               noStyle
                               text="Click to set your personal fuel price"

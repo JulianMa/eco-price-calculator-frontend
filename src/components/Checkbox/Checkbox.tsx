@@ -27,7 +27,7 @@ export default (props: Props) => {
           id={fieldId}
           aria-describedby={fieldId}
           type="checkbox"
-          class="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded cursor-pointer"
+          class="bg-bgColor-primary hover:bg-bgColor-primary-hover border-borderColor-primary hover:border-borderColor-hover border h-4 w-4 rounded cursor-pointer focus:outline-none"
           onChange={(ev) => props.onChange(ev.currentTarget.checked)}
           checked={props.checked}
         />
@@ -35,7 +35,7 @@ export default (props: Props) => {
       <div class="text-sm px-2">
         <label
           for={fieldId}
-          class="font-medium text-gray-900 select-none cursor-pointer"
+          class="text-textColor-primary font-medium select-none cursor-pointer"
         >
           {props.label}
         </label>

@@ -90,11 +90,11 @@ export default () => {
       class={classNames({
         'border-t border-b':
           !calc().loading && calc().logLevel != LogLevel.None,
-        'bg-red-100 border-red-400 text-red-700':
+        'bg-bgColor-error border-borderColor-error text-textColor-error':
           calc().logLevel === LogLevel.Error,
-        'bg-yellow-100 border-yellow-500 text-yellow-700':
+        'bg-bgColor-warning border-borderColor-warning text-textColor-warning':
           calc().logLevel === LogLevel.Warning,
-        'bg-blue-100 border-blue-500 text-blue-700':
+        'bg-bgColor-success border-borderColor-success text-textColor-success':
           calc().logLevel === LogLevel.Info,
       })}
       role="alert"

@@ -6,7 +6,6 @@ import Table, {
 } from '../../components/Table';
 import { useMainContext } from '../../hooks/MainContext';
 import {
-  formatNumber,
   getIngredientById,
   getIngredientDisplayName,
   sortByText,
@@ -62,7 +61,7 @@ export default () => {
         >
           {([productId, valuePerCurrency]) => (
             <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 group flex">
+              <td class="px-6 py-4 whitespace-nowrap text-sm group flex">
                 {getIngredientDisplayName(getIngredientById(productId))}
                 <Tooltip
                   noStyle
@@ -78,7 +77,7 @@ export default () => {
               </td>
               <For each={currencies()}>
                 {(currency) => (
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 group">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm group">
                     {valuePerCurrency[currency] === undefined && (
                       <Button
                         class="opacity-0 group-hover:opacity-100"

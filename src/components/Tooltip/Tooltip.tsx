@@ -29,7 +29,7 @@ export default (props: Props) => {
       isMenuOpen={isMenuOpen}
       renderMenu={() => (
         <>
-          <div class="mb-1 inline-block bg-gray-900 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg">
+          <div class="bg-bgColor-secondary text-textColor-secondary mb-1 inline-block font-medium shadow-sm py-2 px-3 text-sm rounded-lg">
             {props.text}
           </div>
         </>
@@ -41,7 +41,7 @@ export default (props: Props) => {
       <div class="inline-block relative" ref={el}>
         <div
           class={classNames({
-            ['text-sm border rounded border-gray-300 inline-block border-dashed hover:border-gray-500']:
+            ['bg-bgColor-primary hover:bg-bgColor-primary-hover text-textColor border-borderColor-primary hover:border-borderColor-hover text-sm border rounded inline-block border-dashed']:
               !props.noStyle,
           })}
         >

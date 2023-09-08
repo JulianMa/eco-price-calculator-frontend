@@ -23,7 +23,7 @@ import IngredientsCalcName from '../IngredientsCalcName';
 export default () => {
   const { mainState, update } = useMainContext();
   const { priceCalcStore, listProductsStore } = useCalcContext();
-  const cellClass = 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
+  const cellClass = 'px-6 py-4 whitespace-nowrap text-sm';
 
   return (
     <Table>

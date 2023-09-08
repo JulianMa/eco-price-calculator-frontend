@@ -6,7 +6,7 @@ type Props = {
 export default (props: Props) => (
   <div class="relative">
     <input
-      class="rounded-md border border-gray-300 h-8 px-2 pr-8 rounded-md text-sm font-small focus:outline-none text-black"
+      class="bg-bgColor-primary hover:bg-bgColor-primary-hover focus:bg-bgColor-primary-hover rounded-md border border-border-primary h-8 px-2 pr-8 rounded-md text-sm font-small focus:outline-none text-textColor border-borderColor-primary hover:border-borderColor-hover"
       type="search"
       name="search"
       placeholder="Search"
@@ -15,7 +15,7 @@ export default (props: Props) => (
     />
     <button type="submit" class="absolute right-2 top-2">
       <svg
-        class="text-black h-6 w-6 fill-current"
+        class="text-textColor h-6 w-6 fill-current"
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"
         id="Capa_1"

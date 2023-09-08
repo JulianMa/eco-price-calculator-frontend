@@ -19,14 +19,14 @@ export default (props: Props) => {
     >
       <button
         data-action="decrement"
-        class="text-black border border-gray-300 hover:border-gray-400 w-10 rounded-l cursor-pointer outline-none"
+        class="bg-bgColor-primary hover:bg-bgColor-primary-hover text-textColor border-borderColor-primary hover:border-borderColor-hover border w-10 rounded-l cursor-pointer outline-none"
         onClick={() => props.onChange(formatNumber((props.value ?? 0) - 1))}
       >
         <span class="m-auto text-1xl font-thin">−</span>
       </button>
       <input
         type="number"
-        class="text-center w-full border-t border-b border-gray-300 font-semibold text-md text-black outline-none"
+        class="bg-bgColor-primary hover:bg-bgColor-primary-hover text-textColor border-borderColor-primary hover:border-borderColor-hover text-center w-full border-t border-b font-semibold text-md outline-none"
         name="custom-input-number"
         value={props.value ?? ''}
         onChange={(ev) =>
@@ -35,7 +35,7 @@ export default (props: Props) => {
       ></input>
       <button
         data-action="increment"
-        class="text-black border border-gray-300 hover:border-gray-400 w-10 rounded-r cursor-pointer outline-none"
+        class="bg-bgColor-primary hover:bg-bgColor-primary-hover text-textColor border-borderColor-primary hover:border-borderColor-hover border w-10 rounded-r cursor-pointer outline-none"
         onClick={() => props.onChange(formatNumber((props.value ?? 0) + 1))}
       >
         <span class="m-auto text-1xl font-thin">+</span>

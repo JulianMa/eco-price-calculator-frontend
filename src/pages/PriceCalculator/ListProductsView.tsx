@@ -100,7 +100,7 @@ export default () => {
               <For each={props.paginatedProducts()}>
                 {(product) => (
                   <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
                       <Tooltip
                         noStyle
                         text="Click to calculate price for this item"
@@ -116,7 +116,7 @@ export default () => {
                         </Button>
                       </Tooltip>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
                       {product.RecipeVariants.map((recipeVariant) =>
                         (recipeVariant.Recipe.SkillNeeds.length > 0
                           ? recipeVariant.Recipe.SkillNeeds
@@ -198,7 +198,7 @@ export default () => {
                           </div>
                         ))}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
                       <AveragePrice
                         id={getIngredientId({
                           IsSpecificItem: true,
@@ -212,7 +212,7 @@ export default () => {
                         }
                       />
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
                       {!currentCurrency() && 'select currency'}
                       {currentCurrency() && (
                         <div class="flex">

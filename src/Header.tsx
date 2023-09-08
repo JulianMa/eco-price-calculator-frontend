@@ -40,12 +40,10 @@ export default (props: Props) => {
     ];
   });
   return (
-    <header class="bg-white shadow relative">
+    <header class="shadow relative">
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div>
-          <h1 class="text-3xl font-bold text-gray-900">
-            {props.currentRoute()?.text}
-          </h1>
+          <h1 class="text-3xl font-bold">{props.currentRoute()?.text}</h1>
           <span>{props.currentRoute()?.description}</span>
         </div>
         {props.currentRoute()?.includeHeaderFields && (
@@ -58,7 +56,7 @@ export default (props: Props) => {
                 <Dropdown
                   value={currentCurrency()}
                   values={[
-                    { value: '', text: 'Select a currency' },
+                    { value: '', text: 'Select a currency', selectable: false },
                     ...(allCurrencies()?.map((name) => ({
                       value: name,
                       text: name,
@@ -75,10 +73,20 @@ export default (props: Props) => {
                     <Dropdown
                       value={currentServer()}
                       values={[
-                        { value: '', text: 'Select your server' },
+                        {
+                          value: '',
+                          text: 'Select your server',
+                          selectable: false,
+                        },
                         ...servers(),
                         ...(serversResource?.loading ?? true
-                          ? [{ value: '', text: 'Loading online servers...' }]
+                          ? [
+                              {
+                                value: '',
+                                text: 'Loading online servers...',
+                                selectable: false,
+                              },
+                            ]
                           : []),
                       ]}
                       onChange={(newValue) => {

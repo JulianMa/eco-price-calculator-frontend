@@ -7,7 +7,7 @@ import createOnClickOutside from '../../hooks/createOnClickOutside';
 
 type Props = {
   value: string | number;
-  values: { value: string | number; text: string }[];
+  values: { value: string | number; text: string; selectable?: boolean }[];
   onChange: (newValue: string | number) => void;
   origin?: CardinalPoint;
   direction?: CardinalPoint;
@@ -22,7 +22,7 @@ export default (props: Props) => {
       <div
         {...out}
         class={classNames(
-          'w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transform focus:outline-none z-50',
+          'bg-bgColor-primary text-textColor border-borderColor-primary w-56 rounded-md shadow-lg border transform focus:outline-none z-50',
           {
             ['transition ease-out duration-100 opacity-100 scale-100']:
               isMenuOpen(),
@@ -37,21 +37,29 @@ export default (props: Props) => {
       >
         <div class="py-1" role="none">
           <For each={props.values}>
-            {(item) => (
-              <button
-                class={classNames('block px-4 py-2 text-sm w-full text-left', {
-                  ['bg-gray-100 text-gray-900']: item.value == props.value,
-                  ['text-gray-700']: item.value != props.value,
-                })}
-                role="menuitem"
-                onClick={() => {
-                  setMenuOpen(false);
-                  props.onChange(item.value);
-                }}
-              >
-                {item.text}
-              </button>
-            )}
+            {(item) =>
+              item.selectable !== false ? (
+                <button
+                  class={classNames(
+                    'bg-bgColor-primary hover:bg-bgColor-primary-hover text-textColor block px-4 py-2 text-sm w-full text-left',
+                    {
+                      ['bg-bgColor-primary-hover']: item.value == props.value,
+                    }
+                  )}
+                  role="menuitem"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    props.onChange(item.value);
+                  }}
+                >
+                  {item.text}
+                </button>
+              ) : (
+                <div class="bg-bgColor-primary text-textColor block px-4 py-2 text-sm w-full text-left">
+                  {item.text}
+                </div>
+              )
+            }
           </For>
         </div>
       </div>
@@ -66,7 +74,7 @@ export default (props: Props) => {
       <div class={classNames('inline-block text-left', props.class)}>
         <button
           type="button"
-          class="inline-flex justify-center w-full rounded-md border border-gray-300 h-8 px-2 py-1 bg-white text-sm font-small text-black hover:bg-gray-50 focus:outline-none"
+          class="bg-bgColor-primary hover:bg-bgColor-primary-hover text-textColor border-borderColor-primary hover:border-borderColor-hover inline-flex justify-center w-full rounded-md border h-8 px-2 py-1 text-sm font-small focus:outline-none"
           id="menu-button"
           aria-expanded="true"
           aria-haspopup="true"

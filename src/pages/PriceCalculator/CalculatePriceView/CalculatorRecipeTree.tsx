@@ -51,7 +51,8 @@ export default () => {
                 <Tooltip noStyle text="Click to calculate price">
                   <Button
                     class={classNames('inline-block py-1 px-4', {
-                      'bg-gray-300': joinPath(recipe.path) === pathJoined(),
+                      'bg-bgColor-primary-hover':
+                        joinPath(recipe.path) === pathJoined(),
                     })}
                     onClick={() =>
                       priceCalcStore.update.replaceFocusedProductPath(
@@ -66,9 +67,10 @@ export default () => {
               {recipe.recipeVariants.length === 0 && (
                 <div class="inline-block py-1 px-4">{recipe.productName}</div>
               )}
-              {((priceCalcStore.state.showRecipes &&
-                recipe.recipeVariants?.length) ??
-                0) > 0 && <span class="ml-2">with recipe</span>}
+              {priceCalcStore.state.showRecipes &&
+                (recipe.recipeVariants?.length ?? 0) > 0 && (
+                  <span class="ml-2">with recipe</span>
+                )}
               {priceCalcStore.state.showRecipes && (
                 <RecipePicker
                   selectedValue={recipe.selectedVariant?.Variant.Key ?? ''}
@@ -85,7 +87,7 @@ export default () => {
                 !!recipe.selectedVariant?.Variant.Key && (
                   <>
                     at table
-                    <span class="border rounded px-2 py-1 ml-2 font-normal">
+                    <span class="border-borderColor-primary border rounded px-2 py-1 ml-2 font-normal">
                       {
                         recipe.recipeVariants.find(
                           (t) =>

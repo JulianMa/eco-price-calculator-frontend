@@ -30,7 +30,7 @@ export default () => {
         <For each={priceCalcStore.recipeProducts()}>
           {(product) => (
             <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
                 <Tooltip
                   noStyle
                   text="Click to copy this fancy math to clipboard"
@@ -49,10 +49,10 @@ export default () => {
                   </Button>
                 </Tooltip>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
                 {product.Ammount}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
                 <NumericInput
                   value={product.costPercentage}
                   onChange={(newValue) =>
@@ -67,7 +67,7 @@ export default () => {
                   }
                 />
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
                 <Tooltip noStyle text="Click to set your personal price">
                   <Button
                     onClick={() =>
@@ -82,7 +82,7 @@ export default () => {
                   </Button>
                 </Tooltip>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
                 <Tooltip noStyle text="Click to set your personal price">
                   <Button
                     class="px-2 py-1"
@@ -98,7 +98,7 @@ export default () => {
                   </Button>
                 </Tooltip>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
                 <PersonalPrice personalPriceId={getItemId(product.Name)} />
               </td>
             </tr>

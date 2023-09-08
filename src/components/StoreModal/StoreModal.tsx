@@ -39,13 +39,13 @@ export default (props: Props) => {
                     <For each={allProductsForSaleInStore()}>
                       {(product) => (
                         <tr>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm">
                             {product.ItemName}
                           </td>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm">
                             {product.Price}
                           </td>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm text-right">
                             {product.MaxNumWanted}
                           </td>
                         </tr>
@@ -63,13 +63,13 @@ export default (props: Props) => {
                     <For each={allProductsForBuyInStore()}>
                       {(product) => (
                         <tr>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm">
                             {product.ItemName}
                           </td>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm">
                             {product.Price}
                           </td>
-                          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm text-right">
                             {product.Limit}
                           </td>
                         </tr>

@@ -12,10 +12,10 @@ export default (props: Props) => (
         <button
           type="button"
           class={classNames(
-            'border-gray-900 bg-transparent text-sm font-medium px-4 py-1 h-8',
+            'bg-bgColor-primary text-textColor border-borderColor-primary text-sm font-medium px-4 py-1 h-8',
             {
-              ['bg-gray-900 text-white']: option.value == props.selected,
-              ['text-gray-900 hover:bg-gray-900 hover:text-white']:
+              ['bg-bgColor-primary-hover']: option.value == props.selected,
+              ['hover:bg-bgColor-primary-hover hover:border-borderColor-hover']:
                 option.value != props.selected,
               ['rounded-l-lg border']: index() === 0,
               ['rounded-r-md border']: index() === props.options.length - 1,

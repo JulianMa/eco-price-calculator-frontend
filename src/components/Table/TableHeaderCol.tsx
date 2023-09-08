@@ -11,7 +11,7 @@ type Props = {
 export default (props: Props) => (
   <th
     scope="col"
-    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+    class="text-textColor px-6 py-3 text-left text-xs font-medium uppercase tracking-wider whitespace-nowrap"
   >
     {!props.onSort && props.children}
     {props.onSort && (
@@ -30,6 +30,7 @@ export default (props: Props) => (
               width="18"
               height="18"
               viewBox="0 0 24 24"
+              fill="currentColor"
             >
               <path d="M12 3.202l3.839 4.798h-7.678l3.839-4.798zm0-3.202l-8 10h16l-8-10zm3.839 16l-3.839 4.798-3.839-4.798h7.678zm4.161-2h-16l8 10 8-10z" />
             </svg>
@@ -42,6 +43,7 @@ export default (props: Props) => (
               width="18"
               height="18"
               viewBox="0 0 24 24"
+              fill="currentColor"
             >
               <path d="M12 3.202l3.839 4.798h-7.678l3.839-4.798zm0-3.202l-8 10h16l-8-10zm8 14h-16l8 10 8-10z" />
             </svg>
@@ -54,6 +56,7 @@ export default (props: Props) => (
               width="18"
               height="18"
               viewBox="0 0 24 24"
+              fill="currentColor"
             >
               <path d="M12 0l-8 10h16l-8-10zm3.839 16l-3.839 4.798-3.839-4.798h7.678zm4.161-2h-16l8 10 8-10z" />
             </svg>

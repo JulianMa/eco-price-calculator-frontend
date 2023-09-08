@@ -66,7 +66,7 @@ const App: Component = () => {
 
   return (
     <MainContextProvider>
-      <div class="min-h-full">
+      <div class="bg-bgColor-primary text-textColor min-h-full">
         <Navbar routes={routesConfig()} />
         <NotificationsBar />
         <Header currentRoute={currentRoute} />

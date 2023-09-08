@@ -4,7 +4,7 @@ type Props = {
 };
 
 export default (props: Props) => (
-  <thead class="bg-gray-50">
+  <thead class="bg-bgColor-primary-hover">
     <tr>{props.children}</tr>
   </thead>
 );

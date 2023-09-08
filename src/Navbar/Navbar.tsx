@@ -2,6 +2,7 @@ import { createSignal } from 'solid-js';
 import { NavLink } from 'solid-app-router';
 import classnames from 'classnames';
 import ecoIconUrl from '../assets/eco-icon.ico';
+import Dropdown from '../components/Dropdown';
 
 type Props = {
   routes: Array<{
@@ -11,10 +12,30 @@ type Props = {
     highlight: boolean;
   }>;
 };
+const OS = 'os';
+const DARK = 'dark';
+const LIGHT = 'light';
+const isSystemDark = () =>
+  window.matchMedia('(prefers-color-scheme: dark)').matches;
+const updateThemeEffect = (theme: string) => {
+  localStorage.theme = theme;
+  let themeClass = theme !== OS ? theme : isSystemDark() ? DARK : LIGHT;
+  document.documentElement.className = themeClass;
+};
 export default (props: Props) => {
   const [mobileMenuOpen, setMobileMenuOpen] = createSignal(false);
+  const [theme, setTheme] = createSignal(
+    !('theme' in localStorage) ? OS : localStorage.theme
+  );
+  const updateTheme = (newTheme: string) => {
+    // We need to update our signal as well as change classes in document and update localstorage in case user reloads page
+    setTheme(newTheme);
+    updateThemeEffect(newTheme);
+  };
+  // initialize classes and localstate
+  updateThemeEffect(theme());
   return (
-    <nav class="bg-gray-800">
+    <nav class="bg-bgColor-secondary">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center">
@@ -23,16 +44,16 @@ export default (props: Props) => {
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
-                {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                 {props.routes.map((route) => (
                   <NavLink
                     href={route.href}
                     end
                     class={classnames(
-                      'px-3 py-2 rounded-md text-sm font-medium',
+                      'bg-bgColor-secondary text-textColor px-3 py-2 rounded-md text-sm font-medium ',
                       {
-                        'bg-gray-900 text-white': route.highlight,
-                        'text-gray-300 hover:bg-gray-700 hover:text-white':
+                        'bg-bgColor-secondary-hover text-textColor-secondary':
+                          route.highlight,
+                        'hover:bg-bgColor-secondary-hover hover: text-textColor-secondary':
                           !route.highlight,
                       }
                     )}
@@ -45,11 +66,25 @@ export default (props: Props) => {
             </div>
           </div>
 
+          <div>
+            <Dropdown
+              value={theme()}
+              values={[
+                { value: OS, text: 'System theme' },
+                { value: LIGHT, text: 'Light theme' },
+                { value: DARK, text: 'Dark theme' },
+              ]}
+              onChange={(newValue) => updateTheme(`${newValue}`)}
+              origin="SE"
+              direction="SW"
+            />
+          </div>
+
           <div class="-mr-2 flex md:hidden">
             {/* <!-- Mobile menu button --> */}
             <button
               type="button"
-              class="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              class="text-textColor-secondary hover:bg-bgColor-secondary-hover focus:bg-bgColor-secondary-hover inline-flex items-center justify-center p-2 rounded-md focus:outline-none"
               aria-controls="mobile-menu"
               aria-expanded="false"
               onclick={() => setMobileMenuOpen((prev) => !prev)}
@@ -115,7 +150,6 @@ export default (props: Props) => {
         id="mobile-menu"
       >
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
           {props.routes.map((route) => (
             <NavLink
               href={route.href}
@@ -123,8 +157,9 @@ export default (props: Props) => {
               class={classnames(
                 'block px-3 py-2 rounded-md text-base font-medium',
                 {
-                  'bg-gray-900 text-white': route.highlight,
-                  'text-gray-300 hover:bg-gray-700 hover:text-white':
+                  'bg-bgColor-secondary-hover text-textColor-secondary':
+                    route.highlight,
+                  'hover:bg-bgColor-secondary-hover hover: text-textColor-secondary':
                     !route.highlight,
                 }
               )}

@@ -11,13 +11,11 @@ export default ({
 }) => {
   return (
     <tr>
-      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{name}</td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-        {exportedAt()}
-      </td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm">{name}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm">{exportedAt()}</td>
       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         <button
-          class="text-indigo-800 hover:text-indigo-900"
+          class="text-textColor-success hover:underline"
           onclick={() => downloadFile(name)}
         >
           Download

@@ -24,13 +24,13 @@ export default () => {
         <For each={priceCalcStore.recipeProducts()}>
           {(product) => (
             <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
                 {product.Name}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
                 {product.Ammount}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
                 <NumericInput
                   value={product.costPercentage}
                   onChange={(newValue) =>
@@ -45,7 +45,7 @@ export default () => {
                   }
                 />
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
                 {`${product.retailPrice} ${currentCurrency()}`}
               </td>
             </tr>
