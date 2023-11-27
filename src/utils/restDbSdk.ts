@@ -24,7 +24,7 @@ export const getServers = () =>
   fetchAsync<ServersResponse[]>(endpoints.readServer);
 
 export const getStores = (serverName: string): Promise<StoresResponse | undefined> =>
-  fetchAsync<StoresResponse>("/data/Stores.json").then(
+  fetchAsync<StoresResponse>(endpoints.readDB(serverName, constants.Stores)).then(
     (response) =>
       response
         ? {
@@ -38,13 +38,13 @@ export const getStores = (serverName: string): Promise<StoresResponse | undefine
   );
 
 export const getRecipes = (serverName: string): Promise<RecipesResponse | undefined> =>
-  fetchAsync<RecipesResponse>( "/data/Recipes.json");
+  fetchAsync<RecipesResponse>(endpoints.readDB(serverName, constants.Recipes));
 
 export const getTags = (serverName: string) =>
-  fetchAsync<TagsResponse>( "/data/Tags.json");
+  fetchAsync<TagsResponse>(endpoints.readDB(serverName, constants.Tags));
 
 export const getAllItems = (serverName: string) =>
-  fetchAsync<AllItemsResponse>("/data/AllItems.json");
+  fetchAsync<AllItemsResponse>(endpoints.readDB(serverName, constants.AllItems));
 
 export const getCraftingTables = (serverName: string) =>
-  fetchAsync<CraftingTablesResponse>("/data/CraftingTables.json");
+  fetchAsync<CraftingTablesResponse>(endpoints.readDB(serverName, constants.CraftingTables));
