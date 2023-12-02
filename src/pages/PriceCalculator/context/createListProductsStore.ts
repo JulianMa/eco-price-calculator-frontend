@@ -64,25 +64,30 @@ export default (): ListProductsStore => {
   });
 
   const filteredProducts = createMemo(() =>
-    allCraftableProductsWithOffers()?.filter(
-      (product) =>
-        filterByText(state.search, product.Name ?? '') &&
-        filterByIncludesAny(
-          [state.filterProfession],
-          product.RecipeVariants.map((variant) =>
-            variant.Recipe.SkillNeeds.map((t) => t.Skill)
-          ).flat()
-        ) &&
-        filterByIncludesAny(
-          [state.filterCraftingTable],
-          product.RecipeVariants.map(
-            (variant) => variant.Recipe.CraftingTable
-          ).flat()
-        ) &&
-        (!state.filterByOwner ||
-          mainState.userName.length === 0 ||
-          filterByIncludesAny(mySellingProducts(), [product.Name]))
-    ).sort((a, b) => levenshtein(a.Name, state.search) - levenshtein(b.Name, state.search))
+    allCraftableProductsWithOffers()
+      ?.filter(
+        (product) =>
+          filterByText(state.search, product.Name ?? '') &&
+          filterByIncludesAny(
+            [state.filterProfession],
+            product.RecipeVariants.map((variant) =>
+              variant.Recipe.SkillNeeds.map((t) => t.Skill)
+            ).flat()
+          ) &&
+          filterByIncludesAny(
+            [state.filterCraftingTable],
+            product.RecipeVariants.map(
+              (variant) => variant.Recipe.CraftingTable
+            ).flat()
+          ) &&
+          (!state.filterByOwner ||
+            mainState.userName.length === 0 ||
+            filterByIncludesAny(mySellingProducts(), [product.Name]))
+      )
+      .sort(
+        (a, b) =>
+          levenshtein(a.Name, state.search) - levenshtein(b.Name, state.search)
+      )
   );
 
   const paginatedProducts = createMemo(() =>

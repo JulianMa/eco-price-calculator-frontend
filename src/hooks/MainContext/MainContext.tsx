@@ -24,6 +24,7 @@ import {
   getTags,
   getAllItems,
   getCraftingTables,
+  getUsername,
 } from '../../utils/restDbSdk';
 
 type MainContextType = {
@@ -267,6 +268,10 @@ export const MainContextProvider = (props: Props) => {
     currentServer,
     getAllItems
   );
+
+  getUsername().then((res) => {
+    console.log(res?.username);
+  });
   const [craftingTablesResource, { refetch: refetchCraftingTables }] =
     createResource(currentServer, getCraftingTables);
 

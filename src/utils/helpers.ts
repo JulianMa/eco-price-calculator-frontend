@@ -36,8 +36,8 @@ export const sortByText = (a: string, b: string) =>
   a.toLowerCase().localeCompare(b.toLowerCase());
 export const sortByTextFn =
   <T>(fn: (c: T) => string) =>
-    (a: T, b: T) =>
-      fn(a).toLowerCase().localeCompare(fn(b).toLowerCase());
+  (a: T, b: T) =>
+    fn(a).toLowerCase().localeCompare(fn(b).toLowerCase());
 
 export const sortByTextExcludingWord =
   (word: string) => (a: string, b: string) => {
@@ -69,7 +69,8 @@ export const calcPrice = (ammount: number, price?: number) =>
   !price ? 0 : formatNumber(ammount * price);
 
 //https://www.xero.com/au/glossary/margin-vs-markup/
-export const convertToMarginMultiplier = (margin: number) => 1 / (1 - margin / 100);
+export const convertToMarginMultiplier = (margin: number) =>
+  1 / (1 - margin / 100);
 
 // When user hasn't picked cost percentages yet, we divide those percentages even
 export const getRecipeEvenPercentages = (recipe: Variant) => {
@@ -128,48 +129,50 @@ export const getIngredient = (ingredient: {
   Name: string;
 }) => ({
   Name: ingredient.IsSpecificItem ? ingredient.Name : ingredient.Tag,
-  IsSpecificItem: ingredient.IsSpecificItem
+  IsSpecificItem: ingredient.IsSpecificItem,
 });
 
 export const getIngredientDisplayName = (ingredient: {
   IsSpecificItem: boolean;
   Tag: string;
   Name: string;
-}) => ingredient.IsSpecificItem ? ingredient.Name : `Tag ${ingredient.Tag}`;
+}) => (ingredient.IsSpecificItem ? ingredient.Name : `Tag ${ingredient.Tag}`);
 
 export const getIngredientById = (id: string) => {
   if (id.startsWith(getItemId(''))) {
     return {
       IsSpecificItem: true,
       Name: id.substring(getItemId('').length),
-      Tag: ''
-    }
+      Tag: '',
+    };
   }
   if (id.startsWith(getTagId(''))) {
     return {
       IsSpecificItem: false,
       Name: '',
-      Tag: id.substring(getTagId('').length)
-    }
+      Tag: id.substring(getTagId('').length),
+    };
   }
   return {
     IsSpecificItem: true,
     Name: 'old_' + id,
-    Tag: ''
-  }
-}
+    Tag: '',
+  };
+};
 
 export const getDateFromExportedAt = (date: ExportedAt) =>
   // Month - 1 because in javascript months are zero based
   new Date(date.Year, date.Month - 1, date.Day, date.Hour, date.Min, date.Sec);
 
-
-export const getOffersAndCalculateAvgPrice = (allProductsInStores: ProductOffer[] | undefined, currentCurrency: string, productNames: string[]) => {
+export const getOffersAndCalculateAvgPrice = (
+  allProductsInStores: ProductOffer[] | undefined,
+  currentCurrency: string,
+  productNames: string[]
+) => {
   const offersInCurrency =
     allProductsInStores?.filter(
       (t) =>
-        productNames.includes(t.ItemName) &&
-        t.CurrencyName === currentCurrency
+        productNames.includes(t.ItemName) && t.CurrencyName === currentCurrency
     ) ?? [];
   const validOffersForAvg = offersInCurrency.filter(
     (t) => !t.Buying && t.Quantity > 0

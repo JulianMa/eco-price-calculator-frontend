@@ -14,11 +14,7 @@ export default (props: Props) => {
     <NumericInput
       value={get.personalPrice(props.personalPriceId)}
       onChange={(newValue) =>
-        update.personalPrice(
-          props.personalPriceId,
-          currentCurrency(),
-          newValue
-        )
+        update.personalPrice(props.personalPriceId, currentCurrency(), newValue)
       }
       class={props.class}
     />

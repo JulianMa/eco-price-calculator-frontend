@@ -121,10 +121,13 @@ declare interface TagsResponse extends TypedResponse {
 }
 
 declare interface AllItemsResponse extends TypedResponse {
-  AllItems: Record<string, {
-    Tags: string[];
-    Fuel: number;
-  }>;
+  AllItems: Record<
+    string,
+    {
+      Tags: string[];
+      Fuel: number;
+    }
+  >;
 }
 
 declare interface CraftingTablesResponse extends TypedResponse {
@@ -146,7 +149,7 @@ declare interface ItemOrTagPrice {
   Name: string;
   IsSpecificItem: boolean;
   Offers: ProductOffer[];
-  AvgPrice: number | null
+  AvgPrice: number | null;
 }
 
 declare interface CraftingTable {

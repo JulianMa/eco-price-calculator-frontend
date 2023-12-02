@@ -13,5 +13,5 @@ export enum OrderTypes {
 }
 
 export const SpecificTagName = {
-  BurnableFuel: "Burnable Fuel"
-}
+  BurnableFuel: 'Burnable Fuel',
+};

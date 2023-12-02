@@ -71,8 +71,14 @@ const sortByProductsColumn = (
 };
 
 export default () => {
-  const { storesResource, allProductsInStores, isLoadingResources, mainState, update, currentCurrency } =
-    useMainContext();
+  const {
+    storesResource,
+    allProductsInStores,
+    isLoadingResources,
+    mainState,
+    update,
+    currentCurrency,
+  } = useMainContext();
   const [state, setState] = createLocalStore<Store>(
     {
       search: '',
