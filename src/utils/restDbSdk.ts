@@ -36,6 +36,27 @@ async function fetchAsyncAuthorized<T>(url: string): Promise<T | undefined> {
   return undefined;
 }
 
+async function postAsyncAuthorized<T, S>(url: string, body: S): Promise<T | undefined> {
+  var authtoken = localStorage.getItem("authtoken") ?? "";
+  var authtokentype = localStorage.getItem("authtokentype") ?? "";
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+        'X-Auth-Token': authtoken,
+        'X-Auth-Token-Type': authtokentype,
+      },
+    });
+    return (await response.json()) as T;
+  } catch (e) {
+    // Swallow error and return undefined
+    // console.log(`Could not fetch from ${url}`);
+  }
+  return undefined;
+}
+
 export const readDB = (serverName: string, fileName: string) =>
   fetchAsync(endpoints.readDB(serverName, fileName));
 
@@ -73,3 +94,9 @@ export const getCraftingTables = (serverName: string) =>
 
 export const getUsername = (): Promise<{ username: string } | undefined> =>
   fetchAsyncAuthorized<{ username: string }>('/api/v1/plugins/EcoLiveDataExporter/username');
+
+export const getPriceInEcoStore = (itemid: string): Promise<{ price: number } | undefined> =>
+    fetchAsyncAuthorized<{ price: number }>(`/api/v1/plugins/EcoLiveDataExporter/price/${itemid}`);
+
+export const updatePriceInEcoStore = (data: {ItemId: string, NewPrice: number}): Promise<void> =>
+    postAsyncAuthorized(`/api/v1/plugins/EcoLiveDataExporter/updateShopPricing`, data);

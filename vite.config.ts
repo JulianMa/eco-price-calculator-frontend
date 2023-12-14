@@ -19,10 +19,6 @@ export default defineConfig({
             '/api': {
                 target: 'http://127.0.0.1:3001',
                 changeOrigin: true,
-                headers: {
-                    "X-Auth-Token": "i2k4UPeyGVHiHjyLm1pYdMdIlw2g4bPR/b9SfZw9U+w=",
-                    "X-Auth-Token-Type": "slg"
-                }
             },
             '/data': {
                 target: 'http://127.0.0.1:3001',
