@@ -6,6 +6,7 @@ import PriceCalculator from './pages/PriceCalculator';
 import { MainContextProvider } from './hooks/MainContext';
 import Header from './Header';
 import NotificationsBar from './components/NotificationsBar';
+import HowTo from "./pages/HowTo/HowTo";
 
 const Market = lazy(() => import('./pages/Market'));
 const RawData = lazy(() => import('./pages/RawData'));
@@ -38,6 +39,7 @@ const routes = {
     href: '/personal',
   },
   Home: { text: 'About', description: '', href: '/about' },
+  HowTo: { text: 'How To: Calculator', description: 'A quick tutorial on How-To calculate shop prices in Eco, using this Calculator.', href: '/how-two' },
   // Items: { text: "Items", description: "", href: "/items" },
   // Currencies: { text: "Currencies", description: "", href: "/currencies" },
   // Stores: { text: "Stores", description: "", href: "/stores" },
@@ -76,6 +78,7 @@ const App: Component = () => {
             <Route path={routes.RawData.href} element={<RawData />} />
             <Route path={routes.Personal.href} element={<Personal />} />
             <Route path={routes.Home.href} element={<Home />} />
+            <Route path={routes.HowTo.href} element={<HowTo />} />
             <Route path="/" element={<PriceCalculator />} />
             <Route path="/*all" element={<PriceCalculator />} />
           </Routes>

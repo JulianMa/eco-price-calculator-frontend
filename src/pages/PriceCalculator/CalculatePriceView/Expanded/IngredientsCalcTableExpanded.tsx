@@ -19,6 +19,7 @@ import {
 } from '../../../../utils/helpers';
 import { useCalcContext } from '../../context/CalcContext';
 import IngredientsCalcName from '../IngredientsCalcName';
+import SyncPersonalPrice from "../../../../components/SyncPersonalPrice";
 
 export default () => {
   const { mainState, update } = useMainContext();
@@ -56,7 +57,10 @@ export default () => {
                 />
               </td>
               <td class={cellClass}>
-                <PersonalPrice personalPriceId={getIngredientId(ingredient)} />
+                <div className="flex flex-row gap-2">
+                  <PersonalPrice personalPriceId={getIngredientId(ingredient)}/>
+                  <SyncPersonalPrice personalPriceId={getIngredientId(ingredient)}/>
+                </div>
               </td>
               <td class={cellClass}>{formatNumber(ingredient.unitPrice)}</td>
               <td class={cellClass}>{formatNumber(ingredient.calcPrice)}</td>

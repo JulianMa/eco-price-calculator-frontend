@@ -32,21 +32,24 @@ export const getLogLevel = ({
   hasNoData,
   hasOnlySomeData,
   lastUpdateInHours,
-  isPluginOutdated,
+  isPluginOutdated, 
+  isLoggedInIntoEco
 }: {
   hasNoData: boolean;
   hasOnlySomeData: boolean;
   lastUpdateInHours: number;
   isPluginOutdated: boolean;
+  isLoggedInIntoEco: boolean;
 }) => {
   if (hasNoData || hasOnlySomeData) return LogLevel.Error;
   if (lastUpdateInHours > 4) return LogLevel.Warning;
+  if(!isLoggedInIntoEco) return LogLevel.Warning;
   if (isPluginOutdated) return LogLevel.Info;
   return LogLevel.None;
 };
 
 export default () => {
-  const { storesResource, recipesResource, tagsResource } = useMainContext();
+  const { storesResource, recipesResource, tagsResource , loggedInUsernameResource} = useMainContext();
 
   const calc = createMemo(() => {
     // Error
@@ -55,6 +58,7 @@ export default () => {
     const hasTagsData = !!tagsResource?.()?.PluginVersion;
     const hasNoData = !hasStoresData && !hasRecipesData && !hasTagsData;
     const hasOnlySomeData = !hasStoresData || !hasRecipesData || !hasTagsData;
+    const isLoggedInIntoEco = !!(loggedInUsernameResource && loggedInUsernameResource()?.username)
 
     // Warning
     const exportedAt = storesResource?.()?.ExportedAt;
@@ -77,12 +81,14 @@ export default () => {
         hasOnlySomeData,
         lastUpdateInHours,
         isPluginOutdated,
+        isLoggedInIntoEco
       }),
       hasNoData,
       hasOnlySomeData,
       lastUpdateInHours,
       isPluginOutdated,
       pluginVersion,
+      isLoggedInIntoEco
     };
   });
   return (
@@ -128,6 +134,12 @@ export default () => {
               {calc().lastUpdateInHours} hours. Make sure the mod is running and
               configured properly on your eco server.
             </p>
+          )}
+          {calc().logLevel === LogLevel.Warning && !calc().isLoggedInIntoEco && (
+              <p class="text-sm">
+                Your are not Logged in. Advanced features like Shop-Price Syncing are disabled.{' '}
+                To Login, open the Webinterface with the Graphs button in your Eco Client on the bottom right or Press the G key while ingame.
+              </p>
           )}
 
           {calc().logLevel === LogLevel.Info && <p class="font-bold">Info:</p>}

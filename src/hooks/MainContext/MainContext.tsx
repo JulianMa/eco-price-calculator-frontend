@@ -32,6 +32,7 @@ type MainContextType = {
   storesResource: Resource<StoresResponse | undefined> | undefined;
   recipesResource: Resource<RecipesResponse | undefined> | undefined;
   tagsResource: Resource<TagsResponse | undefined> | undefined;
+  loggedInUsernameResource: Resource<{username: string} | undefined> | undefined;
   craftingTablesResource:
     | Resource<CraftingTablesResponse | undefined>
     | undefined;
@@ -116,6 +117,7 @@ const MainContext = createContext<MainContextType>({
   recipesResource: undefined,
   tagsResource: undefined,
   craftingTablesResource: undefined,
+  loggedInUsernameResource: undefined,
   currentServer: () => '',
   isLoadingResources: () => true,
   dbs: () => [],
@@ -269,9 +271,11 @@ export const MainContextProvider = (props: Props) => {
     getAllItems
   );
 
-  getUsername().then((res) => {
-    console.log(res?.username);
-  });
+  const [loggedInUsernameResource] = createResource(
+      currentServer,
+      getUsername
+  );
+  
   const [craftingTablesResource, { refetch: refetchCraftingTables }] =
     createResource(currentServer, getCraftingTables);
 
@@ -493,6 +497,7 @@ export const MainContextProvider = (props: Props) => {
     allCraftableProductsWithOffers,
     allItemsAndTagsWithPrice,
     allTablesPerUser,
+    loggedInUsernameResource,
     mainState,
     forceRefetch: {
       servers: refetchServers,

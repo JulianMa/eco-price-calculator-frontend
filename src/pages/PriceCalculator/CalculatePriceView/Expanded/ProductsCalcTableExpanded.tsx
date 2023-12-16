@@ -9,8 +9,9 @@ import Table, {
 } from '../../../../components/Table';
 import Tooltip from '../../../../components/Tooltip';
 import { useMainContext } from '../../../../hooks/MainContext';
-import { fixPercentages, getItemId } from '../../../../utils/helpers';
+import {fixPercentages, getIngredientId, getItemId} from '../../../../utils/helpers';
 import { useCalcContext } from '../../context/CalcContext';
+import SyncPersonalPrice from "../../../../components/SyncPersonalPrice/SyncPersonalPrice";
 
 export default () => {
   const { currentCurrency, update } = useMainContext();
@@ -98,9 +99,12 @@ export default () => {
                   </Button>
                 </Tooltip>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm">
-                <PersonalPrice personalPriceId={getItemId(product.Name)} />
-              </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                    <div className="flex flex-row gap-2">
+                        <PersonalPrice personalPriceId={getItemId(product.Name)}/>
+                        <SyncPersonalPrice personalPriceId={getItemId(product.Name)}/>
+                    </div>
+                </td>
             </tr>
           )}
         </For>

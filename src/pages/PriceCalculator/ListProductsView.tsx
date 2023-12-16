@@ -18,6 +18,7 @@ import { useCalcContext } from './context/CalcContext';
 import classNames from 'classnames';
 import Checkbox from '../../components/Checkbox';
 import TableRowLoadingSpinner from '../../components/TableRowLoadingSpinner';
+import SyncPersonalPrice from "../../components/SyncPersonalPrice/SyncPersonalPrice";
 
 export default () => {
   const {
@@ -215,23 +216,28 @@ export default () => {
                     <td class="px-6 py-4 whitespace-nowrap text-sm">
                       {!currentCurrency() && 'select currency'}
                       {currentCurrency() && (
-                        <div class="flex">
-                          <PersonalPrice
-                            personalPriceId={getIngredientId({
+                          <div class="flex flex-row gap-2">
+                            <PersonalPrice
+                                personalPriceId={getIngredientId({
+                                  IsSpecificItem: true,
+                                  Name: product.Name,
+                                  Tag: '',
+                                })}
+                            />
+                            <SyncPersonalPrice personalPriceId={getIngredientId({
                               IsSpecificItem: true,
                               Name: product.Name,
                               Tag: '',
-                            })}
-                          />
-                          <Button
-                            class="ml-2"
-                            onClick={() =>
-                              priceCalcStore.setSelectedProduct(product.Name)
-                            }
-                          >
-                            Calculate now
-                          </Button>
-                        </div>
+                            })}/>
+                            <Button
+                                class="ml-2"
+                                onClick={() =>
+                                    priceCalcStore.setSelectedProduct(product.Name)
+                                }
+                            >
+                              Calculate now
+                            </Button>
+                          </div>
                       )}
                     </td>
                   </tr>
@@ -240,7 +246,7 @@ export default () => {
             </TableBody>
           </Table>
           <Pagination
-            currentPage={props.state.currentPage}
+              currentPage={props.state.currentPage}
             totalPages={props.totalPages()}
             onChange={props.update.setCurrentPage}
           />
